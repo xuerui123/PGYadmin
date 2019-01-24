@@ -1,0 +1,435 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <style>
+        select {
+            border: none;
+            background: none;
+            appearance: none;
+            -moz-appearance: none;
+            -webkit-appearance: none;
+            padding-right: 14px;
+        }
+
+        select::-ms-expand {
+            display: none;
+        }
+    </style>
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="../lib/html5shiv.js"></script>
+    <script type="text/javascript" src="../lib/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="../static/h-ui/css/H-ui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/h-ui.admin/css/H-ui.admin.css"/>
+    <link rel="stylesheet" type="text/css" href="../lib/Hui-iconfont/1.0.8/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/h-ui.admin/skin/default/skin.css" id="skin"/>
+    <link rel="stylesheet" type="text/css" href="../static/h-ui.admin/css/style.css"/>
+    <!--[if IE 6]>
+    <script type="text/javascript" src="../lib/DD_belatedPNG_0.0.8a-min.js"></script>
+    <script>DD_belatedPNG.fix('*');</script>
+    <![endif]-->
+    <title>房间管理</title>
+</head>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 用户中心 <span
+        class="c-gray en">&gt;</span> 会员管理
+</nav>
+<div class="page-container" id="content">
+    <div>
+        <span style="width: 100px;display: inline-block;text-align: center">电器类别：</span>
+        <span class="input-text" style="width: 300px;display: inline-block">
+            <select style="width: 280px;display: inline-block" @change="devName">
+                <option value="">请选择设备类别</option>
+                <option value="窗帘">窗帘</option>
+                <option value="灯光">灯光</option>
+                <!--<option value="报警器">报警器</option>-->
+                <option value="智能插座">智能插座</option>
+                <option value="空调">空调</option>
+                <option value="电视">电视</option>
+                <option value="机顶盒">机顶盒</option>
+                <option value="网络盒子">网络盒子</option>
+                <option value="投影仪">投影仪</option>
+                <option value="风扇">风扇</option>
+                <option value="加湿器">加湿器</option>
+                <option value="空气净化器">空气净化器</option>
+                <option value="扫地机器人">扫地机器人</option>
+                <option value="功放">功放</option>
+                <option value="热水器">热水器</option>
+            </select>
+        </span>
+    </div>
+    <div class="mt-20 brand">
+        <span style="width: 100px;display: inline-block;text-align: center">电器品牌：</span>
+        <span class="input-text" style="width: 300px;display: inline-block">
+            <select style="width: 280px;display: inline-block" @change="devBrand">
+                <option value="">请选择设备品牌</option>
+                <option v-if="brandList.length==''" value="">该设备暂无品牌</option>
+                <option v-for="item in brandList" :value="item.brand">{{item.brand}}</option>
+
+            </select>
+        </span>
+    </div>
+    <div class="mt-20 devcode">
+        <span style="width: 100px;display: inline-block;text-align: center">电器型号：</span>
+        <span class="input-text" style="width: 300px;display: inline-block">
+            <select style="width: 280px;display: inline-block" @change="getRemoid">
+                <option value="">请选择设备品牌</option>
+                <option v-if="codeList.length==''" value="">该设备暂无品牌</option>
+                <option v-for="item in codeList" :value="item">{{item}}</option>
+
+            </select>
+        </span>
+    </div>
+    <div class="mt-20 lamp" style="display: none">
+        <span style="width: 100px;display: inline-block;text-align: center">灯光种类：</span>
+        <span class="input-text" style="width: 300px;display: inline-block" @change="lamp">
+            <select style="width: 280px;display: inline-block">
+                <option value="">请选择灯光种类</option>
+                <option value="吊灯">吊灯</option>
+                <option value="灯带">灯带</option>
+                <option value="顶灯">顶灯</option>
+                <option value="踢脚灯">踢脚灯</option>
+                <option value="射灯">射灯</option>
+                <option value="筒灯">筒灯</option>
+                <option value="日光灯">日光灯</option>
+                <option value="壁灯">壁灯</option>
+                <option value="氛围灯">氛围灯</option>
+                <option value="背景灯">背景灯</option>
+                <option value="镜前灯">镜前灯</option>
+
+            </select>
+        </span>
+    </div>
+    <div class="mt-20 SmartPlug" style="display: none">
+        <span style="width: 100px;display: inline-block;text-align: center">插座设备：</span>
+        <span class="input-text" style="width: 300px;display: inline-block">
+            <select style="width: 280px;display: inline-block">
+                <option value="">请选择插座设备</option>
+                <option value="台灯">台灯</option>
+                <option value="饮水机">饮水机</option>
+                <option value="顶灯">热水器</option>
+                <option value="热水器">加湿器</option>
+                <option value="笔记本">笔记本</option>
+                <option value="电风扇">电风扇</option>
+                <option value="鱼缸">鱼缸</option>
+                <option value="电视">电视</option>
+                <option value="功放">功放</option>
+                <option value="冰箱">冰箱</option>
+            </select>
+        </span>
+    </div>
+    <div class="mt-40 ml-40">
+        <div class="row cl">
+            <span @Click="addDev();" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe632;</i> 保存</span>
+            <button onClick="layer_close();" class="btn btn-default radius" type="button">
+                &nbsp;&nbsp;取消&nbsp;&nbsp;
+            </button>
+        </div>
+    </div>
+</div>
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="../lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="../static/h-ui/js/H-ui.min.js"></script>
+<script type="text/javascript" src="../static/h-ui.admin/js/H-ui.admin.js"></script> <!--/_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="../javascript/common/vue.js"></script>
+<script type="text/javascript" src="../javascript/common/mutual.js"></script>
+
+<script>
+
+    var context = new Vue({
+        el: '#content',
+        data: {
+            roomName: '',
+            brandList: [],
+            dname: '',
+            brand: '',
+            codeList: [],
+            remoid: '',
+            lampName: '',
+            SmartPlugName: ''
+        },
+        methods: {
+            devName: function (e) {
+                context.dname = e.target.value;
+                context.brandList = [];
+                context.codeList = [];
+
+                if (context.dname == '灯光' || context.dname == '窗帘' || context.dname == '智能插座') {
+                    $('.brand').css('display', 'none')
+                    $('.devcode').css('display', 'none')
+                    if (context.dname == '灯光') {
+                        $('.lamp').css('display', 'block')
+                    } else if (context.dname == '智能插座') {
+                        $('.SmartPlug').css('display', 'block')
+                    }
+                } else {
+                    $('.brand').css('display', 'block');
+                    $('.devcode').css('display', 'block');
+                    $('.SmartPlug').css('display', 'none');
+                    $('.lamp').css('display', 'none');
+                    let data = {
+                        token: sessionStorage.getItem('token'),
+                        devtype: context.dname
+                    }
+                    mutual('/Manage/device/getbrand', data, function (res) {
+                        console.log(res);
+                        context.brandList = res.data.brand;
+                    }, function (error) {
+                        console.log(error)
+                    })
+                }
+
+            },
+            devBrand: function (e) {
+                context.brand = e.target.value;
+
+                let data = {
+                    token: sessionStorage.getItem('token'),
+                    devtype: context.dname,
+                    brand: context.brand
+                }
+                mutual('/Manage/device/getdevcode', data, function (res) {
+                    console.log(res);
+                    context.codeList = res.data.devcode;
+                }, function (error) {
+                    console.log(error)
+                })
+            },
+            getRemoid: function (e) {
+                context.remoid = e.target.value
+            },
+            lamp: function (e) {
+                context.lampName = e.target.value
+            },
+            SmartPlug: function (e) {
+                context.SmartPlugName = e.target.value;
+                console.log(e.target.value)
+            },
+            addDev: function () {
+                let obj = {}
+                if (context.dname == '电视') {
+                    obj = {
+                        dch: '01',
+                        dloca: context.roomName,
+                        dname: context.dname,
+                        dbra: context.brand,
+                        remoid: context.remoid,
+                        online: "1",
+                        dlogo: 'TV.svg',
+                        dsys: '2126',
+                        dpanel: 'TV',
+                        act : 'add',
+                        token: sessionStorage.getItem('token'),
+                        sn :sessionStorage.getItem('sn'),
+
+                    }
+                } else if (context.dname == '空调') {
+                    obj = {
+                        dch: '01',
+                        dloca: context.roomName,
+                        dname: context.dname,
+                        dbra: context.brand,
+                        remoid: context.remoid,
+                        online: "1",
+                        dlogo: 'AirConditioning.svg',
+                        dsys: '2126',
+                        dpanel: 'AirConditioning',
+                        act : 'add',
+                        token: sessionStorage.getItem('token'),
+                        sn :sessionStorage.getItem('sn'),
+                    }
+                } else if (context.dname == '机顶盒') {
+                    obj = {
+                        dch: '01',
+                        dloca: context.roomName,
+                        dname: context.dname,
+                        dbra: context.brand,
+                        remoid: context.remoid,
+                        online: "1",
+                        dlogo: 'STB.svg',
+                        dsys: '2126',
+                        dpanel: 'STB',
+                        act : 'add',
+                        token: sessionStorage.getItem('token'),
+                        sn :sessionStorage.getItem('sn'),
+                    }
+                } else if (context.dname == '网络盒子') {
+                    obj = {
+                        dch: '01',
+                        dloca: context.roomName,
+                        dname: context.dname,
+                        dbra: context.brand,
+                        remoid: context.remoid,
+                        online: "1",
+                        dlogo: 'NetworkBox.svg',
+                        dsys: '2126',
+                        dpanel: 'NetworkBox',
+                        act : 'add',
+                        token: sessionStorage.getItem('token'),
+                        sn :sessionStorage.getItem('sn'),
+                    }
+                } else if (context.dname == '投影仪') {
+                    obj = {
+                        dch: '01',
+                        dloca: context.roomName,
+                        dname: context.dname,
+                        dbra: context.brand,
+                        remoid: context.remoid,
+                        online: "1",
+                        dlogo: 'Projector.svg',
+                        dsys: '2126',
+                        dpanel: 'Projector',
+                        act : 'add',
+                        token: sessionStorage.getItem('token'),
+                        sn :sessionStorage.getItem('sn'),
+                    }
+                } else if (context.dname == '窗帘') {
+                    obj = {
+                        dch: 12,
+                        dname: context.dname,
+                        dloca: context.roomName,
+                        dlogo: 'Curtain.svg',
+                        dcap: "",
+                        dsys: "1123",
+                        dpanel: "Curtain",
+                        act : 'add',
+                        token: sessionStorage.getItem('token'),
+                        sn :sessionStorage.getItem('sn'),
+                    }
+                } else if (context.dname == '灯光') {
+                    obj = {
+                        dch: 11,
+                        dname: context.lampName,
+                        dloca: context.roomName,
+                        dlogo: 'Lamp.svg',
+                        dcap: "",
+                        dsys: "1121",
+                        dpanel: "Lamp",
+                        act : 'add',
+                        token: sessionStorage.getItem('token'),
+                        sn :sessionStorage.getItem('sn'),
+                    }
+                } else if (context.dname == '智能插座') {
+                    obj = {
+                        dch: 11,
+                        dname: context.SmartPlugName,
+                        dloca: context.roomName,
+                        dlogo: 'SmartPlug1.svg',
+                        dsys: "1126",
+                        dpanel: "SmartPlug1",
+                        act : 'add',
+                        token: sessionStorage.getItem('token'),
+                        sn :sessionStorage.getItem('sn'),
+                    }
+                } else if (context.dname == '风扇') {
+                    obj = {
+                        dch: '01',
+                        dloca: context.roomName,
+                        dname: context.dname,
+                        dbra: context.brand,
+                        remoid: context.remoid,
+                        online: "1",
+                        dlogo: 'Fan.svg',
+                        dsys: '2126',
+                        dpanel: 'Fan1',
+                        act : 'add',
+                        token: sessionStorage.getItem('token'),
+                        sn :sessionStorage.getItem('sn'),
+                    }
+                } else if (context.dname == '加湿器') {
+                    obj = {
+                        dch: "01",
+                        dloca: context.roomName,
+                        dname: context.dname,
+                        dbra: context.brand,
+                        remoid: context.remoid,
+                        dlogo: 'Humidifier.svg',
+                        dcap: "",
+                        dsys: "2126",
+                        dpanel: "Humidifier",
+                        act : 'add',
+                        token: sessionStorage.getItem('token'),
+                        sn :sessionStorage.getItem('sn'),
+                    }
+                } else if (context.dname == '空气净化器') {
+                    obj = {
+                        dch: '01',
+                        dloca: context.roomName,
+                        dname: context.dname,
+                        dbra: context.brand,
+                        remoid: context.remoid,
+                        online: "1",
+                        dlogo: 'AirPurifier.svg',
+                        dsys: '2126',
+                        dpanel: 'AirPurifier',
+                        act : 'add',
+                        token: sessionStorage.getItem('token'),
+                        sn :sessionStorage.getItem('sn'),
+                    }
+                } else if (context.dname == '扫地机器人') {
+                    obj = {
+                        dch: "01",
+                        dloca: context.roomName,
+                        dname: context.dname,
+                        dbra: context.brand,
+                        remoid: context.remoid,
+                        dlogo: 'SweepingRobot.svg',
+                        dcap: "",
+                        dsys: "2136",
+                        dpanel: "SweepingRobot",
+                        act : 'add',
+                        token: sessionStorage.getItem('token'),
+                        sn :sessionStorage.getItem('sn'),
+                    }
+                } else if (context.dname == '功放') {
+                    obj = {
+                        dch: "01",
+                        dloca: context.roomName,
+                        dname: context.dname,
+                        dbra: context.brand,
+                        remoid: context.remoid,
+                        dlogo: 'PowerAmplifier.svg',
+                        dcap: "",
+                        dsys: "2126",
+                        dpanel: "PowerAmplifier",
+                        act : 'add',
+                        token: sessionStorage.getItem('token'),
+                        sn :sessionStorage.getItem('sn'),
+                    }
+                } else if (context.dname == '热水器') {
+                    obj = {
+                        dch: '01',
+                        dloca: context.roomName,
+                        dname: context.dname,
+                        dbra: context.brand,
+                        remoid: context.remoid,
+                        online: "1",
+                        dlogo: 'WaterHeater.svg',
+                        dsys: '2126',
+                        dpanel: 'WaterHeater',
+                        act : 'add',
+                        token: sessionStorage.getItem('token'),
+                        sn :sessionStorage.getItem('sn'),
+                    }
+                }
+                console.log(obj)
+                mutual('/Manage/device/ele', obj,function (res) {
+                    console.log(res)
+                },function (error) {
+                    console.log(error)
+                })
+            }
+        },
+        computed: {}
+    });
+    context.roomName = decodeURI(window.location.search.slice(window.location.search.indexOf('=') + 1));
+
+</script>
+</body>
+</html>

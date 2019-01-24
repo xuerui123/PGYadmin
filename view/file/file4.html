@@ -1,0 +1,1836 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>PuGoing开发者平台</title>
+    <style>
+        .ai * {
+            font-family: "PingFang SC", "Helvetica Neue", Helvetica, Tahoma, Arial, "Microsoft YaHei", Roboto !important;
+        }
+
+        .ai ul,
+        .ai li {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        .ai a:focus {
+            outline: none;
+            -moz-outline: none;
+        }
+
+        .ai a,
+        .ai a:hover,
+        .ai a:focus,
+        .ai a:active {
+            text-decoration: none !important;
+        }
+
+        .container {
+            width: 100% !important;
+            margin: 0 !important;
+            padding-top: 80px;
+        }
+
+        /*.ai.header {
+          width: 100%;
+          height: 56px;
+          background: #fff;
+          z-index: 103;
+        }*/
+        .ai.header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 80px;
+            padding: 0 83px;
+            overflow: hidden;
+            background: #fff;
+            box-sizing: border-box;
+            z-index: 101;
+            transition: height .3s;
+        }
+
+        .ai.header.fixed {
+            height: 56px;
+            box-shadow: 0 3px 3px 0 rgba(75, 85, 95, 0.10);
+        }
+
+        .ai .left {
+            height: 100%;
+            float: left;
+            color: #fff;
+        }
+
+        .ai .logo {
+            padding-top: 18px;
+            padding-left: 20px;
+            padding-right: 20px;
+            float: left;
+            text-align: left;
+            font-size: 0;
+            color: #fff;
+            transition: padding .3s;
+        }
+
+        .ai.header.fixed .logo {
+            padding-top: 8px;
+        }
+
+        .ai .logo img {
+            height: 44px;
+        }
+
+        .ai .nav {
+            display: inline-block;
+            height: 100%;
+        }
+
+        .ai .nav ul {
+            display: inline-block;
+            height: 100%;
+        }
+
+        .ai .nav ul li {
+            height: 100%;
+            float: left;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .ai .nav ul li a {
+            display: block;
+            height: 100%;
+        }
+
+        .ai .nav ul li span {
+            display: block;
+            height: 100% !important;
+            line-height: 80px !important;
+            transition: line-height .3s;
+        }
+
+        .ai.header.fixed .nav span {
+            line-height: 56px !important;
+        }
+
+        .ai .nav ul li a:hover span,
+        .ai .locked span {
+            border-bottom: 3px solid #469dff;
+            color: #57708F;
+        }
+
+        .ai .nav ul li:last-child a {
+            border-right: none;
+        }
+
+        .ai .nav ul li a span,
+        .ai .right ul li a > span {
+            display: inline-block;
+            height: 50px;
+            padding: 0 5px 20px;
+            margin: 0 15px;
+            line-height: 45px;
+            box-sizing: border-box;
+        }
+
+        .ai ul.right {
+            float: right;
+            height: 56px;
+            padding-top: 12px;
+            padding-bottom: 12px;
+            margin-right: -20px;
+            line-height: 48px;
+            transition: padding .3s;
+        }
+
+        .ai.fixed ul.right {
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+
+        .ai ul.right li {
+            height: 56px;
+            float: left;
+            font-size: 14px;
+            line-height: 56px;
+            color: #57708f;
+        }
+
+        .ai ul.right li a {
+            padding: 0 20px;
+        }
+
+        .ai ul.right li a:hover {
+            color: #11191c;
+        }
+
+        .ai ul.right li::before {
+            display: inline-block;
+            width: 1px;
+            height: 20px;
+            vertical-align: middle;
+            content: "";
+            background-color: #D6DEE6;
+        }
+
+        .ai ul.right li:first-child::before {
+            background-color: transparent;
+        }
+
+        .ai.footer {
+            position: relative;
+            bottom: 0;
+            z-index: 101;
+            min-height: 83px;
+            height: 83px;
+            padding: 20px 83px;
+            border-top: 1px solid #f4f6f9;
+            font-size: 12px;
+            color: #c1c4c6;
+            background-color: #fff;
+            box-sizing: border-box;
+        }
+
+        .ai.footer .links {
+            margin: 0;
+            line-height: 28px;
+        }
+
+        .ai.footer .links a,
+        .ai.footer .links span {
+            font-size: 12px;
+            color: #86898e;
+        }
+
+        .ai.footer .links a {
+            margin: 0 10px;
+        }
+
+        .ai.footer .links span {
+            margin: 0;
+        }
+
+        .ai.footer .links a:hover,
+        .ai.footer .links a:visited {
+            color: #86898e;
+        }
+
+        .ai .copyright {
+            float: right;
+            line-height: 28px;
+            font-size: 12px;
+        }
+
+        .ai.footer .address {
+            margin-left: 10px;
+            line-height: 20px;
+        }
+
+        .ai .contact {
+            float: right;
+            color: #86898e;
+            text-align: right;
+        }
+
+        .ai .qr {
+            position: absolute;
+            top: -130px;
+            right: 158px;
+            display: none;
+            width: 120px;
+            height: 120px;
+            padding: 10px;
+            background-color: #fff;
+            box-shadow: 0 5px 10px 0 #D8EAFD;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .ai .qr-box {
+            position: relative;
+            margin: 0;
+            line-height: 28px;
+            cursor: pointer;
+        }
+
+        .ai .qr-box i {
+            color: #469DFF;
+            margin-right: 5px;
+        }
+
+        .ai .qr-box:hover .qr {
+            display: block;
+        }
+
+        .ai .qr-box span {
+            position: absolute;
+            left: 56px;
+            bottom: -15px;
+            display: block;
+            width: 0px;
+            border: 8px solid #fff;
+            border-bottom-color: transparent;
+            border-left-color: transparent;
+            border-right-color: transparent;
+        }
+
+        .ai .qr-box .icon {
+            height: 16px;
+            padding-top: 5px;
+            margin-right: 5px;
+            float: left;
+        }
+
+        .ai .copyright {
+            color: #c1c4c6;
+            margin-left: 10px;
+            line-height: 20px;
+            font-size: 12px;
+        }
+
+        .ai .links {
+            margin: 0;
+            line-height: 28px;
+        }
+
+        .ai .links a {
+            margin: 0 10px;
+            font-size: 12px;
+            color: #86898e;
+        }
+
+        .ai .links a:hover,
+        .ai .links a:visited {
+            color: #86898e;
+        }
+
+        .ai .left {
+            float: left;
+        }
+    </style>
+</head>
+<body data-spm="7629140">
+<script>
+    with (document) with (body) with (insertBefore(createElement("script"), firstChild)) setAttribute("exparams", "category=&userid=&aplus&yunid=&f5509eb36d6b7&trid=0b8ff31315362878959905598e0204&asid=AYNb5p2Y5JFbbqjRZAAAAABQZSth63QZSw==", id = "tb-beacon-aplus", src = (location > "https" ? "//g" : "//g") + ".alicdn.com/alilog/mlog/aplus_v2.js")
+</script>
+
+<div id="root" class="container">
+
+
+    <link rel="stylesheet" href="//g.alicdn.com/shop/jae-platform/0.0.10/stylesheet/doc-min.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="//g.alicdn.com/shop/tae-portal/0.4.5/styles/docs-detail-v2.css">
+    <style>
+        @font-face {
+            font-family: "iconfont1";
+            src: url("//at.alicdn.com/t/font_1448507037_6084561.eot?#iefix") format("embedded-opentype"), url("//at.alicdn.com/t/font_1448507037_6084561.woff") format("woff"), url("//at.alicdn.com/t/font_1448507037_6084561.ttf") format("truetype"), url("//at.alicdn.com/t/font_1448507037_6084561.svg#iconfont") format("svg");
+        }
+
+        .iconfont {
+            font-family: "iconfont1" !important;
+            font-size: 16px;
+            font-style: normal;
+        }
+
+        #pages {
+            min-height: 700px;
+        }
+
+        .wrap {
+            width: 100%;
+        }
+
+        .wrap-inner {
+            margin: 0 auto;
+            width: 990px;
+        }
+
+        .block-docs-search-list .list-wrap ul li h2 a em {
+            /*搜索标题，字体标红*/
+            color: red;
+        }
+
+        .wrap .block-docs-search-list .list-wrap ul li .desc em {
+            /*搜索内容，字体标红*/
+            color: red;
+        }
+
+        .update-access-wrap {
+            /*文档修改时间靠右*/
+            top: inherit;
+            position: inherit;
+            float: right;
+        }
+
+        .block-docs-wrap .docs-right .mtl-main {
+            margin-bottom: 5px;
+        }
+
+    </style>
+
+    <script src="//g.alicdn.com/tb/tracker/1.0.13/index.js"></script>
+    <script src="//g.alicdn.com/kissy/k/1.4.4/seed-min.js" data-config="{combine:false}"></script>
+    <script src="//g.alicdn.com/shop/tae-portal/0.4.5/scripts/lib/underscore-min.js"></script>
+
+    <script>
+        window.TAE_CFG = {
+            userNick: 'taeTestNick',
+            api: {
+                zanCode: '/doc2/youyong'
+            }
+        };
+        KISSY.config('packages', {
+            'module': {
+                debug: true,
+                base: '//g.alicdn.com/shop/tae-portal/0.4.5/scripts/'
+            }
+        });
+
+    </script>
+
+
+    <div class="menu-overlay-mask J_menuMask"></div>
+
+    <div id="pages">
+        <div class="wrap" id="detailContainer">
+
+
+            <div class="wrap-inner block-docs-wrap J_FloatContainer">
+                <div class="docs-left" id="sideMenu">
+                    <h3 class="menu-title">PuGoing开发者平台</h3>
+                    <ul class="menu-1">
+                        <li class>
+                            <a  class="J_ExpTrigger open"  href="javascript:void(0)" title="新手教程">云接入</a>
+                            <ul class="menu-2">
+                                <li><a  title="概览" href="/file/file1" >概览</a></li>
+                                <li><a  title="用户操作接口" href="/file/file2" >用户操作接口</a></li>
+                                <li><a  title="房间管理接口" href="/file/file3" >房间管理接口</a></li>
+                                <li><a  title="设备管理" href="/file/file4" >设备管理</a></li>
+                                <li><a  title="红外接入" href="/file/file5" >红外接入</a></li>
+                                <li><a  title="传感器设备日志" href="/file/file6" >传感器设备日志</a></li>
+                                <li><a  title="场景接口" href="/file/file7" >场景接口</a></li>
+                                <li><a  title="主机文字交互" href="/file/file8" >主机文字交互</a></li>
+                            </ul>
+                        </li>
+
+
+
+
+                    </ul>
+                </div>
+                <!--E 左侧边栏 -->
+                <div class="docs-right">
+                    <!-- content -->
+
+
+                    <div class="mtl">
+                        <h2 class="mtl-main">PuGoing设备管理</h2>
+
+                        <!--<div class="update-access-wrap">-->
+                        <!--<span class="update-time">更新时间：2018/10/29</span>-->
+                        <!--<span class="access-times">访问次数：31560</span>-->
+                        <!--</div>-->
+
+                        <div class="mao-list">
+                            <div class="inner" id="maoList">
+
+                                <div class="mao-s-h J_maoTrigger"><i class="iconfont icon-s">&#xe693;</i><i
+                                        class="iconfont icon-h">&#xe692;</i></div>
+                            </div>
+                        </div>
+                        <!--E 锚点列表 -->
+                    </div>
+
+                    <div class="doc-detail-bd" id="bd">
+                        <h2>PuGoing 设备管理</h2>
+                        <h3>一.添加设备</h3>
+
+                        <p>示例：</p>
+                        <pre>{
+
+    &quot;op&quot;:&quot;device&quot;,
+    &quot;act&quot;:&quot;add&quot;,
+    &quot;uid&quot;:&quot;XXXXXXXXXX&quot;,
+    &quot;did&quot;:&quot;XXXXXXXXXX&quot;,
+    &quot;token&quot;:&quot;XXXXXXXXXX&quot;,
+    &quot;date&quot;:{
+        &quot;danam&quot;:&quot;空调&quot;,
+        &quot;dbra&quot;:&quot;格力&quot;,
+        &quot;dcap&quot;:&quot;&quot;,
+        &quot;dch&quot;:&quot;01&quot;,
+        &quot;dinfo&quot;:&quot;&quot;,
+        &quot;dloca&quot;:&quot;客厅&quot;,
+        &quot;dlogo&quot;:&quot;AirConditioning.svg&quot;,
+        &quot;dname&quot;:&quot;空调&quot;,
+        &quot;dnlp&quot;:&quot;&quot;,
+        &quot;dpanel&quot;:&quot;AirConditioning&quot;,
+        &quot;dsys&quot;:&quot;2126&quot;,
+        &quot;eva&quot;:&quot;&quot;
+      }
+ }</pre>
+                        <p>正常响应：</p>
+                        <pre>{
+    &quot;ack&quot;:&quot;1&quot;,
+    &quot;msg&quot;:&quot;{
+        &quot;yid&quot;:XXXXXXXXXXXX
+    }&quot;
+ }</pre>
+                        <h3>参数协议</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>op</td>
+                                <td>String</td>
+                                <td>方法类别</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>act</td>
+                                <td>String</td>
+                                <td>方法名</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>uid</td>
+                                <td>String</td>
+                                <td>用户的微信uid</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>did</td>
+                                <td>String</td>
+                                <td>主机的did</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>token</td>
+                                <td>String</td>
+                                <td>见二.获取token</td>
+                                <td>是</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <h3>协议中的date列表</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>danam</td>
+                                <td>String</td>
+                                <td>插座、墙面开关 类这种需要</td>
+                                <td>否</td>
+                            </tr>
+                            <tr>
+                                <td>dbra</td>
+                                <td>String</td>
+                                <td>设备品牌</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>dcap</td>
+                                <td>String</td>
+                                <td>像智能门锁这些，有用户运行数据，比如指纹/密码用户编号，版本号，电量统计。格式为 电量：正常6.0v，设备当前状态：打开
+                                    ，设备数据：0102F2，固件版本：v1.2。这个字段需要实时的更新云端设备表。除了更新云端的设备运行日志表以为，还需要更新设备表里面这个字段。
+                                </td>
+                                <td>否</td>
+                            </tr>
+                            <tr>
+                                <td>dch</td>
+                                <td>String</td>
+                                <td> 1:红外 2:433射频FSK 3：433射频ASK 4：433射频固定码1527 5:315射频FSK 6：315射频ASK 7:315射频固定码1527</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>dinfo</td>
+                                <td>String</td>
+                                <td>直接显示在设备界面的信息，设备最后一条日志记录保存到这里。例如：门磁：4/6 20:25 开</td>
+                                <td>否</td>
+                            </tr>
+                            <tr>
+                                <td>dloca</td>
+                                <td>String</td>
+                                <td>客厅、主卧/考虑区域属性，一楼客厅，一楼主卧，area+room方式。关闭一楼所有的灯光</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>dlogo</td>
+                                <td>String</td>
+                                <td>每个设备的logo图片命名，比如 电视是TV.svg</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>dname</td>
+                                <td>String</td>
+                                <td>设备名称</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>dnlp</td>
+                                <td>String</td>
+                                <td>自定义设备，当添加自定义的按键功能时，比如自定义设备-车库。dnlp字段为打开,关闭。则设备支持自定义语义功能。比如帮我打开一下车库，都能够支持。本地语义解析支持。
+                                </td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>dpanel</td>
+                                <td>String</td>
+                                <td> 面板编号1 or 2 当同一个电器，比如风扇，有多种遥控器的话，需要根据这个选择相应的面板进行前端界面</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>dsys</td>
+                                <td>String</td>
+                                <td>
+                                    多个组合码,占位从高位到低位（按用途属性分类：灯光系统1、门禁安防系统2、智能窗帘系统3、室内环境检测系统4、影音智能系统5、家电设备6、语音中控7、电源能耗8、家人安全（比如门磁属于
+                                    安防系统；客厅灯属于灯光系统(支持查看灯光设备，查看安防系统，查看窗帘等命令用)）
+                                </td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>eva</td>
+                                <td>String</td>
+                                <td>标准化一些基础的能力
+                                    open，close 打开、关闭----move 移动 ----alarm 闹钟 ----temH 温度过高 ----temL 温度过低 ----humH 湿度过高
+                                    ---humL 湿度过低 ---lumH 光很亮 ---lumL 光很暗 ---pm25
+                                    对于智能门锁：
+                                    ----添加门锁后，默认会增加open，代表门锁打开，所有用户都触发；
+                                    当添加指纹用户时，会增加01open事件，代表某个用户打开门锁；
+                                    ----01open 智能门锁，U01代表编号是01的客户。01编号客户是谁，在dcap里面通过U01:刘小鹏 这里获取)
+                                </td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>remoid</td>
+                                <td>String</td>
+                                <td>K00081（官方标准库） 遥控器ID UK0001(用户库) 86SW3</td>
+                                <td>否</td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                    <div class="doc-detail-bd" id="bd1">
+
+                        <h3>二.更新设备</h3>
+
+                        <p>示例：</p>
+                        <pre>{
+
+    &quot;op&quot;:&quot;device&quot;,
+    &quot;act&quot;:&quot;update&quot;,
+    &quot;uid&quot;:&quot;XXXXXXXXXX&quot;,
+    &quot;did&quot;:&quot;XXXXXXXXXX&quot;,
+    &quot;token&quot;:&quot;XXXXXXXXXX&quot;,
+    &quot;date&quot;:{
+        &quot;yid&quot;:&quot;XXXXXXXXXX&quot;,
+        &quot;danam&quot;:&quot;空调&quot;,
+        &quot;dbra&quot;:&quot;格力&quot;,
+        &quot;dcap&quot;:&quot;&quot;,
+        &quot;dch&quot;:&quot;01&quot;,
+        &quot;dinfo&quot;:&quot;&quot;,
+        &quot;dloca&quot;:&quot;客厅&quot;,
+        &quot;dlogo&quot;:&quot;AirConditioning.svg&quot;,
+        &quot;dname&quot;:&quot;空调&quot;,
+        &quot;dnlp&quot;:&quot;&quot;,
+        &quot;dpanel&quot;:&quot;AirConditioning&quot;,
+        &quot;dsys&quot;:&quot;2126&quot;,
+        &quot;eva&quot;:&quot;&quot;
+      }
+ }</pre>
+                        <p>正常响应：</p>
+                        <pre>{
+    &quot;ack&quot;:&quot;1&quot;
+ }</pre>
+                        <h3>参数协议</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>op</td>
+                                <td>String</td>
+                                <td>方法类别</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>act</td>
+                                <td>String</td>
+                                <td>方法名</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>uid</td>
+                                <td>String</td>
+                                <td>用户的微信uid</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>did</td>
+                                <td>String</td>
+                                <td>主机的did</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>token</td>
+                                <td>String</td>
+                                <td>见二.获取token</td>
+                                <td>是</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <h3>协议中的date列表</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>yid</td>
+                                <td>String</td>
+                                <td>添加设备时返回的yid</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>danam</td>
+                                <td>String</td>
+                                <td>插座、墙面开关 类这种需要</td>
+                                <td>否</td>
+                            </tr>
+                            <tr>
+                                <td>dbra</td>
+                                <td>String</td>
+                                <td>设备品牌</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>dcap</td>
+                                <td>String</td>
+                                <td>像智能门锁这些，有用户运行数据，比如指纹/密码用户编号，版本号，电量统计。格式为 电量：正常6.0v，设备当前状态：打开
+                                    ，设备数据：0102F2，固件版本：v1.2。这个字段需要实时的更新云端设备表。除了更新云端的设备运行日志表以为，还需要更新设备表里面这个字段。
+                                </td>
+                                <td>否</td>
+                            </tr>
+                            <tr>
+                                <td>dch</td>
+                                <td>String</td>
+                                <td> 1:红外 2:433射频FSK 3：433射频ASK 4：433射频固定码1527 5:315射频FSK 6：315射频ASK 7:315射频固定码1527</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>dinfo</td>
+                                <td>String</td>
+                                <td>直接显示在设备界面的信息，设备最后一条日志记录保存到这里。例如：门磁：4/6 20:25 开</td>
+                                <td>否</td>
+                            </tr>
+                            <tr>
+                                <td>dloca</td>
+                                <td>String</td>
+                                <td>客厅、主卧/考虑区域属性，一楼客厅，一楼主卧，area+room方式。关闭一楼所有的灯光</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>dlogo</td>
+                                <td>String</td>
+                                <td>每个设备的logo图片命名，比如 电视是TV.svg</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>dname</td>
+                                <td>String</td>
+                                <td>设备名称</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>dnlp</td>
+                                <td>String</td>
+                                <td>自定义设备，当添加自定义的按键功能时，比如自定义设备-车库。dnlp字段为打开,关闭。则设备支持自定义语义功能。比如帮我打开一下车库，都能够支持。本地语义解析支持。
+                                </td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>dpanel</td>
+                                <td>String</td>
+                                <td> 面板编号1 or 2 当同一个电器，比如风扇，有多种遥控器的话，需要根据这个选择相应的面板进行前端界面</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>dsys</td>
+                                <td>String</td>
+                                <td>
+                                    多个组合码,占位从高位到低位（按用途属性分类：灯光系统1、门禁安防系统2、智能窗帘系统3、室内环境检测系统4、影音智能系统5、家电设备6、语音中控7、电源能耗8、家人安全（比如门磁属于
+                                    安防系统；客厅灯属于灯光系统(支持查看灯光设备，查看安防系统，查看窗帘等命令用)）
+                                </td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>eva</td>
+                                <td>String</td>
+                                <td>标准化一些基础的能力
+                                    open，close 打开、关闭----move 移动 ----alarm 闹钟 ----temH 温度过高 ----temL 温度过低 ----humH 湿度过高
+                                    ---humL 湿度过低 ---lumH 光很亮 ---lumL 光很暗 ---pm25
+                                    对于智能门锁：
+                                    ----添加门锁后，默认会增加open，代表门锁打开，所有用户都触发；
+                                    当添加指纹用户时，会增加01open事件，代表某个用户打开门锁；
+                                    ----01open 智能门锁，U01代表编号是01的客户。01编号客户是谁，在dcap里面通过U01:刘小鹏 这里获取)
+                                </td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>remoid</td>
+                                <td>String</td>
+                                <td>K00081（官方标准库） 遥控器ID UK0001(用户库) 86SW3</td>
+                                <td>否</td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                    <div class="doc-detail-bd" id="bd2">
+                        <h3>三.删除设备</h3>
+                        <p>示例：</p>
+                        <pre>{
+    &quot;op&quot;:&quot;device&quot;,
+    &quot;act&quot;:&quot;del&quot;,
+    &quot;uid&quot;:&quot;XXXXXXXXXX&quot;,
+    &quot;did&quot;:&quot;XXXXXXXXXX&quot;,
+    &quot;token&quot;:&quot;XXXXXXXXXX&quot;,
+    &quot;date&quot;:{
+        &quot;yid&quot;:&quot;XXXXXXXXXX&quot;,
+      }
+ }</pre>
+                        <p>正常响应：</p>
+                        <pre>{
+    &quot;ack&quot;:&quot;1&quot;
+
+ }</pre>
+                        <h3>参数协议</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>op</td>
+                                <td>String</td>
+                                <td>方法类别</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>act</td>
+                                <td>String</td>
+                                <td>方法名</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>uid</td>
+                                <td>String</td>
+                                <td>用户的微信uid</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>did</td>
+                                <td>String</td>
+                                <td>主机的did</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>token</td>
+                                <td>String</td>
+                                <td>见二.获取token</td>
+                                <td>是</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <h3>协议中的date列表</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>yid</td>
+                                <td>String</td>
+                                <td>添加设备时返回的yid</td>
+                                <td>是</td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                    <div class="doc-detail-bd" id="bd3">
+                        <h3>四.查看所有设备</h3>
+                        <p>示例：</p>
+                        <pre>{
+    &quot;op&quot;:&quot;device&quot;,
+    &quot;act&quot;:&quot;del&quot;,
+    &quot;uid&quot;:&quot;XXXXXXXXXX&quot;,
+    &quot;did&quot;:&quot;XXXXXXXXXX&quot;,
+    &quot;token&quot;:&quot;XXXXXXXXXX&quot;
+ }</pre>
+                        <p>正常响应：</p>
+                        <pre>{"ack":"1",
+   "msg":{
+       "devlist":[
+           {
+                "id":"2333",
+                "yid":"c2f90dc105bc091b360f0f7551dda784",
+                "xqid":"30373331313044303741343543364445",
+                "danme":"",
+                "uidp":"6",
+                "online":"1",
+                "mdid":"",
+                "isev":"1",
+                "eva":"temH,temL,humH,humL,lumH,lumL",
+                "dsys":"6137",
+                "dpanel":"IntelligentButler",
+                "dno":"PGY_MV1",
+                "dname":"\u8bed\u97f3\u4e3b\u673a",
+                "dloca":"\u5ba2\u5385",
+                "dlab":"",
+                "did":"30373331313044303741343543364445",
+                "dch":"ff",
+                "dcap":"wake:null;sen:5;tem:10;hum:63;lum:89",
+                "dbra":"",
+                "dbat":"",
+                "dinfo":"10\u2103|63%|89L",
+                "danam":null,
+                "dnlp":"",
+                "dres1":null,
+                "dres2":null,
+                "dlogo":"IntelligentButler.svg",
+                "remoid":"",
+                "dver":null,
+                "dtag":null
+           },{
+                "id":"2439",
+                "yid":"68b283bbd74e9becbcae48a0f045c74a",
+                "xqid":"30373331313044303741343543364445",
+                "danme":"",
+                "uidp":"",
+                "online":"1",
+                "mdid":"",
+                "isev":"",
+                "eva":"",
+                "dsys":"1121",
+                "dpanel":"Lamp",
+                "dno":"",
+                "dname":"\u540a\u706f",
+                "dloca":"default",
+                "dlab":"",
+                "did":"",
+                "dch":"11",
+                "dcap":"",
+                "dbra":"",
+                "dbat":"",
+                "dinfo":"",
+                "danam":"",
+                "dnlp":"",
+                "dres1":"",
+                "dres2":"",
+                "dlogo":"Chandelier.svg",
+                "remoid":"",
+                "dver":"",
+                "dtag":""
+           },{
+                "id":"2442",
+                "yid":"b30d14157c015d74985db951cc2ea472",
+                "xqid":"30373331313044303741343543364445",
+                "danme":"",
+                "uidp":"",
+                "online":"1",
+                "mdid":"",
+                "isev":"",
+                "eva":"",
+                "dsys":"2126",
+                "dpanel":"Humidifier",
+                "dno":"",
+                "dname":"\u52a0\u6e7f\u5668",
+                "dloca":"default",
+                "dlab":"",
+                "did":"",
+                "dch":"01",
+                "dcap":"",
+                "dbra":"",
+                "dbat":"",
+                "dinfo":"",
+                "danam":"",
+                "dnlp":"",
+                "dres1":"",
+                "dres2":"",
+                "dlogo":"Humidifier.svg",
+                "remoid":"",
+                "dver":"",
+                "dtag":""
+           }
+       ]}
+ }</pre>
+                        <h3>参数协议</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>op</td>
+                                <td>String</td>
+                                <td>方法类别</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>act</td>
+                                <td>String</td>
+                                <td>方法名</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>uid</td>
+                                <td>String</td>
+                                <td>用户的微信uid</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>did</td>
+                                <td>String</td>
+                                <td>主机的did</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>token</td>
+                                <td>String</td>
+                                <td>见二.获取token</td>
+                                <td>是</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <h3>返回的参数说明</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>id</td>
+                                <td>String</td>
+                                <td>设备id（前端暂无使用）</td>
+                            </tr>
+                            <tr>
+                                <td>yid</td>
+                                <td>String</td>
+                                <td>添加设备时返回的yid</td>
+                            </tr>
+                            <tr>
+                                <td>xqid</td>
+                                <td>String</td>
+                                <td>前端暂无使用</td>
+                            </tr>
+                            <tr>
+                                <td>danme</td>
+                                <td>String</td>
+                                <td>插座、墙面开关 类这种需要</td>
+                            </tr>
+                            <tr>
+                                <td>uidp</td>
+                                <td>String</td>
+                                <td>所有人都能控制此设备、6：管理和家里人能控制此设备、4：只有管理员可以控制此设备。</td>
+                            </tr>
+                            <tr>
+                                <td>online</td>
+                                <td>String</td>
+                                <td>设备是否在线（1为在线，0为不在线）</td>
+                            </tr>
+                            <tr>
+                                <td>mdid</td>
+                                <td>String</td>
+                                <td>前端暂无使用</td>
+                            </tr>
+                            <tr>
+                                <td>isev</td>
+                                <td>String</td>
+                                <td> 为空或者0没有，为1设备拥有事件触发能力 ， 设备是否拥有事件能力，当做场景触发的条件</td>
+                            </tr>
+                            <tr>
+                                <td>eva</td>
+                                <td>String</td>
+                                <td> 标准化一些基础的能力 open，close  打开、关闭----move 移动  ----alarm 闹钟  ----temH 温度过高  ----temL 温度过低   ----humH 湿度过高  ---humL  湿度过低   ---lumH 光很亮 ---lumL 光很暗  ---pm25</td>
+                            </tr>
+                            <tr>
+                                <td>dsys</td>
+                                <td>String</td>
+                                <td> xxxx多个组合码,占位从高位到低位</td>
+                            </tr>
+                            <tr>
+                                <td>dpanel</td>
+                                <td>String</td>
+                                <td>面板编号1 or 2  当同一个电器，比如风扇，有多种遥控器的话，需要根据这个选择相应的面板进行前端界面显示</td>
+                            </tr>
+                            <tr>
+                                <td>dno</td>
+                                <td>String</td>
+                                <td>设备型号</td>
+                            </tr>
+                            <tr>
+                                <td>dname</td>
+                                <td>String</td>
+                                <td>设备名称</td>
+                            </tr>
+                            <tr>
+                                <td>dloca</td>
+                                <td>String</td>
+                                <td>设备位置（客厅、主卧/考虑区域属性，一楼客厅，一楼主卧，area+room方式。关闭一楼所有的灯光。）</td>
+                            </tr>
+                            <tr>
+                                <td>dlab</td>
+                                <td>String</td>
+                                <td>配套万能遥控器用—根据标签索引是哪一个遥控器</td>
+                            </tr>
+                            <tr>
+                                <td>did</td>
+                                <td>String</td>
+                                <td>添加设备时返回的did</td>
+                            </tr>
+                            <tr>
+                                <td>dch</td>
+                                <td>String</td>
+                                <td>01:红外数据通道  红外压缩编码数据      02：红外数据通道-红外原始电平通道
+                                    11:433射频 ASK 1527  12:433射频电平ASK    13:433 FSK透传   14:433 ASK透传  15：奥普433私有协议
+                                    21:315射频 ASK1527   22: 315射频电平ASK   23: 315FSK透传   24: 315ASK透传 </td>
+                            </tr>
+                            <tr>
+                                <td>dcap</td>
+                                <td>String</td>
+                                <td>像智能门锁这些，有用户运行数据，比如指纹/密码用户编号，版本号，电量统计。格式为 电量：正常6.0v，设备当前状态：打开 ，设备数据：0102F2，固件版本：v1.2
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>dbra</td>
+                                <td>String</td>
+                                <td>设备品牌</td>
+                            </tr>
+                            <tr>
+                                <td>dbat</td>
+                                <td>String</td>
+                                <td>非电池类为空，电池类直接是0-100的电量值。</td>
+                            </tr>
+                            <tr>
+                                <td>dinfo</td>
+                                <td>String</td>
+                                <td>显示在设备界面的信息，设备最后一条日志记录保存到这里。例如：门磁：4/6 20:25 开</td>
+                            </tr>
+                            <tr>
+                                <td>danam</td>
+                                <td>String</td>
+                                <td>设备别名（插座、墙面开关 类这种需要）</td>
+                            </tr>
+                            <tr>
+                                <td>dnlp</td>
+                                <td>String</td>
+                                <td>自定义设备，当添加自定义的按键功能时，比如自定义设备-车库。dnlp字段为打开,关闭。则设备支持自定义语义功能。比如帮我打开一下车库，都能够支持。本地语义解析支持</td>
+                            </tr>
+                            <tr>
+                                <td>dres1</td>
+                                <td>String</td>
+                                <td>保留字段</td>
+                            </tr>
+                            <tr>
+                                <td>dres2</td>
+                                <td>String</td>
+                                <td>保留字段</td>
+                            </tr>
+                            <tr>
+                                <td>dlogo</td>
+                                <td>String</td>
+                                <td>每个设备的logo图片命名，比如 电视是TV.svg</td>
+                            </tr>
+                            <tr>
+                                <td>remoid</td>
+                                <td>String</td>
+                                <td>K00081（官方标准库） 遥控器ID  UK0001(用户库)    86SW3</td>
+                            </tr>
+                            <tr>
+                                <td>dver</td>
+                                <td>String</td>
+                                <td>设备的固件版本信息，对于自组网设备，需要存储这个字段</td>
+                            </tr>
+                            <tr>
+                                <td>dtag</td>
+                                <td>String</td>
+                                <td>设备用来手动区分的标记，比如一个房间有好几个人体感应器，那么怎么区分同一个房间的各个地方的人体感应器呢，就用到了这个dtag。比如在卧室。。床下人体活动  门口人体活动 </td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                    <div class="doc-detail-bd" id="bd4">
+                        <h3>五.设备控制相关的功能</h3>
+                        <p>示例：</p>
+                        <pre>{
+    &quot;op&quot;:&quot;device&quot;,
+    &quot;act&quot;:&quot;action&quot;,
+    &quot;uid&quot;:&quot;XXXXXXXXXX&quot;,
+    &quot;did&quot;:&quot;XXXXXXXXXX&quot;,
+    &quot;token&quot;:&quot;XXXXXXXXXX&quot;,
+    &quot;date&quot;:{
+        &quot;yid&quot;:&quot;XXXXXXXXXX&quot;,
+        &quot;dkey&quot;:&quot;XXXXXXXXXX&quot;,
+        &quot;dvcm&quot;:&quot;XXXXXXXXXX&quot;,
+      }
+ }</pre>
+                        <p>正常响应：</p>
+                        <pre>{
+    &quot;ack&quot;:&quot;1&quot;,
+    &quot;msg&quot;:&quot;{
+        &quot;content&quot;:&quot;已执行&quot;
+    }&quot;
+
+
+ }</pre>
+                        <h3>参数协议</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>op</td>
+                                <td>String</td>
+                                <td>方法类别</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>act</td>
+                                <td>String</td>
+                                <td>方法名</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>uid</td>
+                                <td>String</td>
+                                <td>用户的微信uid</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>did</td>
+                                <td>String</td>
+                                <td>主机的did</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>token</td>
+                                <td>String</td>
+                                <td>见二.获取token</td>
+                                <td>是</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <h3>协议中的date列表</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>yid</td>
+                                <td>String</td>
+                                <td>添加设备时返回的yid</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>dkey</td>
+                                <td>String</td>
+                                <td>具体的按键控制（每个设备的按键有固定码传入这时dvcm传空）</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>dvcm</td>
+                                <td>String</td>
+                                <td>自定义设备按键时传入（ 这时dkey传空）</td>
+                                <td>是</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <h3>返回参数说明</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>content</td>
+                                <td>String</td>
+                                <td>操作响应的返回</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="doc-detail-bd" id="bd5">
+                        <h3>六.设备学习模式</h3>
+                        <p>示例：</p>
+                        <pre>{
+    &quot;op&quot;:&quot;device&quot;,
+    &quot;act&quot;:&quot;study&quot;,
+    &quot;uid&quot;:&quot;XXXXXXXXXX&quot;,
+    &quot;did&quot;:&quot;XXXXXXXXXX&quot;,
+    &quot;token&quot;:&quot;XXXXXXXXXX&quot;,
+    &quot;date&quot;:{
+        &quot;yid&quot;:&quot;XXXXXXXXXX&quot;,
+        &quot;pt&quot;:&quot;1&quot;,
+        &quot;isgru&quot;:&quot;1&quot;,
+        &quot;dvcm&quot;:&quot;XXXX&quot;,
+        &quot;dkey&quot;:&quot;XXXX&quot;,
+        &quot;dch&quot;:&quot;01&quot;,
+        &quot;gkdt&quot;:&quot;2&quot;,
+      }
+ }</pre>
+                        <p>正常响应：</p>
+                        <pre>{
+    &quot;ack&quot;:&quot;1&quot;
+
+ }</pre>
+                        <h3>参数协议</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>op</td>
+                                <td>String</td>
+                                <td>方法类别</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>act</td>
+                                <td>String</td>
+                                <td>方法名</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>uid</td>
+                                <td>String</td>
+                                <td>用户的微信uid</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>did</td>
+                                <td>String</td>
+                                <td>主机的did</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>token</td>
+                                <td>String</td>
+                                <td>见二.获取token</td>
+                                <td>是</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <h3>协议中的date列表</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>yid</td>
+                                <td>String</td>
+                                <td>添加设备时返回的yid</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>pt</td>
+                                <td>String</td>
+                                <td>1（标准面板设备） 2（自定义设备）</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>isgru</td>
+                                <td>String</td>
+                                <td>1(组合按键学习)  0(单键学习)</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>dvcm</td>
+                                <td>String</td>
+                                <td>芝麻开门  打开车库  自定义语音指令 （和dkey二选一</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>dkey</td>
+                                <td>String</td>
+                                <td>具体的功能按键（和dvcm二选一）</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>dch</td>
+                                <td>String</td>
+                                <td>01:红外数据通道  红外压缩编码数据      02：红外数据通道-红外原始电平通道
+                                    11:433射频 ASK 1527  12:433射频电平ASK    13:433 FSK透传   14:433 ASK透传  15：奥普433私有协议
+                                    21:315射频 ASK1527   22: 315射频电平ASK   23: 315FSK透传   24: 315ASK透传
+                                    31：WIFI内部局域网UDP通讯和HILINK路由器  32：WIFI 外网连接udp  32：WIFI 外网连接http  33：本地局域网tcp  34：本地局域网udp</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>gkdt</td>
+                                <td>String</td>
+                                <td> 2(s秒)  2秒—标准遥控器面板，长按进行组合键学习，单击进行单个按键学习模式。遥控器面板可处于编辑模式。默认为空，不起作用。</td>
+                                <td>是</td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                    <div class="doc-detail-bd" id="bd6">
+                        <h3>七.电视屏道绑定</h3>
+                        <p>示例：</p>
+                        <pre>{
+    &quot;op&quot;:&quot;device&quot;,
+    &quot;act&quot;:&quot;bindTVnum&quot;,
+    &quot;uid&quot;:&quot;XXXXXXXXXX&quot;,
+    &quot;did&quot;:&quot;XXXXXXXXXX&quot;,
+    &quot;token&quot;:&quot;XXXXXXXXXX&quot;,
+    &quot;date&quot;:{
+        &quot;yid&quot;:&quot;XXXXXXXXXX&quot;,
+        &quot;name&quot;:&quot;XXXXXXXXXX&quot;,
+        &quot;num&quot;:&quot;XXX&quot;,
+      }
+ }</pre>
+                        <p>正常响应：</p>
+                        <pre>{
+    &quot;ack&quot;:&quot;1&quot;
+
+ }</pre>
+                        <h3>参数协议</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>op</td>
+                                <td>String</td>
+                                <td>方法类别</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>act</td>
+                                <td>String</td>
+                                <td>方法名</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>uid</td>
+                                <td>String</td>
+                                <td>用户的微信uid</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>did</td>
+                                <td>String</td>
+                                <td>主机的did</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>token</td>
+                                <td>String</td>
+                                <td>见二.获取token</td>
+                                <td>是</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <h3>协议中的date列表</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>yid</td>
+                                <td>String</td>
+                                <td>添加设备时返回的yid</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>name</td>
+                                <td>String</td>
+                                <td>电视频道（如：湖南卫视，中央一台）</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>num</td>
+                                <td>String</td>
+                                <td>电视台数（1，12，32）</td>
+                                <td>是</td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                    <div class="doc-detail-bd" id="bd7">
+                        <h3>八.电视屏道绑定</h3>
+                        <p>示例：</p>
+                        <pre>{
+    &quot;op&quot;:&quot;device&quot;,
+    &quot;act&quot;:&quot;del&quot;,
+    &quot;uid&quot;:&quot;XXXXXXXXXX&quot;,
+    &quot;did&quot;:&quot;XXXXXXXXXX&quot;,
+    &quot;token&quot;:&quot;XXXXXXXXXX&quot;,
+    &quot;date&quot;:{
+        &quot;yid&quot;:&quot;XXXXXXXXXX&quot;,
+        &quot;name&quot;:&quot;XXXXXXXXXX&quot;,
+        &quot;num&quot;:&quot;XXX&quot;,
+      }
+ }</pre>
+                        <p>正常响应：</p>
+                        <pre>{
+    &quot;ack&quot;:&quot;1&quot;
+
+ }</pre>
+                        <h3>参数协议</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>op</td>
+                                <td>String</td>
+                                <td>方法类别</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>act</td>
+                                <td>String</td>
+                                <td>方法名</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>uid</td>
+                                <td>String</td>
+                                <td>用户的微信uid</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>did</td>
+                                <td>String</td>
+                                <td>主机的did</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>token</td>
+                                <td>String</td>
+                                <td>见二.获取token</td>
+                                <td>是</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <h3>协议中的date列表</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>yid</td>
+                                <td>String</td>
+                                <td>添加设备时返回的yid</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>name</td>
+                                <td>String</td>
+                                <td>电视频道（如：湖南卫视，中央一台）</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>num</td>
+                                <td>String</td>
+                                <td>电视台数（1，12，32）</td>
+                                <td>是</td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                    <div class="doc-detail-bd" id="bd8">
+                        <h3>九.查看屏道绑定</h3>
+                        <p>示例：</p>
+                        <pre>{
+    &quot;op&quot;:&quot;device&quot;,
+    &quot;act&quot;:&quot;listTVnum&quot;,
+    &quot;uid&quot;:&quot;XXXXXXXXXX&quot;,
+    &quot;did&quot;:&quot;XXXXXXXXXX&quot;,
+    &quot;token&quot;:&quot;XXXXXXXXXX&quot;,
+    &quot;date&quot;:{
+        &quot;yid&quot;:&quot;XXXXXXXXXX&quot;,
+      }
+ }</pre>
+                        <p>正常响应：</p>
+                        <pre>{
+    &quot;ack&quot;:&quot;1&quot;
+
+ }</pre>
+                        <h3>参数协议</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>op</td>
+                                <td>String</td>
+                                <td>方法类别</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>act</td>
+                                <td>String</td>
+                                <td>方法名</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>uid</td>
+                                <td>String</td>
+                                <td>用户的微信uid</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>did</td>
+                                <td>String</td>
+                                <td>主机的did</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>token</td>
+                                <td>String</td>
+                                <td>见二.获取token</td>
+                                <td>是</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <h3>协议中的date列表</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>yid</td>
+                                <td>String</td>
+                                <td>添加设备时返回的yid</td>
+                                <td>是</td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                    <div class="doc-detail-bd" id="bd9">
+                        <h3>十.删除屏道绑定</h3>
+                        <p>示例：</p>
+                        <pre>{
+    &quot;op&quot;:&quot;device&quot;,
+    &quot;act&quot;:&quot;delTVnum&quot;,
+    &quot;uid&quot;:&quot;XXXXXXXXXX&quot;,
+    &quot;did&quot;:&quot;XXXXXXXXXX&quot;,
+    &quot;token&quot;:&quot;XXXXXXXXXX&quot;,
+    &quot;date&quot;:{
+        &quot;yid&quot;:&quot;XXXXXXXXXX&quot;,
+        &quot;name&quot;:&quot;XXXXXX&quot;,
+      }
+ }</pre>
+                        <p>正常响应：</p>
+                        <pre>{
+    &quot;ack&quot;:&quot;1&quot;
+
+ }</pre>
+                        <h3>参数协议</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>op</td>
+                                <td>String</td>
+                                <td>方法类别</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>act</td>
+                                <td>String</td>
+                                <td>方法名</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>uid</td>
+                                <td>String</td>
+                                <td>用户的微信uid</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>did</td>
+                                <td>String</td>
+                                <td>主机的did</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>token</td>
+                                <td>String</td>
+                                <td>见二.获取token</td>
+                                <td>是</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <h3>协议中的date列表</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>yid</td>
+                                <td>String</td>
+                                <td>添加设备时返回的yid</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>name</td>
+                                <td>String</td>
+                                <td>电视频道名</td>
+                                <td>是</td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                </div>
+                >
+            </div>
+            >
+        </div>
+        >
+    </div>
+    >
+</div>
+<script src="//g.alicdn.com/shop/tae-portal/0.4.5/scripts/docs-cc-v2.js"></script>
+</body>
+</html>

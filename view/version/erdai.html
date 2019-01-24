@@ -1,0 +1,99 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="../lib/html5shiv.js"></script>
+    <script type="text/javascript" src="../lib/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="../static/h-ui/css/H-ui.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/h-ui.admin/css/H-ui.admin.css"/>
+    <link rel="stylesheet" type="text/css" href="../lib/Hui-iconfont/1.0.8/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/h-ui.admin/skin/default/skin.css" id="skin"/>
+    <link rel="stylesheet" type="text/css" href="../static/h-ui.admin/css/style.css"/>
+    <!--[if IE 6]>
+    <script type="text/javascript" src="../lib/DD_belatedPNG_0.0.8a-min.js"></script>
+    <script>DD_belatedPNG.fix('*');</script>
+    <![endif]-->
+    <title>用户管理</title>
+</head>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 版本管理 <span
+        class="c-gray en">&gt;</span> 小乔管家
+</nav>
+<div class="page-container" id="content">
+    <div class="text-l" style="margin-bottom: 20px;">
+        <input type="text" class="input-text" style="width:250px" placeholder="版本号" name="">
+        <button type="submit" class="btn btn-success radius" name=""><i class="Hui-iconfont">&#xe665;</i> 搜版本
+        </button>
+        <a href="javascript:;" @click="addVersion('添加版本信息','add','800','500',2)" class="btn btn-secondary radius f-r">
+            <i class="Hui-iconfont">&#xe600;</i> 添加
+        </a>
+    </div>
+
+    <table class="table table-border table-bordered table-hover table-bg table-striped">
+        <thead>
+        <tr class="text-c">
+            <!--<th width="25"><input type="checkbox" name="" value=""></th>-->
+            <th>ID</th>
+            <th width="50">渠道名</th>
+            <th width="80">APK全名</th>
+            <th width="300">APK URL</th>
+            <th width="250">MD5</th>
+            <th width="50">版本号</th>
+            <th width="50">版本code</th>
+            <th width=300">MCU URL</th>
+            <th width="250">MCU MD5</th>
+            <th width="50"> MCU CODE</th>
+            <th width="50">操作</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="text-c" v-for='item in list'>
+            <!--<td><input type="checkbox" value="1" name=""></td>-->
+            <td>{{item.id}}</td>
+            <td>{{item.channel}}</td>
+            <td>{{item.apkname}}</td>
+            <td>{{item.apkurl}}</td>
+            <td>{{item.apkmd5}}</td>
+            <td>{{item.version}}</td>
+            <td>{{item.versioncode}}</td>
+            <td>{{item.mcuurl}}</td>
+            <td>{{item.mcumd5}}</td>
+            <td>{{item.mcucode}}</td>
+            <td class="td-manage">
+                <a title="编辑" href="javascript:;" @click="editVersion('编辑','edit','800','510',item)" class="ml-5" style="text-decoration:none">
+                    <i class="Hui-iconfont">&#xe6df;</i>
+                </a>
+                <a title="删除" href="javascript:;" @click="delVersion(item.id)" class="ml-5"
+                   style="text-decoration:none">
+                    <i class="Hui-iconfont">&#xe6e2;</i>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="../lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="../lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="../static/h-ui/js/H-ui.min.js"></script>
+<script type="text/javascript" src="../static/h-ui.admin/js/H-ui.admin.js"></script> <!--/_footer 作为公共模版分离出去-->
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="../lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="../lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="../lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript" src="../javascript/common/vue.js"></script>
+<script type="text/javascript" src="../javascript/common/mutual.js"></script>
+<script type="text/javascript" src="../javascript/version/erdai.js"></script>
+
+</body>
+</html>

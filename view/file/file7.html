@@ -1,0 +1,1311 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>PuGoing开发者平台</title>
+    <style>
+        .ai * {
+            font-family: "PingFang SC", "Helvetica Neue", Helvetica, Tahoma, Arial, "Microsoft YaHei", Roboto !important;
+        }
+
+        .ai ul,
+        .ai li {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        .ai a:focus {
+            outline: none;
+            -moz-outline: none;
+        }
+
+        .ai a,
+        .ai a:hover,
+        .ai a:focus,
+        .ai a:active {
+            text-decoration: none !important;
+        }
+
+        .container {
+            width: 100% !important;
+            margin: 0 !important;
+            padding-top: 80px;
+        }
+
+        /*.ai.header {
+          width: 100%;
+          height: 56px;
+          background: #fff;
+          z-index: 103;
+        }*/
+        .ai.header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 80px;
+            padding: 0 83px;
+            overflow: hidden;
+            background: #fff;
+            box-sizing: border-box;
+            z-index: 101;
+            transition: height .3s;
+        }
+
+        .ai.header.fixed {
+            height: 56px;
+            box-shadow: 0 3px 3px 0 rgba(75, 85, 95, 0.10);
+        }
+
+        .ai .left {
+            height: 100%;
+            float: left;
+            color: #fff;
+        }
+
+        .ai .logo {
+            padding-top: 18px;
+            padding-left: 20px;
+            padding-right: 20px;
+            float: left;
+            text-align: left;
+            font-size: 0;
+            color: #fff;
+            transition: padding .3s;
+        }
+
+        .ai.header.fixed .logo {
+            padding-top: 8px;
+        }
+
+        .ai .logo img {
+            height: 44px;
+        }
+
+        .ai .nav {
+            display: inline-block;
+            height: 100%;
+        }
+
+        .ai .nav ul {
+            display: inline-block;
+            height: 100%;
+        }
+
+        .ai .nav ul li {
+            height: 100%;
+            float: left;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .ai .nav ul li a {
+            display: block;
+            height: 100%;
+        }
+
+        .ai .nav ul li span {
+            display: block;
+            height: 100% !important;
+            line-height: 80px !important;
+            transition: line-height .3s;
+        }
+
+        .ai.header.fixed .nav span {
+            line-height: 56px !important;
+        }
+
+        .ai .nav ul li a:hover span,
+        .ai .locked span {
+            border-bottom: 3px solid #469dff;
+            color: #57708F;
+        }
+
+        .ai .nav ul li:last-child a {
+            border-right: none;
+        }
+
+        .ai .nav ul li a span,
+        .ai .right ul li a > span {
+            display: inline-block;
+            height: 50px;
+            padding: 0 5px 20px;
+            margin: 0 15px;
+            line-height: 45px;
+            box-sizing: border-box;
+        }
+
+        .ai ul.right {
+            float: right;
+            height: 56px;
+            padding-top: 12px;
+            padding-bottom: 12px;
+            margin-right: -20px;
+            line-height: 48px;
+            transition: padding .3s;
+        }
+
+        .ai.fixed ul.right {
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+
+        .ai ul.right li {
+            height: 56px;
+            float: left;
+            font-size: 14px;
+            line-height: 56px;
+            color: #57708f;
+        }
+
+        .ai ul.right li a {
+            padding: 0 20px;
+        }
+
+        .ai ul.right li a:hover {
+            color: #11191c;
+        }
+
+        .ai ul.right li::before {
+            display: inline-block;
+            width: 1px;
+            height: 20px;
+            vertical-align: middle;
+            content: "";
+            background-color: #D6DEE6;
+        }
+
+        .ai ul.right li:first-child::before {
+            background-color: transparent;
+        }
+
+        .ai.footer {
+            position: relative;
+            bottom: 0;
+            z-index: 101;
+            min-height: 83px;
+            height: 83px;
+            padding: 20px 83px;
+            border-top: 1px solid #f4f6f9;
+            font-size: 12px;
+            color: #c1c4c6;
+            background-color: #fff;
+            box-sizing: border-box;
+        }
+
+        .ai.footer .links {
+            margin: 0;
+            line-height: 28px;
+        }
+
+        .ai.footer .links a,
+        .ai.footer .links span {
+            font-size: 12px;
+            color: #86898e;
+        }
+
+        .ai.footer .links a {
+            margin: 0 10px;
+        }
+
+        .ai.footer .links span {
+            margin: 0;
+        }
+
+        .ai.footer .links a:hover,
+        .ai.footer .links a:visited {
+            color: #86898e;
+        }
+
+        .ai .copyright {
+            float: right;
+            line-height: 28px;
+            font-size: 12px;
+        }
+
+        .ai.footer .address {
+            margin-left: 10px;
+            line-height: 20px;
+        }
+
+        .ai .contact {
+            float: right;
+            color: #86898e;
+            text-align: right;
+        }
+
+        .ai .qr {
+            position: absolute;
+            top: -130px;
+            right: 158px;
+            display: none;
+            width: 120px;
+            height: 120px;
+            padding: 10px;
+            background-color: #fff;
+            box-shadow: 0 5px 10px 0 #D8EAFD;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .ai .qr-box {
+            position: relative;
+            margin: 0;
+            line-height: 28px;
+            cursor: pointer;
+        }
+
+        .ai .qr-box i {
+            color: #469DFF;
+            margin-right: 5px;
+        }
+
+        .ai .qr-box:hover .qr {
+            display: block;
+        }
+
+        .ai .qr-box span {
+            position: absolute;
+            left: 56px;
+            bottom: -15px;
+            display: block;
+            width: 0px;
+            border: 8px solid #fff;
+            border-bottom-color: transparent;
+            border-left-color: transparent;
+            border-right-color: transparent;
+        }
+
+        .ai .qr-box .icon {
+            height: 16px;
+            padding-top: 5px;
+            margin-right: 5px;
+            float: left;
+        }
+
+        .ai .copyright {
+            color: #c1c4c6;
+            margin-left: 10px;
+            line-height: 20px;
+            font-size: 12px;
+        }
+
+        .ai .links {
+            margin: 0;
+            line-height: 28px;
+        }
+
+        .ai .links a {
+            margin: 0 10px;
+            font-size: 12px;
+            color: #86898e;
+        }
+
+        .ai .links a:hover,
+        .ai .links a:visited {
+            color: #86898e;
+        }
+
+        .ai .left {
+            float: left;
+        }
+    </style>
+</head>
+<body data-spm="7629140">
+<script>
+    with (document) with (body) with (insertBefore(createElement("script"), firstChild)) setAttribute("exparams", "category=&userid=&aplus&yunid=&f5509eb36d6b7&trid=0b8ff31315362878959905598e0204&asid=AYNb5p2Y5JFbbqjRZAAAAABQZSth63QZSw==", id = "tb-beacon-aplus", src = (location > "https" ? "//g" : "//g") + ".alicdn.com/alilog/mlog/aplus_v2.js")
+</script>
+
+<div id="root" class="container">
+
+
+    <link rel="stylesheet" href="//g.alicdn.com/shop/jae-platform/0.0.10/stylesheet/doc-min.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="//g.alicdn.com/shop/tae-portal/0.4.5/styles/docs-detail-v2.css">
+    <style>
+        @font-face {
+            font-family: "iconfont1";
+            src: url("//at.alicdn.com/t/font_1448507037_6084561.eot?#iefix") format("embedded-opentype"), url("//at.alicdn.com/t/font_1448507037_6084561.woff") format("woff"), url("//at.alicdn.com/t/font_1448507037_6084561.ttf") format("truetype"), url("//at.alicdn.com/t/font_1448507037_6084561.svg#iconfont") format("svg");
+        }
+
+        .iconfont {
+            font-family: "iconfont1" !important;
+            font-size: 16px;
+            font-style: normal;
+        }
+
+        #pages {
+            min-height: 700px;
+        }
+
+        .wrap {
+            width: 100%;
+        }
+
+        .wrap-inner {
+            margin: 0 auto;
+            width: 990px;
+        }
+
+        .block-docs-search-list .list-wrap ul li h2 a em {
+            /*搜索标题，字体标红*/
+            color: red;
+        }
+
+        .wrap .block-docs-search-list .list-wrap ul li .desc em {
+            /*搜索内容，字体标红*/
+            color: red;
+        }
+
+        .update-access-wrap {
+            /*文档修改时间靠右*/
+            top: inherit;
+            position: inherit;
+            float: right;
+        }
+
+        .block-docs-wrap .docs-right .mtl-main {
+            margin-bottom: 5px;
+        }
+
+    </style>
+
+    <script src="//g.alicdn.com/tb/tracker/1.0.13/index.js"></script>
+    <script src="//g.alicdn.com/kissy/k/1.4.4/seed-min.js" data-config="{combine:false}"></script>
+    <script src="//g.alicdn.com/shop/tae-portal/0.4.5/scripts/lib/underscore-min.js"></script>
+
+    <script>
+        window.TAE_CFG = {
+            userNick: 'taeTestNick',
+            api: {
+                zanCode: '/doc2/youyong'
+            }
+        };
+        KISSY.config('packages', {
+            'module': {
+                debug: true,
+                base: '//g.alicdn.com/shop/tae-portal/0.4.5/scripts/'
+            }
+        });
+
+    </script>
+
+
+    <div class="menu-overlay-mask J_menuMask"></div>
+
+    <div id="pages">
+        <div class="wrap" id="detailContainer">
+
+
+            <div class="wrap-inner block-docs-wrap J_FloatContainer">
+                <div class="docs-left" id="sideMenu">
+                    <h3 class="menu-title">PuGoing开发者平台</h3>
+                    <ul class="menu-1">
+                        <li class>
+                            <a  class="J_ExpTrigger open"  href="javascript:void(0)" title="新手教程">云接入</a>
+                            <ul class="menu-2">
+                                <li><a  title="概览" href="/file/file1" >概览</a></li>
+                                <li><a  title="用户操作接口" href="/file/file2" >用户操作接口</a></li>
+                                <li><a  title="房间管理接口" href="/file/file3" >房间管理接口</a></li>
+                                <li><a  title="设备管理" href="/file/file4" >设备管理</a></li>
+                                <li><a  title="红外接入" href="/file/file5" >红外接入</a></li>
+                                <li><a  title="传感器设备日志" href="/file/file6" >传感器设备日志</a></li>
+                                <li><a  title="场景接口" href="/file/file7" >场景接口</a></li>
+                                <li><a  title="主机文字交互" href="/file/file8" >主机文字交互</a></li>
+                            </ul>
+                        </li>
+
+
+
+
+                    </ul>
+                </div>
+                <!--E 左侧边栏 -->
+                <div class="docs-right">
+                    <!-- content -->
+
+
+                    <div class="mtl">
+                        <h2 class="mtl-main">PuGoing场景接口</h2>
+
+                        <!--<div class="update-access-wrap">-->
+                        <!--<span class="update-time">更新时间：2018/10/29</span>-->
+                        <!--<span class="access-times">访问次数：31560</span>-->
+                        <!--</div>-->
+
+                        <div class="mao-list">
+                            <div class="inner" id="maoList">
+
+                                <div class="mao-s-h J_maoTrigger"><i class="iconfont icon-s">&#xe693;</i><i
+                                        class="iconfont icon-h">&#xe692;</i></div>
+                            </div>
+                        </div>
+                        <!--E 锚点列表 -->
+                    </div>
+                    <div class="doc-detail-bd" id="bd">
+                        <h2>PuGoing 场景接口</h2>
+                        <h3>一.添加场景</h3>
+                        <p>示例：</p>
+                        <pre>{
+    &quot;op&quot;:&quot;scene&quot;,
+    &quot;act&quot;:&quot;add&quot;,
+    &quot;uid&quot;:&quot;XXXXXXX&quot;,
+    &quot;did&quot;:&quot;XXXXXXX&quot;,
+    &quot;token&quot;:&quot;XXXXXXX&quot;,
+    &quot;date&quot;:{
+        &quot;sna&quot;:&quot;回家场景&quot;,
+        &quot;timearea&quot;:&quot;00:00-23：59&quot;,
+        &quot;svc&quot;:&quot;0,我回来了&quot;,
+        &quot;sev&quot;:&quot;0,yid+eva&quot;,
+        &quot;timedo&quot;:&quot;repeat:1;mode:2;date:1,2,3,4,5;time:00:00:00&quot;,
+        &quot;evindp&quot;:&quot;1&quot;,
+        &quot;sevc&quot;:&quot;1&quot;,
+        &quot;action&quot;:&quot;1,tts欢迎主人回家","0,打开客厅灯光&quot;,
+        &quot;stype&quot;:&quot;1&quot;,
+        &quot;slogo&quot;:&quot;cj.svg&quot;,
+      }
+ }</pre>
+                        <p>正常响应：</p>
+                        <pre>{
+    &quot;ack&quot;:&quot;1&quot;,
+ }</pre>
+                        <h3>参数协议</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>op</td>
+                                <td>String</td>
+                                <td>方法类别</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>act</td>
+                                <td>String</td>
+                                <td>方法名</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>uid</td>
+                                <td>String</td>
+                                <td>获取的微信uid</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>did</td>
+                                <td>String</td>
+                                <td>主机的did</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>token</td>
+                                <td>String</td>
+                                <td>见二.获取token</td>
+                                <td>是</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <h3>协议中的date列表</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>sna</td>
+                                <td>String</td>
+                                <td>场景名称：回家场景</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>timearea</td>
+                                <td>String</td>
+                                <td>场景执行的时间段</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>svc</td>
+                                <td>String</td>
+                                <td>我回来啦，场景语音触发命令，可以有很多条语句；格式：0，我回来了，1，我到家了，0，回家模式；(0为满足单独执行，1为与其他条件一起满足时执行)</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>sevc</td>
+                                <td>String</td>
+                                <td>事件触发场景的时候，是否需要语音口头确认，选择是，这里置位1，选择否可以为0或者空“”</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>sev</td>
+                                <td>String</td>
+                                <td>事件触发场景的时候，是否需要语音口头确认，选择是，这里置位1，选择否可以为0或者空“”</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>timedo</td>
+                                <td>String</td>
+                                <td>
+                                    单次定时触发
+                                    （repeat:0; mode:1; date:2018-05-29; time:18:57:00）
+                                    周期定时触发
+                                    （repeat:1; mode:2; date:1,3,4,5; time:18:57:00）
+                                </td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>evindp</td>
+                                <td>String</td>
+                                <td>场景事件之间依赖关系</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>action</td>
+                                <td>String</td>
+                                <td>场景执行的动作，每个动作之间有时间延时，通过逗号实现分隔
+                                    格式：1,yid_eva(数字代表延迟时间（s/秒），yid是设备的yid拼接"_"后接设备动作eva【如门磁open，close】) 加上tts主机播放文字内容
+                                </td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>stype</td>
+                                <td>String</td>
+                                <td> 1开启场景 0 关闭场景 2快捷方式</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>slogo</td>
+                                <td>String</td>
+                                <td> cj.svg非定时场景 cjds.svg 定时场景</td>
+                                <td>是</td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                    <div class="doc-detail-bd" id="bd1">
+                        <h3>二.查看场景列表</h3>
+                        <p>示例：</p>
+                        <pre>{
+    &quot;op&quot;:&quot;scene&quot;,
+    &quot;act&quot;:&quot;list&quot;,
+    &quot;uid&quot;:&quot;XXXXXXXX&quot;,
+    &quot;did&quot;:&quot;XXXXXXXX&quot;,
+    &quot;token&quot;:&quot;XXXXXXXX&quot;,
+ }</pre>
+                        <p>正常响应：</p>
+                        <pre>{
+    &quot;ack&quot;:&quot;1&quot;,
+    &quot;msg&quot;:&quot;{[
+        {
+            &quot;action&quot;:&quot;1,tts欢迎主人回家&quot;,
+            &quot;env&quot;:&quot;&quot;,
+            &quot;evindp&quot;:&quot;1&quot;,
+            &quot;id&quot;:&quot;2311&quot;,
+            &quot;scres1&quot;:&quot;&quot;,
+            &quot;scres2&quot;:&quot;&quot;,
+            &quot;sev&quot;:&quot;&quot;,
+            &quot;sevc&quot;:&quot;1&quot;,
+            &quot;sid&quot;:&quot;XXXXXXXXXX&quot;,
+            &quot;sinfo&quot;:&quot;&quot;,
+            &quot;slogo&quot;:&quot;cj.svg&quot;,
+            &quot;sna&quot;:&quot;回家场景&quot;,
+            &quot;stype&quot;:&quot;1&quot;,
+            &quot;svc&quot;:&quot;&quot;,
+            &quot;svcack&quot;:&quot;&quot;,
+            &quot;timearea&quot;:&quot;00:00-23:59&quot;,
+            &quot;timedo&quot;:&quot;repeat:1;mode:2;date:1,2,3,4,5;time:00:00:00&quot;,
+            &quot;voevdp&quot;:&quot;&quot;,
+        },{
+            &quot;action&quot;:&quot;1,tts欢迎主人回家&quot;,
+            &quot;env&quot;:&quot;&quot;,
+            &quot;evindp&quot;:&quot;1&quot;,
+            &quot;id&quot;:&quot;2311&quot;,
+            &quot;scres1&quot;:&quot;&quot;,
+            &quot;scres2&quot;:&quot;&quot;,
+            &quot;sev&quot;:&quot;&quot;,
+            &quot;sevc&quot;:&quot;1&quot;,
+            &quot;sid&quot;:&quot;XXXXXXXXXX&quot;,
+            &quot;sinfo&quot;:&quot;&quot;,
+            &quot;slogo&quot;:&quot;cj.svg&quot;,
+            &quot;sna&quot;:&quot;回家场景&quot;,
+            &quot;stype&quot;:&quot;1&quot;,
+            &quot;svc&quot;:&quot;&quot;,
+            &quot;svcack&quot;:&quot;&quot;,
+            &quot;timearea&quot;:&quot;00:00-23:59&quot;,
+            &quot;timedo&quot;:&quot;repeat:1;mode:2;date:1,2,3,4,5;time:00:00:00&quot;,
+            &quot;voevdp&quot;:&quot;&quot;,
+        },
+    ]}&quot;
+
+ }</pre>
+                        <h3>参数协议</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>op</td>
+                                <td>String</td>
+                                <td>方法类别</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>act</td>
+                                <td>String</td>
+                                <td>方法名</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>uid</td>
+                                <td>String</td>
+                                <td>获取的微信uid</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>did</td>
+                                <td>String</td>
+                                <td>主机的did</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>token</td>
+                                <td>String</td>
+                                <td>见二.获取token</td>
+                                <td>是</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <h3>返回参数说明</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>action</td>
+                                <td>String</td>
+                                <td>场景执行的动作，每个动作之间有时间延时，通过逗号实现分隔
+                                    格式：1,yid_eva(数字代表延迟时间（s/秒），yid是设备的yid拼接"_"后接设备动作eva【如门磁open，close】) 加上tts主机播放文字内容
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>env</td>
+                                <td>String</td>
+                                <td>场景环境参数（预留）</td>
+                            </tr>
+                            <tr>
+                                <td>evindp</td>
+                                <td>String</td>
+                                <td>场景事件之间依赖关系</td>
+                            </tr>
+                            <tr>
+                                <td>id</td>
+                                <td>String</td>
+                                <td>前端暂无使用</td>
+                            </tr>
+                            <tr>
+                                <td>scres1</td>
+                                <td>String</td>
+                                <td>场景预留字段1</td>
+                            </tr>
+                            <tr>
+                                <td>scres2</td>
+                                <td>String</td>
+                                <td>场景预留字段2</td>
+                            </tr>
+                            <tr>
+                                <td>sev</td>
+                                <td>String</td>
+                                <td>事件触发场景的时候，是否需要语音口头确认，选择是，这里置位1，选择否可以为0或者空“”</td>
+                            </tr>
+                            <tr>
+                                <td>sevc</td>
+                                <td>String</td>
+                                <td>事件触发场景的时候，是否需要语音口头确认，选择是，这里置位1，选择否可以为0或者空“”</td>
+                            </tr>
+                            <tr>
+                                <td>sid</td>
+                                <td>String</td>
+                                <td>场景的sid</td>
+                            </tr>
+                            <tr>
+                                <td>sinfo</td>
+                                <td>String</td>
+                                <td>场景执行最后一条记录</td>
+                            </tr>
+                            <tr>
+                                <td>slogo</td>
+                                <td>String</td>
+                                <td>cj.svg非定时场景 cjds.svg 定时场景</td>
+                            </tr>
+                            <tr>
+                                <td>sna</td>
+                                <td>String</td>
+                                <td> 场景名称：回家场景</td>
+                            </tr>
+                            <tr>
+                                <td>stype</td>
+                                <td>String</td>
+                                <td> 1开启场景 0 关闭场景 2快捷方式</td>
+                            </tr>
+                            <tr>
+                                <td>svc</td>
+                                <td>String</td>
+                                <td>我回来啦，场景语音触发命令，可以有很多条语句；格式：0，我回来了，1，我到家了，0，回家模式；</td>
+                            </tr>
+                            <tr>
+                                <td>svcack</td>
+                                <td>String</td>
+                                <td>暂无使用</td>
+                            </tr>
+                            <tr>
+                                <td>timearea</td>
+                                <td>String</td>
+                                <td>场景执行的时间段</td>
+                            </tr>
+                            <tr>
+                                <td>timedo</td>
+                                <td>String</td>
+                                <td>单次定时触发 （repeat:0; mode:1; date:2018-05-29; time:18:57:00） 周期定时触发 （repeat:1; mode:2;
+                                    date:1,3,4,5; time:18:57:00）
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>voevdp</td>
+                                <td>String</td>
+                                <td>场景语音和事件关系</td>
+                            </tr>
+                            <tr>
+                                <td>xqid</td>
+                                <td>String</td>
+                                <td>前端暂无使用</td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="doc-detail-bd" id="bd2">
+                        <h3>三.更新场景</h3>
+                        <p>示例：</p>
+                        <pre>{
+    &quot;op&quot;:&quot;scene&quot;,
+    &quot;act&quot;:&quot;update&quot;,
+    &quot;uid&quot;:&quot;XXXXXXX&quot;,
+    &quot;did&quot;:&quot;XXXXXXX&quot;,
+    &quot;token&quot;:&quot;XXXXXXX&quot;,
+    &quot;date&quot;:{
+        &quot;sid&quot;:&quot;XXXXXXX&quot;,
+        &quot;sna&quot;:&quot;回家场景&quot;,
+        &quot;timearea&quot;:&quot;00:00-23：59&quot;,
+        &quot;svc&quot;:&quot;0,我回来了&quot;,
+        &quot;sev&quot;:&quot;0,yid+eva&quot;,
+        &quot;timedo&quot;:&quot;repeat:1;mode:2;date:1,2,3,4,5;time:00:00:00&quot;,
+        &quot;evindp&quot;:&quot;1&quot;,
+        &quot;sevc&quot;:&quot;1&quot;,
+        &quot;action&quot;:&quot;1,tts欢迎主人回家","0,打开客厅灯光&quot;,
+        &quot;stype&quot;:&quot;1&quot;,
+        &quot;slogo&quot;:&quot;cj.svg&quot;
+      }
+ }</pre>
+                        <p>正常响应：</p>
+                        <pre>{
+    &quot;ack&quot;:&quot;1&quot;,
+ }</pre>
+                        <h3>参数协议</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>op</td>
+                                <td>String</td>
+                                <td>方法类别</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>act</td>
+                                <td>String</td>
+                                <td>方法名</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>uid</td>
+                                <td>String</td>
+                                <td>获取的微信uid</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>did</td>
+                                <td>String</td>
+                                <td>主机的did</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>token</td>
+                                <td>String</td>
+                                <td>见二.获取token</td>
+                                <td>是</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <h3>协议中的date列表</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>sid</td>
+                                <td>String</td>
+                                <td>场景的sid</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>sna</td>
+                                <td>String</td>
+                                <td>场景名称：回家场景</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>timearea</td>
+                                <td>String</td>
+                                <td>场景执行的时间段</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>svc</td>
+                                <td>String</td>
+                                <td>我回来啦，场景语音触发命令，可以有很多条语句；格式：0，我回来了，1，我到家了，0，回家模式；(0为满足单独执行，1为与其他条件一起满足时执行)</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>sevc</td>
+                                <td>String</td>
+                                <td>事件触发场景的时候，是否需要语音口头确认，选择是，这里置位1，选择否可以为0或者空“”</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>sev</td>
+                                <td>String</td>
+                                <td>事件触发场景的时候，是否需要语音口头确认，选择是，这里置位1，选择否可以为0或者空“”</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>timedo</td>
+                                <td>String</td>
+                                <td>
+                                    单次定时触发
+                                    （repeat:0; mode:1; date:2018-05-29; time:18:57:00）
+                                    周期定时触发
+                                    （repeat:1; mode:2; date:1,3,4,5; time:18:57:00）
+                                </td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>evindp</td>
+                                <td>String</td>
+                                <td>场景事件之间依赖关系</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>action</td>
+                                <td>String</td>
+                                <td>场景执行的动作，每个动作之间有时间延时，通过逗号实现分隔
+                                    格式：1,yid_eva(数字代表延迟时间（s/秒），yid是设备的yid拼接"_"后接设备动作eva【如门磁open，close】) 加上tts主机播放文字内容
+                                </td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>stype</td>
+                                <td>String</td>
+                                <td> 1开启场景 0 关闭场景 2快捷方式</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>slogo</td>
+                                <td>String</td>
+                                <td> cj.svg非定时场景 cjds.svg 定时场景</td>
+                                <td>是</td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                    <div class="doc-detail-bd" id="bd3">
+                        <h3>四.检查场景执行条件是否重复</h3>
+                        <p>示例：</p>
+                        <pre>{
+    &quot;op&quot;:&quot;scene&quot;,
+    &quot;act&quot;:&quot;listsvc&quot;,
+    &quot;uid&quot;:&quot;XXXXXXX&quot;,
+    &quot;did&quot;:&quot;XXXXXXX&quot;,
+    &quot;token&quot;:&quot;XXXXXXX&quot;,
+    &quot;date&quot;:{
+       &quot;svc&quot;:&quot;我回来了&quot;
+      }
+ }</pre>
+                        <p>正常响应：</p>
+                        <pre>{
+    &quot;ack&quot;:&quot;1&quot;,
+ }</pre>
+                        <h3>参数协议</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>op</td>
+                                <td>String</td>
+                                <td>方法类别</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>act</td>
+                                <td>String</td>
+                                <td>方法名</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>uid</td>
+                                <td>String</td>
+                                <td>获取的微信uid</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>did</td>
+                                <td>String</td>
+                                <td>主机的did</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>token</td>
+                                <td>String</td>
+                                <td>见二.获取token</td>
+                                <td>是</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <h3>协议中的date列表</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>svc</td>
+                                <td>String</td>
+                                <td>我回来啦，场景语音触发命令，可以有很多条语句；格式：0，我回来了，1，我到家了，0，回家模式；</td>
+                                <td>是</td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                    <div class="doc-detail-bd" id="bd4">
+                        <h3>五.添加场景到快速执行列表</h3>
+                        <p>示例：</p>
+                        <pre>{
+    &quot;op&quot;:&quot;scene&quot;,
+    &quot;act&quot;:&quot;cfg&quot;,
+    &quot;uid&quot;:&quot;XXXXXXX&quot;,
+    &quot;did&quot;:&quot;XXXXXXX&quot;,
+    &quot;token&quot;:&quot;XXXXXXX&quot;,
+    &quot;date&quot;:{
+       &quot;sid&quot;:&quot;XXXXX&quot;
+       &quot;stype&quot;:&quot;2&quot;
+      }
+ }</pre>
+                        <p>正常响应：</p>
+                        <pre>{
+    &quot;ack&quot;:&quot;1&quot;
+ }</pre>
+                        <h3>参数协议</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>op</td>
+                                <td>String</td>
+                                <td>方法类别</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>act</td>
+                                <td>String</td>
+                                <td>方法名</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>uid</td>
+                                <td>String</td>
+                                <td>获取的微信uid</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>did</td>
+                                <td>String</td>
+                                <td>主机的did</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>token</td>
+                                <td>String</td>
+                                <td>见二.获取token</td>
+                                <td>是</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <h3>协议中的date列表</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>sid</td>
+                                <td>String</td>
+                                <td>我回来啦，场景语音触发命令，可以有很多条语句；格式：0，我回来了，1，我到家了，0，回家模式；</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>stype</td>
+                                <td>String</td>
+                                <td> 0 关闭  ； 1 开启 ；2 快捷方式；</td>
+                                <td>是</td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                    <div class="doc-detail-bd" id="bd5">
+                        <h3>六.快速执行场景</h3>
+                        <p>示例：</p>
+                        <pre>{
+    &quot;op&quot;:&quot;scene&quot;,
+    &quot;act&quot;:&quot;run&quot;,
+    &quot;uid&quot;:&quot;XXXXXXX&quot;,
+    &quot;did&quot;:&quot;XXXXXXX&quot;,
+    &quot;token&quot;:&quot;XXXXXXX&quot;,
+    &quot;date&quot;:{
+       &quot;sid&quot;:&quot;XXXXX&quot;
+      }
+ }</pre>
+                        <p>正常响应：</p>
+                        <pre>{
+    &quot;ack&quot;:&quot;1&quot;
+ }</pre>
+                        <h3>参数协议</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>op</td>
+                                <td>String</td>
+                                <td>方法类别</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>act</td>
+                                <td>String</td>
+                                <td>方法名</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>uid</td>
+                                <td>String</td>
+                                <td>获取的微信uid</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>did</td>
+                                <td>String</td>
+                                <td>主机的did</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>token</td>
+                                <td>String</td>
+                                <td>见二.获取token</td>
+                                <td>是</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <h3>协议中的date列表</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>sid</td>
+                                <td>String</td>
+                                <td>我回来啦，场景语音触发命令，可以有很多条语句；格式：0，我回来了，1，我到家了，0，回家模式；</td>
+                                <td>是</td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                    <div class="doc-detail-bd" id="bd6">
+                        <h3>七.删除场景</h3>
+                        <p>示例：</p>
+                        <pre>{
+    &quot;op&quot;:&quot;scene&quot;,
+    &quot;act&quot;:&quot;del&quot;,
+    &quot;uid&quot;:&quot;XXXXXXX&quot;,
+    &quot;did&quot;:&quot;XXXXXXX&quot;,
+    &quot;token&quot;:&quot;XXXXXXX&quot;,
+    &quot;date&quot;:{
+       &quot;sid&quot;:&quot;XXXXX&quot;
+      }
+ }</pre>
+                        <p>正常响应：</p>
+                        <pre>{
+    &quot;ack&quot;:&quot;1&quot;
+ }</pre>
+                        <h3>参数协议</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>op</td>
+                                <td>String</td>
+                                <td>方法类别</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>act</td>
+                                <td>String</td>
+                                <td>方法名</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>uid</td>
+                                <td>String</td>
+                                <td>获取的微信uid</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>did</td>
+                                <td>String</td>
+                                <td>主机的did</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>token</td>
+                                <td>String</td>
+                                <td>见二.获取token</td>
+                                <td>是</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <h3>协议中的date列表</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>sid</td>
+                                <td>String</td>
+                                <td>我回来啦，场景语音触发命令，可以有很多条语句；格式：0，我回来了，1，我到家了，0，回家模式；</td>
+                                <td>是</td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="//g.alicdn.com/shop/tae-portal/0.4.5/scripts/docs-cc-v2.js"></script>
+</body>
+</html>

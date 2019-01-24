@@ -1,0 +1,1875 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>PuGoing开发者平台</title>
+    <style>
+        .ai * {
+            font-family: "PingFang SC", "Helvetica Neue", Helvetica, Tahoma, Arial, "Microsoft YaHei", Roboto !important;
+        }
+
+        .ai ul,
+        .ai li {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        .ai a:focus {
+            outline: none;
+            -moz-outline: none;
+        }
+
+        .ai a,
+        .ai a:hover,
+        .ai a:focus,
+        .ai a:active {
+            text-decoration: none !important;
+        }
+
+        .container {
+            width: 100% !important;
+            margin: 0 !important;
+            padding-top: 80px;
+        }
+
+        /*.ai.header {
+          width: 100%;
+          height: 56px;
+          background: #fff;
+          z-index: 103;
+        }*/
+        .ai.header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 80px;
+            padding: 0 83px;
+            overflow: hidden;
+            background: #fff;
+            box-sizing: border-box;
+            z-index: 101;
+            transition: height .3s;
+        }
+
+        .ai.header.fixed {
+            height: 56px;
+            box-shadow: 0 3px 3px 0 rgba(75, 85, 95, 0.10);
+        }
+
+        .ai .left {
+            height: 100%;
+            float: left;
+            color: #fff;
+        }
+
+        .ai .logo {
+            padding-top: 18px;
+            padding-left: 20px;
+            padding-right: 20px;
+            float: left;
+            text-align: left;
+            font-size: 0;
+            color: #fff;
+            transition: padding .3s;
+        }
+
+        .ai.header.fixed .logo {
+            padding-top: 8px;
+        }
+
+        .ai .logo img {
+            height: 44px;
+        }
+
+        .ai .nav {
+            display: inline-block;
+            height: 100%;
+        }
+
+        .ai .nav ul {
+            display: inline-block;
+            height: 100%;
+        }
+
+        .ai .nav ul li {
+            height: 100%;
+            float: left;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .ai .nav ul li a {
+            display: block;
+            height: 100%;
+        }
+
+        .ai .nav ul li span {
+            display: block;
+            height: 100% !important;
+            line-height: 80px !important;
+            transition: line-height .3s;
+        }
+
+        .ai.header.fixed .nav span {
+            line-height: 56px !important;
+        }
+
+        .ai .nav ul li a:hover span,
+        .ai .locked span {
+            border-bottom: 3px solid #469dff;
+            color: #57708F;
+        }
+
+        .ai .nav ul li:last-child a {
+            border-right: none;
+        }
+
+        .ai .nav ul li a span,
+        .ai .right ul li a > span {
+            display: inline-block;
+            height: 50px;
+            padding: 0 5px 20px;
+            margin: 0 15px;
+            line-height: 45px;
+            box-sizing: border-box;
+        }
+
+        .ai ul.right {
+            float: right;
+            height: 56px;
+            padding-top: 12px;
+            padding-bottom: 12px;
+            margin-right: -20px;
+            line-height: 48px;
+            transition: padding .3s;
+        }
+
+        .ai.fixed ul.right {
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+
+        .ai ul.right li {
+            height: 56px;
+            float: left;
+            font-size: 14px;
+            line-height: 56px;
+            color: #57708f;
+        }
+
+        .ai ul.right li a {
+            padding: 0 20px;
+        }
+
+        .ai ul.right li a:hover {
+            color: #11191c;
+        }
+
+        .ai ul.right li::before {
+            display: inline-block;
+            width: 1px;
+            height: 20px;
+            vertical-align: middle;
+            content: "";
+            background-color: #D6DEE6;
+        }
+
+        .ai ul.right li:first-child::before {
+            background-color: transparent;
+        }
+
+        .ai.footer {
+            position: relative;
+            bottom: 0;
+            z-index: 101;
+            min-height: 83px;
+            height: 83px;
+            padding: 20px 83px;
+            border-top: 1px solid #f4f6f9;
+            font-size: 12px;
+            color: #c1c4c6;
+            background-color: #fff;
+            box-sizing: border-box;
+        }
+
+        .ai.footer .links {
+            margin: 0;
+            line-height: 28px;
+        }
+
+        .ai.footer .links a,
+        .ai.footer .links span {
+            font-size: 12px;
+            color: #86898e;
+        }
+
+        .ai.footer .links a {
+            margin: 0 10px;
+        }
+
+        .ai.footer .links span {
+            margin: 0;
+        }
+
+        .ai.footer .links a:hover,
+        .ai.footer .links a:visited {
+            color: #86898e;
+        }
+
+        .ai .copyright {
+            float: right;
+            line-height: 28px;
+            font-size: 12px;
+        }
+
+        .ai.footer .address {
+            margin-left: 10px;
+            line-height: 20px;
+        }
+
+        .ai .contact {
+            float: right;
+            color: #86898e;
+            text-align: right;
+        }
+
+        .ai .qr {
+            position: absolute;
+            top: -130px;
+            right: 158px;
+            display: none;
+            width: 120px;
+            height: 120px;
+            padding: 10px;
+            background-color: #fff;
+            box-shadow: 0 5px 10px 0 #D8EAFD;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .ai .qr-box {
+            position: relative;
+            margin: 0;
+            line-height: 28px;
+            cursor: pointer;
+        }
+
+        .ai .qr-box i {
+            color: #469DFF;
+            margin-right: 5px;
+        }
+
+        .ai .qr-box:hover .qr {
+            display: block;
+        }
+
+        .ai .qr-box span {
+            position: absolute;
+            left: 56px;
+            bottom: -15px;
+            display: block;
+            width: 0px;
+            border: 8px solid #fff;
+            border-bottom-color: transparent;
+            border-left-color: transparent;
+            border-right-color: transparent;
+        }
+
+        .ai .qr-box .icon {
+            height: 16px;
+            padding-top: 5px;
+            margin-right: 5px;
+            float: left;
+        }
+
+        .ai .copyright {
+            color: #c1c4c6;
+            margin-left: 10px;
+            line-height: 20px;
+            font-size: 12px;
+        }
+
+        .ai .links {
+            margin: 0;
+            line-height: 28px;
+        }
+
+        .ai .links a {
+            margin: 0 10px;
+            font-size: 12px;
+            color: #86898e;
+        }
+
+        .ai .links a:hover,
+        .ai .links a:visited {
+            color: #86898e;
+        }
+
+        .ai .left {
+            float: left;
+        }
+    </style>
+</head>
+<body data-spm="7629140">
+<script>
+    with (document) with (body) with (insertBefore(createElement("script"), firstChild)) setAttribute("exparams", "category=&userid=&aplus&yunid=&f5509eb36d6b7&trid=0b8ff31315362878959905598e0204&asid=AYNb5p2Y5JFbbqjRZAAAAABQZSth63QZSw==", id = "tb-beacon-aplus", src = (location > "https" ? "//g" : "//g") + ".alicdn.com/alilog/mlog/aplus_v2.js")
+</script>
+
+<div id="root" class="container">
+
+
+    <link rel="stylesheet" href="//g.alicdn.com/shop/jae-platform/0.0.10/stylesheet/doc-min.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="//g.alicdn.com/shop/tae-portal/0.4.5/styles/docs-detail-v2.css">
+    <style>
+        @font-face {
+            font-family: "iconfont1";
+            src: url("//at.alicdn.com/t/font_1448507037_6084561.eot?#iefix") format("embedded-opentype"), url("//at.alicdn.com/t/font_1448507037_6084561.woff") format("woff"), url("//at.alicdn.com/t/font_1448507037_6084561.ttf") format("truetype"), url("//at.alicdn.com/t/font_1448507037_6084561.svg#iconfont") format("svg");
+        }
+
+        .iconfont {
+            font-family: "iconfont1" !important;
+            font-size: 16px;
+            font-style: normal;
+        }
+
+        #pages {
+            min-height: 700px;
+        }
+
+        .wrap {
+            width: 100%;
+        }
+
+        .wrap-inner {
+            margin: 0 auto;
+            width: 990px;
+        }
+
+        .block-docs-search-list .list-wrap ul li h2 a em {
+            /*搜索标题，字体标红*/
+            color: red;
+        }
+
+        .wrap .block-docs-search-list .list-wrap ul li .desc em {
+            /*搜索内容，字体标红*/
+            color: red;
+        }
+
+        .update-access-wrap {
+            /*文档修改时间靠右*/
+            top: inherit;
+            position: inherit;
+            float: right;
+        }
+
+        .block-docs-wrap .docs-right .mtl-main {
+            margin-bottom: 5px;
+        }
+
+    </style>
+
+    <script src="//g.alicdn.com/tb/tracker/1.0.13/index.js"></script>
+    <script src="//g.alicdn.com/kissy/k/1.4.4/seed-min.js" data-config="{combine:false}"></script>
+    <script src="//g.alicdn.com/shop/tae-portal/0.4.5/scripts/lib/underscore-min.js"></script>
+
+    <script>
+        window.TAE_CFG = {
+            userNick: 'taeTestNick',
+            api: {
+                zanCode: '/doc2/youyong'
+            }
+        };
+        KISSY.config('packages', {
+            'module': {
+                debug: true,
+                base: '//g.alicdn.com/shop/tae-portal/0.4.5/scripts/'
+            }
+        });
+
+    </script>
+
+
+    <div class="menu-overlay-mask J_menuMask"></div>
+
+    <div id="pages">
+        <div class="wrap" id="detailContainer">
+
+
+            <div class="wrap-inner block-docs-wrap J_FloatContainer">
+                <div class="docs-left" id="sideMenu">
+                    <h3 class="menu-title">PuGoing开发者平台</h3>
+                    <ul class="menu-1">
+                        <li class>
+                            <a  class="J_ExpTrigger open"  href="javascript:void(0)" title="新手教程">云接入</a>
+                            <ul class="menu-2">
+                                <li><a  title="概览" href="/file/file1" >概览</a></li>
+                                <li><a  title="用户操作接口" href="/file/file2" >用户操作接口</a></li>
+                                <li><a  title="房间管理接口" href="/file/file3" >房间管理接口</a></li>
+                                <li><a  title="设备管理" href="/file/file4" >设备管理</a></li>
+                                <li><a  title="红外接入" href="/file/file5" >红外接入</a></li>
+                                <li><a  title="传感器设备日志" href="/file/file6" >传感器设备日志</a></li>
+                                <li><a  title="场景接口" href="/file/file7" >场景接口</a></li>
+                                <li><a  title="主机文字交互" href="/file/file8" >主机文字交互</a></li>
+                            </ul>
+                        </li>
+
+
+                    </ul>
+                </div>
+                <!--E 左侧边栏 -->
+                <div class="docs-right">
+                    <!-- content -->
+
+
+                    <div class="mtl">
+                        <h2 class="mtl-main">用户操作接入</h2>
+
+                        <!--<div class="update-access-wrap">-->
+                        <!--<span class="update-time">更新时间：2018/10/29</span>-->
+                        <!--<span class="access-times">访问次数：31560</span>-->
+                        <!--</div>-->
+
+                        <div class="mao-list">
+                            <div class="inner" id="maoList">
+
+                                <div class="mao-s-h J_maoTrigger"><i class="iconfont icon-s">&#xe693;</i><i
+                                        class="iconfont icon-h">&#xe692;</i></div>
+                            </div>
+                        </div>
+                        <!--E 锚点列表 -->
+                    </div>
+
+                    <div class="doc-detail-bd" id="bd">
+                        <h2>PuGoing 用户操作接入</h2>
+                        <h3>一.获取uid</h3>
+                        <p>示例：</p>
+                        <pre>{
+    &quot;op&quot;:&quot;mysys&quot;,
+    &quot;act&quot;:&quot;getuid&quot;,
+    &quot;userName&quot;:&quot;XXX&quot;,
+    &quot;userImg&quot;:&quot;XXX&quot;,
+
+    &quot;date&quot;:{
+        &quot;appid&quot;:&quot;XXXX&quot;,
+        &quot;appkey&quot;:&quot;XXXXX&quot;
+      }
+ }</pre>
+                        <p>正常响应：</p>
+                        <pre>{
+    &quot;ack&quot;:&quot;1&quot;,
+    &quot;msg&quot;:{
+        &quot;uid&quot;:&quot;XXXXXXXXXXXXXXX&quot;
+      }
+ }</pre>
+                        <h3>参数协议</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>op</td>
+                                <td>String</td>
+                                <td>方法类别</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>act</td>
+                                <td>String</td>
+                                <td>方法名</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>userName</td>
+                                <td>String</td>
+                                <td>用户头像</td>
+                                <td>否</td>
+                            </tr>
+                            <tr>
+                                <td>userImg</td>
+                                <td>String</td>
+                                <td>用户昵称</td>
+                                <td>否</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <h3>协议中的date列表</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>appid</td>
+                                <td>String</td>
+                                <td>小程序的appid</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>appkey</td>
+                                <td>String</td>
+                                <td>小程序的key</td>
+                                <td>是</td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="doc-detail-bd" id="bd1">
+
+                        <h3>二.获取token</h3>
+
+                        <p>示例：</p>
+                        <pre>{
+    &quot;op&quot;:&quot;mysys&quot;,
+    &quot;act&quot;:&quot;auth&quot;,
+    &quot;date&quot;:{
+        &quot;appid&quot;:&quot;XXXX&quot;,
+        &quot;appkey&quot;:&quot;XXXXX&quot;
+      }
+ }</pre>
+                        <p>正常响应：</p>
+                        <pre>{
+    &quot;ack&quot;:&quot;1&quot;,
+    &quot;msg&quot;:{
+        &quot;token&quot;:&quot;XXXXXXXXXXXXXXX&quot;
+      }
+ }</pre>
+                        <h3>参数协议</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>op</td>
+                                <td>String</td>
+                                <td>方法类别</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>act</td>
+                                <td>String</td>
+                                <td>方法名</td>
+                                <td>是</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <h3>协议中的date列表</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>appid</td>
+                                <td>String</td>
+                                <td>联系管理员提供（用于获取token）</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>appkey</td>
+                                <td>String</td>
+                                <td>联系管理员提供（用于获取token）</td>
+                                <td>是</td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                    <div class="doc-detail-bd" id="bd2">
+
+                        <h3>三.配置联网</h3>
+                        <p>示例：</p>
+                        <pre>{
+    &quot;op&quot;:&quot;mysys&quot;,
+    &quot;act&quot;:&quot;setwifi&quot;,
+    &quot;uid&quot;:&quot;XXX&quot;,
+    &quot;date&quot;:{
+        &quot;account&quot;:&quot;XXXX&quot;,
+        &quot;pwd&quot;:&quot;XXXXX&quot;
+      }
+ }</pre>
+                        <p>正常响应：</p>
+                        <pre>{
+    &quot;ack&quot;:&quot;1&quot;,
+    &quot;msg&quot;:{
+        &quot;wav&quot;:&quot;XXXXXXXXXXXXXXX.wav&quot;
+      }
+ }</pre>
+                        <h3>参数协议</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>op</td>
+                                <td>String</td>
+                                <td>方法类别</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>act</td>
+                                <td>String</td>
+                                <td>方法名</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>uid</td>
+                                <td>String</td>
+                                <td>获取的微信uid</td>
+                                <td>是</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <h3>协议中的date列表</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>account</td>
+                                <td>String</td>
+                                <td>Wi-Fi的账号（不得包含特殊符号）</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>pwd</td>
+                                <td>String</td>
+                                <td>Wi-Fi的密码（不得包含特殊符号）</td>
+                                <td>否</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="doc-detail-bd" id="bd3">
+
+                        <h3>四.绑定主机获取</h3>
+                        <p>示例：（播放音频完成，监听数据）</p>
+                        <pre>{
+    &quot;op&quot;:&quot;mysys&quot;,
+    &quot;act&quot;:&quot;qbind&quot;,
+    &quot;uid&quot;:&quot;XXX&quot;,
+    &quot;token&quot;:&quot;XXXXXXXXXXXXXXXXXXX&quot;,
+ }</pre>
+                        <p>正常响应：</p>
+                        <pre>{
+    &quot;ack&quot;:&quot;1&quot;,
+    &quot;msg&quot;:{
+        &quot;did&quot;:&quot;XXXXXXXXXXXXXXX&quot;
+      }
+ }</pre>
+                        <p>异常响应：</p>
+                        <pre>{
+    &quot;ack&quot;:&quot;0&quot;,
+ }</pre>
+                        <h3>参数协议</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>op</td>
+                                <td>String</td>
+                                <td>方法类别</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>act</td>
+                                <td>String</td>
+                                <td>方法名</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>uid</td>
+                                <td>String</td>
+                                <td>获取的微信uid</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>token</td>
+                                <td>String</td>
+                                <td>见二.获取token</td>
+                                <td>是</td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="doc-detail-bd" id="bd4">
+
+                        <h3>五.查看当前主机所有的成员</h3>
+                        <p>示例：</p>
+                        <pre>{
+    &quot;op&quot;:&quot;mysys&quot;,
+    &quot;act&quot;:&quot;listmeber&quot;,
+    &quot;uid&quot;:&quot;XXX&quot;,
+    &quot;did&quot;:&quot;XXX&quot;,
+    &quot;token&quot;:&quot;XXXXXXXXXXXXXXXXXXX&quot;,
+ }</pre>
+                        <p>正常响应：</p>
+                        <pre>{
+    &quot;ack&quot;:&quot;1&quot;,
+    &quot;msg&quot;:{[
+        {
+            &quot;name&quot;:&quot;用户1&quot;,
+            &quot;img&quot;:&quot;XXXXXXXX&quot;,
+            &quot;id&quot;:&quot;123&quot;,
+            &quot;pr&quot;:&quot;admin&quot;,
+
+        },
+        {
+            &quot;name&quot;:&quot;用户2&quot;,
+            &quot;img&quot;:&quot;XXXXXXXX&quot;,
+            &quot;id&quot;:&quot;124&quot;,
+            &quot;pr&quot;:&quot;member&quot;,
+
+        }
+    ]}
+ }</pre>
+                        <p>异常响应：</p>
+                        <pre>{
+    &quot;ack&quot;:&quot;0&quot;,
+ }</pre>
+                        <h3>参数协议</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>op</td>
+                                <td>String</td>
+                                <td>方法类别</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>act</td>
+                                <td>String</td>
+                                <td>方法名</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>uid</td>
+                                <td>String</td>
+                                <td>获取的微信uid</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>did</td>
+                                <td>String</td>
+                                <td>声波联网后获取的did（主机id）</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>token</td>
+                                <td>String</td>
+                                <td>见二.获取token</td>
+                                <td>是</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <h3>接收参数</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>name</td>
+                                <td>String</td>
+                                <td>用户昵称</td>
+                            </tr>
+                            <tr>
+                                <td>img</td>
+                                <td>String</td>
+                                <td>用户头像</td>
+                            </tr>
+                            <tr>
+                                <td>pr</td>
+                                <td>String</td>
+                                <td>用户身份（首次绑定主机身份为admin【管理员】，之后通过声波绑定及分享绑定的用户均为member【成员】）</td>
+                            </tr>
+                            <tr>
+                                <td>id</td>
+                                <td>String</td>
+                                <td>用户id系统分配（暂无使用）</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="doc-detail-bd" id="bd5">
+                        <h3>六.查看已绑定的主机</h3>
+                        <p>示例：</p>
+                        <pre>{
+    &quot;op&quot;:&quot;mysys&quot;,
+    &quot;act&quot;:&quot;listrobot&quot;,
+    &quot;uid&quot;:&quot;XXX&quot;,
+    &quot;token&quot;:&quot;XXXXXXXXXXXXXXXXXXX&quot;,
+ }</pre>
+                        <p>正常响应：</p>
+                        <pre>{
+    &quot;ack&quot;:&quot;1&quot;,
+    &quot;msg&quot;:{[
+        {
+            &quot;name&quot;:&quot;主机1&quot;,
+            &quot;img&quot;:&quot;XXXXXXXX&quot;,
+            &quot;device_id&quot;:&quot;XXXXXXXX&quot;,
+            &quot;num&quot;:&quot;XXXXXXXX&quot;,
+            &quot;use&quot;:&quot;1&quot;,
+            &quot;safemode&quot;:&quot;1&quot;,
+            &quot;pr&quot;:&quot;admin&quot;,
+
+        },
+        {
+            &quot;name&quot;:&quot;主机2&quot;,
+            &quot;img&quot;:&quot;XXXXXXXX&quot;,
+            &quot;device_id&quot;:&quot;XXXXXXXX&quot;,
+            &quot;num&quot;:&quot;XXXXXXXX&quot;,
+            &quot;use&quot;:&quot;0&quot;,
+            &quot;safemode&quot;:&quot;0&quot;,
+            &quot;pr&quot;:&quot;member&quot;,
+
+        }
+    ]}
+ }</pre>
+                        <p>异常响应：</p>
+                        <pre>{
+    &quot;ack&quot;:&quot;0&quot;,
+ }</pre>
+                        <h3>参数协议</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>op</td>
+                                <td>String</td>
+                                <td>方法类别</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>act</td>
+                                <td>String</td>
+                                <td>方法名</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>uid</td>
+                                <td>String</td>
+                                <td>获取的微信uid</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>token</td>
+                                <td>String</td>
+                                <td>见二.获取token</td>
+                                <td>是</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <h3>接收参数</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>name</td>
+                                <td>String</td>
+                                <td>主机名（用户设置）</td>
+                            </tr>
+                            <tr>
+                                <td>img</td>
+                                <td>String</td>
+                                <td>主机图片（用户设置）</td>
+                            </tr>
+                            <tr>
+                                <td>device_id</td>
+                                <td>String</td>
+                                <td>主机ID</td>
+                            </tr>
+                            <tr>
+                                <td>num</td>
+                                <td>String</td>
+                                <td>主机的SN：</td>
+                            </tr>
+                            <tr>
+                                <td>user</td>
+                                <td>String</td>
+                                <td>用户使用主机情况（1为用户正在使用的主机，0为其他主机）</td>
+                            </tr>
+                            <tr>
+                                <td>safemode</td>
+                                <td>String</td>
+                                <td>家里的布防模式（1为离家布防，2为留守布防，0为撤防模式）</td>
+                            </tr>
+                            <tr>
+                                <td>pr</td>
+                                <td>String</td>
+                                <td>用户身份（首次绑定主机身份为admin【管理员】，之后通过声波绑定及分享绑定的用户均为member【成员】）</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="doc-detail-bd" id="bd6">
+                        <h3>七.切换管家机器人</h3>
+                        <p>示例</p>
+                        <pre>{
+    &quot;op&quot;:&quot;mysys&quot;,
+    &quot;act&quot;:&quot;swrobot&quot;,
+    &quot;uid&quot;:&quot;XXX&quot;,
+    &quot;did&quot;:&quot;XXX&quot;,
+    &quot;token&quot;:&quot;XXXXXXXXXXXXXXXXXXX&quot;,
+    &quot;date&quot;:{
+        &quot;did&quot;:&quot;XXX&quot;
+    },
+
+ }</pre>
+                        <p>正常响应：</p>
+                        <pre>{
+    &quot;ack&quot;:&quot;1&quot;
+ }</pre>
+                        <p>异常响应：</p>
+                        <pre>{
+    &quot;ack&quot;:&quot;0&quot;,
+ }</pre>
+                        <h3>参数协议</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>op</td>
+                                <td>String</td>
+                                <td>方法类别</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>act</td>
+                                <td>String</td>
+                                <td>方法名</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>uid</td>
+                                <td>String</td>
+                                <td>获取的微信uid</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>did</td>
+                                <td>String</td>
+                                <td>正在使用主机的id</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>token</td>
+                                <td>String</td>
+                                <td>见二.获取token</td>
+                                <td>是</td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                        <h3>date参数协议</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>did</td>
+                                <td>String</td>
+                                <td>将要切换的主机id</td>
+                                <td>是</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="doc-detail-bd" id="bd7">
+                        <h3>八.查看当前系统信息</h3>
+                        <p>示例</p>
+                        <pre>{
+    &quot;op&quot;:&quot;mysys&quot;,
+    &quot;act&quot;:&quot;listsysinfo&quot;,
+    &quot;uid&quot;:&quot;XXX&quot;,
+    &quot;did&quot;:&quot;XXX&quot;,
+    &quot;token&quot;:&quot;XXXXXXXXXXXXXXXXXXX&quot;,
+
+
+ }</pre>
+                        <p>正常响应：</p>
+                        <pre>{
+    &quot;ack&quot;:&quot;1&quot;,
+    &quot;msg&quot;:{[
+        {
+            &quot;name&quot;:&quot;主机1&quot;,
+            &quot;img&quot;:&quot;XXXXXXXX&quot;,
+            &quot;id&quot;:&quot;XXXXXXXX&quot;,
+            &quot;pr&quot;:&quot;XXXXXXXX&quot;,
+        }
+ }</pre>
+                        <p>异常响应：</p>
+                        <pre>{
+    &quot;ack&quot;:&quot;0&quot;,
+ }</pre>
+                        <h3>参数协议</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>op</td>
+                                <td>String</td>
+                                <td>方法类别</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>act</td>
+                                <td>String</td>
+                                <td>方法名</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>uid</td>
+                                <td>String</td>
+                                <td>获取的微信uid</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>did</td>
+                                <td>String</td>
+                                <td>正在使用主机的id</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>token</td>
+                                <td>String</td>
+                                <td>见二.获取token</td>
+                                <td>是</td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                        <h3>返回参数协议</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>ack</td>
+                                <td>String</td>
+                                <td>1为响应成功，0为响应失败</td>
+                            </tr>
+                            <tr>
+                                <td>name</td>
+                                <td>String</td>
+                                <td>当前使用的主机名</td>
+                            </tr>
+                            <tr>
+                                <td>img</td>
+                                <td>String</td>
+                                <td>当前使用的主机图片</td>
+                            </tr>
+                            <tr>
+                                <td>id</td>
+                                <td>String</td>
+                                <td>当前使用的主机id</td>
+                            </tr>
+                            <tr>
+                                <td>pr</td>
+                                <td>String</td>
+                                <td>当前使用的主机的身份（admin为管理员，member为成员）</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="doc-detail-bd" id="bd8">
+                        <h3>九.查询主机是否在线</h3>
+                        <p>示例</p>
+                        <pre>{
+    &quot;op&quot;:&quot;mysys&quot;,
+    &quot;act&quot;:&quot;qonline&quot;,
+    &quot;uid&quot;:&quot;XXX&quot;,
+    &quot;did&quot;:&quot;XXX&quot;,
+    &quot;token&quot;:&quot;XXXXXXXXXXXXXXXXXXX&quot;,
+ }</pre>
+                        <p>正常响应：</p>
+                        <pre>{
+    &quot;ack&quot;:&quot;1&quot;,
+    &quot;msg&quot;:&quot;{
+        status:online/offline
+    }&quot;
+ }</pre>
+                        <p>异常响应：</p>
+                        <pre>{
+    &quot;ack&quot;:&quot;0&quot;,
+ }</pre>
+                        <h3>参数协议</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>op</td>
+                                <td>String</td>
+                                <td>方法类别</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>act</td>
+                                <td>String</td>
+                                <td>方法名</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>uid</td>
+                                <td>String</td>
+                                <td>获取的微信uid</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>did</td>
+                                <td>String</td>
+                                <td>正在使用主机的id</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>token</td>
+                                <td>String</td>
+                                <td>见二.获取token</td>
+                                <td>是</td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                        <h3>返回参数协议</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>ack</td>
+                                <td>String</td>
+                                <td>1为返回返回成功，0为返回错误</td>
+                            </tr>
+                            <tr>
+                                <td>status</td>
+                                <td>String</td>
+                                <td>主机在线情况（online在线  offline离线）</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="doc-detail-bd" id="bd9">
+                        <h3>十.删除绑定的主机</h3>
+                        <p>示例</p>
+                        <pre>{
+    &quot;op&quot;:&quot;mysys&quot;,
+    &quot;act&quot;:&quot;delsysinfo&quot;,
+    &quot;uid&quot;:&quot;XXX&quot;,
+    &quot;did&quot;:&quot;XXX&quot;,
+    &quot;token&quot;:&quot;XXXXXXXXXXXXXXXXXXX&quot;,
+    &quot;date&quot;:{
+        &quot;did&quot;:&quot;XXX&quot;
+    },
+
+ }</pre>
+                        <p>正常响应：</p>
+                        <pre>{
+    &quot;ack&quot;:&quot;1&quot;
+ }</pre>
+                        <p>异常响应：</p>
+                        <pre>{
+    &quot;ack&quot;:&quot;0&quot;,
+ }</pre>
+                        <h3>参数协议</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>op</td>
+                                <td>String</td>
+                                <td>方法类别</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>act</td>
+                                <td>String</td>
+                                <td>方法名</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>uid</td>
+                                <td>String</td>
+                                <td>获取的微信uid</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>did</td>
+                                <td>String</td>
+                                <td>正在使用主机的id</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>token</td>
+                                <td>String</td>
+                                <td>见二.获取token</td>
+                                <td>是</td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                        <h3>date参数协议</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>did</td>
+                                <td>String</td>
+                                <td>将要切换的主机id</td>
+                                <td>是</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="doc-detail-bd" id="bd10">
+                        <h3>十一.移交主机管理权限</h3>
+                        <p>示例</p>
+                        <pre>{
+    &quot;op&quot;:&quot;mysys&quot;,
+    &quot;act&quot;:&quot;delsysinfo&quot;,
+    &quot;uid&quot;:&quot;XXX&quot;,
+    &quot;did&quot;:&quot;XXX&quot;,
+    &quot;token&quot;:&quot;XXXXXXXXXXXXXXXXXXX&quot;,
+    &quot;date&quot;:{
+        &quot;id&quot;:&quot;XXX&quot;
+    },
+
+ }</pre>
+                        <p>正常响应：</p>
+                        <pre>{
+    &quot;ack&quot;:&quot;1&quot;
+ }</pre>
+                        <p>异常响应：</p>
+                        <pre>{
+    &quot;ack&quot;:&quot;0&quot;,
+ }</pre>
+                        <h3>参数协议</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>op</td>
+                                <td>String</td>
+                                <td>方法类别</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>act</td>
+                                <td>String</td>
+                                <td>方法名</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>uid</td>
+                                <td>String</td>
+                                <td>获取的微信uid</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>did</td>
+                                <td>String</td>
+                                <td>正在使用主机的id</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>token</td>
+                                <td>String</td>
+                                <td>见二.获取token</td>
+                                <td>是</td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                        <h3>date参数协议</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>id</td>
+                                <td>String</td>
+                                <td>查看成员所返回的数据中的id（不是uid）</td>
+                                <td>是</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="doc-detail-bd" id="bd11">
+                        <h3>十二.移交主机管理权限</h3>
+                        <p>示例</p>
+                        <pre>{
+    &quot;op&quot;:&quot;mysys&quot;,
+    &quot;act&quot;:&quot;delmeber&quot;,
+    &quot;uid&quot;:&quot;XXX&quot;,
+    &quot;did&quot;:&quot;XXX&quot;,
+    &quot;token&quot;:&quot;XXXXXXXXXXXXXXXXXXX&quot;,
+    &quot;date&quot;:{
+        &quot;id&quot;:&quot;XXX&quot;
+    },
+
+ }</pre>
+                        <p>正常响应：</p>
+                        <pre>{
+    &quot;ack&quot;:&quot;1&quot;
+ }</pre>
+                        <p>异常响应：</p>
+                        <pre>{
+    &quot;ack&quot;:&quot;0&quot;,
+ }</pre>
+                        <h3>参数协议</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>op</td>
+                                <td>String</td>
+                                <td>方法类别</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>act</td>
+                                <td>String</td>
+                                <td>方法名</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>uid</td>
+                                <td>String</td>
+                                <td>获取的微信uid</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>did</td>
+                                <td>String</td>
+                                <td>正在使用主机的id</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>token</td>
+                                <td>String</td>
+                                <td>见二.获取token</td>
+                                <td>是</td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                        <h3>date参数协议</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>id</td>
+                                <td>String</td>
+                                <td>查看成员所返回的数据中的id（不是uid）</td>
+                                <td>是</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="doc-detail-bd" id="bd12">
+                        <h3>十三.主机不在线时解除绑定关系</h3>
+                        <p>示例</p>
+                        <pre>{
+    &quot;op&quot;:&quot;mysys&quot;,
+    &quot;act&quot;:&quot;delsysuser&quot;,
+    &quot;uid&quot;:&quot;XXX&quot;,
+    &quot;did&quot;:&quot;XXX&quot;,
+    &quot;token&quot;:&quot;XXXXXXXXXXXXXXXXXXX&quot;,
+    &quot;date&quot;:{
+        &quot;did&quot;:&quot;XXX&quot;
+    },
+
+ }</pre>
+                        <p>正常响应：</p>
+                        <pre>{
+    &quot;ack&quot;:&quot;1&quot;
+ }</pre>
+                        <p>异常响应：</p>
+                        <pre>{
+    &quot;ack&quot;:&quot;0&quot;,
+ }</pre>
+                        <h3>参数协议</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>op</td>
+                                <td>String</td>
+                                <td>方法类别</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>act</td>
+                                <td>String</td>
+                                <td>方法名</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>uid</td>
+                                <td>String</td>
+                                <td>获取的微信uid</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>did</td>
+                                <td>String</td>
+                                <td>正在使用主机的id</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>token</td>
+                                <td>String</td>
+                                <td>见二.获取token</td>
+                                <td>是</td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                        <h3>date参数协议</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>did</td>
+                                <td>String</td>
+                                <td>要解绑的主机did</td>
+                                <td>是</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="doc-detail-bd" id="bd13">
+                        <h3>附一.更新主机信息</h3>
+                        <p>示例</p>
+                        <pre>{
+    &quot;op&quot;:&quot;host&quot;,
+    &quot;act&quot;:&quot;update&quot;,
+    &quot;uid&quot;:&quot;XXX&quot;,
+    &quot;did&quot;:&quot;XXX&quot;,
+    &quot;token&quot;:&quot;XXXXXXXXXXXXXXXXXXX&quot;,
+    &quot;date&quot;:{
+        &quot;name&quot;:&quot;万科花园&quot;,
+        &quot;safemode&quot;:&quot;0&quot;,
+        &quot;img&quot;:&quot;https:www.12333.com/123.jpg&quot;,
+    },
+
+ }</pre>
+                        <p>正常响应：</p>
+                        <pre>{
+    &quot;ack&quot;:&quot;1&quot;
+ }</pre>
+                        <h3>参数协议</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>op</td>
+                                <td>String</td>
+                                <td>方法类别</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>act</td>
+                                <td>String</td>
+                                <td>方法名</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>uid</td>
+                                <td>String</td>
+                                <td>获取的微信uid</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>did</td>
+                                <td>String</td>
+                                <td>正在使用主机的id</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>token</td>
+                                <td>String</td>
+                                <td>见二.获取token</td>
+                                <td>是</td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                        <h3>date参数协议</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>name</td>
+                                <td>String</td>
+                                <td>修改主机的名字（多台主机时做区分）</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>safemode</td>
+                                <td>String</td>
+                                <td>修改主机的布防模式（0 撤防模式  1 离家布防  2 留守布防）</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>img</td>
+                                <td>String</td>
+                                <td>修改主机的图片（多台主机时做区分）</td>
+                                <td>是</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="doc-detail-bd" id="bd14">
+                        <h3>附二.获取主机免打扰时间</h3>
+                        <p>示例</p>
+                        <pre>{
+    &quot;op&quot;:&quot;host&quot;,
+    &quot;act&quot;:&quot;getmutetime&quot;,
+    &quot;uid&quot;:&quot;XXX&quot;,
+    &quot;did&quot;:&quot;XXX&quot;,
+    &quot;token&quot;:&quot;XXXXXXXXXXXXXXXXXXX&quot;
+ }</pre>
+                        <p>正常响应：</p>
+                        <pre>{
+
+    &quot;ack&quot;:&quot;1&quot;,
+    &quot;msg&quot;:&quot;{
+        &quot;time&quot;:&quot;22:00-7:00&quot;
+    }&quot;
+ }</pre>
+                        <h3>参数协议</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>op</td>
+                                <td>String</td>
+                                <td>方法类别</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>act</td>
+                                <td>String</td>
+                                <td>方法名</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>uid</td>
+                                <td>String</td>
+                                <td>获取的微信uid</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>did</td>
+                                <td>String</td>
+                                <td>正在使用主机的id</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>token</td>
+                                <td>String</td>
+                                <td>见二.获取token</td>
+                                <td>是</td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                        <h3>返回参数说明</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>time</td>
+                                <td>String</td>
+                                <td>23:00-07:00（免打扰时间段主机会自动静音）</td>
+                                <td>是</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="doc-detail-bd" id="bd15">
+                        <h3>附三.设置主机免打扰时间</h3>
+                        <p>示例</p>
+                        <pre>{
+    &quot;op&quot;:&quot;host&quot;,
+    &quot;act&quot;:&quot;getmutetime&quot;,
+    &quot;uid&quot;:&quot;XXX&quot;,
+    &quot;did&quot;:&quot;XXX&quot;,
+    &quot;token&quot;:&quot;XXXXXXXXXXXXXXXXXXX&quot;,
+    &quot;date&quot;:&quot;{
+        &quot;time&quot;:&quot;22:00-07:00&quot;
+    }&quot;
+
+ }</pre>
+                        <p>正常响应：</p>
+                        <pre>{
+
+    &quot;ack&quot;:&quot;1&quot;,
+    &quot;msg&quot;:&quot;{
+        &quot;time&quot;:&quot;22:00-7:00&quot;
+    }&quot;
+ }</pre>
+                        <h3>参数协议</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>op</td>
+                                <td>String</td>
+                                <td>方法类别</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>act</td>
+                                <td>String</td>
+                                <td>方法名</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>uid</td>
+                                <td>String</td>
+                                <td>获取的微信uid</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>did</td>
+                                <td>String</td>
+                                <td>正在使用主机的id</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>token</td>
+                                <td>String</td>
+                                <td>见二.获取token</td>
+                                <td>是</td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                        <h3>date中参数说明</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>time</td>
+                                <td>String</td>
+                                <td>23:00-07:00（免打扰时间段主机会自动静音）</td>
+                                <td>是</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="//g.alicdn.com/shop/tae-portal/0.4.5/scripts/docs-cc-v2.js"></script>
+
+</body>
+</html>
