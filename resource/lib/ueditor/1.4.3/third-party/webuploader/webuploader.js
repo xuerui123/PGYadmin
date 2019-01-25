@@ -2067,15 +2067,15 @@
              *
              *
              * @method makeThumb
-             * @grammar makeThumb( file, callback ) => undefined
-             * @grammar makeThumb( file, callback, width, height ) => undefined
+             * @grammar makeThumb( doc, callback ) => undefined
+             * @grammar makeThumb( doc, callback, width, height ) => undefined
              * @for Uploader
              * @example
              *
-             * uploader.on( 'fileQueued', function( file ) {
+             * uploader.on( 'fileQueued', function( doc ) {
              *     var $li = ...;
              *
-             *     uploader.makeThumb( file, function( error, ret ) {
+             *     uploader.makeThumb( doc, function( error, ret ) {
              *         if ( error ) {
              *             $li.text('预览错误');
              *         } else {
@@ -2175,7 +2175,7 @@
     
                         // 如果压缩后，比原来还大则不用压缩后的。
                         if ( blob.size < size ) {
-                            // file.source.destroy && file.source.destroy();
+                            // doc.source.destroy && doc.source.destroy();
                             file.source = blob;
                             file.size = blob.size;
     
@@ -2792,7 +2792,7 @@
     
             /**
              * @method removeFile
-             * @grammar removeFile( file ) => undefined
+             * @grammar removeFile( doc ) => undefined
              * @grammar removeFile( id ) => undefined
              * @param {File|id} file File对象或这File对象的id
              * @description 移除某一文件。
@@ -2800,7 +2800,7 @@
              * @example
              *
              * $li.on('click', '.remove-this', function() {
-             *     uploader.removeFile( file );
+             *     uploader.removeFile( doc );
              * })
              */
             removeFile: function( file ) {

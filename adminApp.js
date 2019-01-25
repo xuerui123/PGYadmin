@@ -46,14 +46,14 @@ router.get('/version/yidai', ctx => ctx.render('/version/yidai'));
 router.get('/version/erdai', ctx => ctx.render('/version/erdai'));
 router.get('/version/add', ctx => ctx.render('/version/add'));
 router.get('/version/edit', ctx => ctx.render('/version/edit'));
-router.get('/file/file1', ctx => ctx.render('/file/file1'));
-router.get('/file/file2', ctx => ctx.render('/file/file2'));
-router.get('/file/file3', ctx => ctx.render('/file/file3'));
-router.get('/file/file4', ctx => ctx.render('/file/file4'));
-router.get('/file/file5', ctx => ctx.render('/file/file5'));
-router.get('/file/file6', ctx => ctx.render('/file/file6'));
-router.get('/file/file7', ctx => ctx.render('/file/file7'));
-router.get('/file/file8', ctx => ctx.render('/file/file8'));
+router.get('/doc/doc1', ctx => ctx.render('/doc/doc1'));
+router.get('/doc/doc2', ctx => ctx.render('/doc/doc2'));
+router.get('/doc/doc3', ctx => ctx.render('/doc/doc3'));
+router.get('/doc/doc4', ctx => ctx.render('/doc/doc4'));
+router.get('/doc/doc5', ctx => ctx.render('/doc/doc5'));
+router.get('/doc/doc6', ctx => ctx.render('/doc/doc6'));
+router.get('/doc/doc7', ctx => ctx.render('/doc/doc7'));
+router.get('/doc/doc8', ctx => ctx.render('/doc/doc8'));
 
 
 

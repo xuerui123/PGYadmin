@@ -390,6 +390,8 @@
     </script>
 
 
+
+
     <div class="menu-overlay-mask J_menuMask"></div>
 
     <div id="pages">
@@ -403,18 +405,16 @@
                         <li class>
                             <a  class="J_ExpTrigger open"  href="javascript:void(0)" title="新手教程">云接入</a>
                             <ul class="menu-2">
-                                <li><a  title="概览" href="/file/file1" >概览</a></li>
-                                <li><a  title="用户操作接口" href="/file/file2" >用户操作接口</a></li>
-                                <li><a  title="房间管理接口" href="/file/file3" >房间管理接口</a></li>
-                                <li><a  title="设备管理" href="/file/file4" >设备管理</a></li>
-                                <li><a  title="红外接入" href="/file/file5" >红外接入</a></li>
-                                <li><a  title="传感器设备日志" href="/file/file6" >传感器设备日志</a></li>
-                                <li><a  title="场景接口" href="/file/file7" >场景接口</a></li>
-                                <li><a  title="主机文字交互" href="/file/file8" >主机文字交互</a></li>
+                                <li><a  title="概览" href="/doc/doc1" >概览</a></li>
+                                <li><a  title="用户操作接口" href="/doc/doc2" >用户操作接口</a></li>
+                                <li><a  title="房间管理接口" href="/doc/doc3" >房间管理接口</a></li>
+                                <li><a  title="设备管理" href="/doc/doc4" >设备管理</a></li>
+                                <li><a  title="红外接入" href="/doc/doc5" >红外接入</a></li>
+                                <li><a  title="传感器设备日志" href="/doc/doc6" >传感器设备日志</a></li>
+                                <li><a  title="场景接口" href="/doc/doc7" >场景接口</a></li>
+                                <li><a  title="主机文字交互" href="/doc/doc8" >主机文字交互</a></li>
                             </ul>
                         </li>
-
-
 
 
                     </ul>
@@ -425,7 +425,7 @@
 
 
                     <div class="mtl">
-                        <h2 class="mtl-main">PuGoing房间管理接口</h2>
+                        <h2 class="mtl-main">PuGoing发送消息给主机</h2>
 
                         <!--<div class="update-access-wrap">-->
                         <!--<span class="update-time">更新时间：2018/10/29</span>-->
@@ -443,22 +443,30 @@
                     </div>
 
                     <div class="doc-detail-bd" id="bd">
-                        <h2>PuGoing 房间管理接口</h2>
-                        <h3>一.添加房间</h3>
+                        <h2>PuGoing 发送消息给主机</h2>
                         <p>示例：</p>
                         <pre>{
-    &quot;op&quot;:&quot;room&quot;,
-    &quot;act&quot;:&quot;add&quot;,
-    &quot;uid&quot;:&quot;XXXXXXXX&quot;,
-    &quot;did&quot;:&quot;XXXXXXXX&quot;,
-    &quot;token&quot;:&quot;XXXXXXXX&quot;,
+    &quot;op&quot;:&quot;textctrl&quot;,
+    &quot;act&quot;:&quot;send&quot;,
+    &quot;uid&quot;:&quot;XXXXXXX&quot;,
+    &quot;did&quot;:&quot;XXXXXXX&quot;,
+    &quot;token&quot;:&quot;XXXXXXX&quot;,
     &quot;date&quot;:{
-        &quot;roomname&quot;:&quot;XXXX&quot;,
-    }
+        &quot;msg&quot;:&quot;打开电视&quot;,
+        &quot;fm&quot;:&quot;0&quot;
+      }
  }</pre>
                         <p>正常响应：</p>
                         <pre>{
-    &quot;ack&quot;:&quot;1&quot;,
+    &quot;op&quot;:&quot;textctrl&quot;,
+    &quot;act&quot;:&quot;send&quot;,
+    &quot;date&quot;:{
+        &quot;ask&quot;:&quot;1&quot;,
+        &quot;status&quot;:&quot;chat&quot;,
+        &quot;msg&quot;:&quot;{
+             &quot;type&quot;:&quot;text&quot;
+             &quot;content&quot;:&quot;好的&quot;
+        }&quot;
  }</pre>
                         <h3>参数协议</h3>
                         <table>
@@ -515,76 +523,18 @@
                             </thead>
                             <tbody>
                             <tr>
-                                <td>roomname</td>
+                                <td>msg</td>
                                 <td>String</td>
-                                <td>房间名</td>
+                                <td>要发送给主机的文字消息</td>
                                 <td>是</td>
                             </tr>
-                            </tbody>
-                        </table>
+                            <tr>
+                                <td>fm</td>
+                                <td>String</td>
+                                <td>0为公众号，1为小程序</td>
+                                <td>是</td>
+                            </tr>
 
-
-                    </div>
-                    <div class="doc-detail-bd" id="bd1">
-                        <h3>二.查看所有房间</h3>
-                        <p>示例：</p>
-                        <pre>{
-    &quot;op&quot;:&quot;room&quot;,
-    &quot;act&quot;:&quot;list&quot;,
-    &quot;uid&quot;:&quot;XXXXXXXX&quot;,
-    &quot;did&quot;:&quot;XXXXXXXX&quot;,
-    &quot;token&quot;:&quot;XXXXXXXX&quot;
- }</pre>
-                        <p>正常响应：</p>
-                        <pre>{
-    &quot;ack&quot;:&quot;1&quot;,
-    &quot;msg&quot;:&quot;{
-        &quot;name&quot;:&quot;客厅&quot;,
-        &quot;id&quot;:&quot;123&quot;
-    }&quot;
-
- }</pre>
-                        <h3>参数协议</h3>
-                        <table>
-                            <thead>
-                            <tr>
-                                <th>参数名</th>
-                                <th>参数类型</th>
-                                <th>参数说明</th>
-                                <th>是否必传</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>op</td>
-                                <td>String</td>
-                                <td>方法类别</td>
-                                <td>是</td>
-                            </tr>
-                            <tr>
-                                <td>act</td>
-                                <td>String</td>
-                                <td>方法名</td>
-                                <td>是</td>
-                            </tr>
-                            <tr>
-                                <td>uid</td>
-                                <td>String</td>
-                                <td>获取的微信uid</td>
-                                <td>是</td>
-                            </tr>
-                            <tr>
-                                <td>did</td>
-                                <td>String</td>
-                                <td>主机的did</td>
-                                <td>是</td>
-                            </tr>
-                            <tr>
-                                <td>token</td>
-                                <td>String</td>
-                                <td>见二.获取token</td>
-                                <td>是</td>
-                            </tr>
                             </tbody>
                         </table>
                         <h3>返回参数说明</h3>
@@ -594,48 +544,6 @@
                                 <th>参数名</th>
                                 <th>参数类型</th>
                                 <th>参数说明</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>name</td>
-                                <td>String</td>
-                                <td>房间名</td>
-                            </tr>
-                            <tr>
-                                <td>id</td>
-                                <td>String</td>
-                                <td>房间id</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="doc-detail-bd" id="bd2">
-                        <h3>三.删除房间</h3>
-                        <p>示例：</p>
-                        <pre>{
-    &quot;op&quot;:&quot;room&quot;,
-    &quot;act&quot;:&quot;del&quot;,
-    &quot;uid&quot;:&quot;XXXXXXXX&quot;,
-    &quot;did&quot;:&quot;XXXXXXXX&quot;,
-    &quot;token&quot;:&quot;XXXXXXXX&quot;,
-    &quot;date&quot;:{
-        &quot;roomname&quot;:&quot;XXXX&quot;,
-        &quot;roomid&quot;:&quot;XXXX&quot;,
-
-    }
- }</pre>
-                        <p>正常响应：</p>
-                        <pre>{
-    &quot;ack&quot;:&quot;1&quot;,
- }</pre>
-                        <h3>参数协议</h3>
-                        <table>
-                            <thead>
-                            <tr>
-                                <th>参数名</th>
-                                <th>参数类型</th>
-                                <th>参数说明</th>
                                 <th>是否必传</th>
                             </tr>
                             </thead>
@@ -652,27 +560,9 @@
                                 <td>方法名</td>
                                 <td>是</td>
                             </tr>
-                            <tr>
-                                <td>uid</td>
-                                <td>String</td>
-                                <td>获取的微信uid</td>
-                                <td>是</td>
-                            </tr>
-                            <tr>
-                                <td>did</td>
-                                <td>String</td>
-                                <td>主机的did</td>
-                                <td>是</td>
-                            </tr>
-                            <tr>
-                                <td>token</td>
-                                <td>String</td>
-                                <td>见二.获取token</td>
-                                <td>是</td>
-                            </tr>
                             </tbody>
                         </table>
-                        <h3>协议中的date列表</h3>
+                        <h3>返回参数中的date说明</h3>
                         <table>
                             <thead>
                             <tr>
@@ -684,116 +574,39 @@
                             </thead>
                             <tbody>
                             <tr>
-                                <td>roomname</td>
+                                <td>ask</td>
                                 <td>String</td>
-                                <td>房间名</td>
+                                <td>调用接口结果1为成功，0为失败</td>
                                 <td>是</td>
                             </tr>
                             <tr>
-                                <td>roomid</td>
+                                <td>status</td>
                                 <td>String</td>
-                                <td>房间id</td>
-                                <td>是</td>
-                            </tr>
-                            </tbody>
-                        </table>
-
-
-                    </div>
-                    <div class="doc-detail-bd" id="bd3">
-                        <h3>四.更新房间名</h3>
-                        <p>示例：</p>
-                        <pre>{
-    &quot;op&quot;:&quot;room&quot;,
-    &quot;act&quot;:&quot;update&quot;,
-    &quot;uid&quot;:&quot;XXXXXXXX&quot;,
-    &quot;did&quot;:&quot;XXXXXXXX&quot;,
-    &quot;token&quot;:&quot;XXXXXXXX&quot;,
-    &quot;date&quot;:{
-        &quot;roomname&quot;:&quot;XXXX&quot;,
-        &quot;roomid&quot;:&quot;XXXX&quot;,
-
-    }
- }</pre>
-                        <p>正常响应：</p>
-                        <pre>{
-    &quot;ack&quot;:&quot;1&quot;
- }</pre>
-                        <h3>参数协议</h3>
-                        <table>
-                            <thead>
-                            <tr>
-                                <th>参数名</th>
-                                <th>参数类型</th>
-                                <th>参数说明</th>
-                                <th>是否必传</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>op</td>
-                                <td>String</td>
-                                <td>方法类别</td>
+                                <td>返回数据种类</td>
                                 <td>是</td>
                             </tr>
                             <tr>
-                                <td>act</td>
+                                <td>msg下的type</td>
                                 <td>String</td>
-                                <td>方法名</td>
+                                <td>返回的消息内容格式（text：文字，img：图片，vioce：音频，video：视频）</td>
                                 <td>是</td>
                             </tr>
                             <tr>
-                                <td>uid</td>
+                                <td>msg中的content</td>
                                 <td>String</td>
-                                <td>获取的微信uid</td>
-                                <td>是</td>
-                            </tr>
-                            <tr>
-                                <td>did</td>
-                                <td>String</td>
-                                <td>主机的did</td>
-                                <td>是</td>
-                            </tr>
-                            <tr>
-                                <td>token</td>
-                                <td>String</td>
-                                <td>见二.获取token</td>
-                                <td>是</td>
-                            </tr>
-                            </tbody>
-                        </table>
-                        <h3>协议中的date列表</h3>
-                        <table>
-                            <thead>
-                            <tr>
-                                <th>参数名</th>
-                                <th>参数类型</th>
-                                <th>参数说明</th>
-                                <th>是否必传</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td>roomname</td>
-                                <td>String</td>
-                                <td>房间名</td>
-                                <td>是</td>
-                            </tr>
-                            <tr>
-                                <td>roomid</td>
-                                <td>String</td>
-                                <td>房间id</td>
+                                <td>返回的消息内容</td>
                                 <td>是</td>
                             </tr>
                             </tbody>
                         </table>
 
 
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
+</div>
+                </div>>
+            </div>>
+        </div>>
+    </div>>
 </div>
 <script src="//g.alicdn.com/shop/tae-portal/0.4.5/scripts/docs-cc-v2.js"></script>
 </body>

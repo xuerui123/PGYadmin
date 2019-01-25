@@ -2426,7 +2426,7 @@
     
             /**
              * @method removeFile
-             * @grammar removeFile( file ) => undefined
+             * @grammar removeFile( doc ) => undefined
              * @grammar removeFile( id ) => undefined
              * @param {File|id} file File对象或这File对象的id
              * @description 移除某一文件。
@@ -2434,7 +2434,7 @@
              * @example
              *
              * $li.on('click', '.remove-this', function() {
-             *     uploader.removeFile( file );
+             *     uploader.removeFile( doc );
              * })
              */
             removeFile: function( file ) {

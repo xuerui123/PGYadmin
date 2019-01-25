@@ -3626,22 +3626,22 @@ vjs.Player.prototype.selectSource = function(sources){
  *
  * There are three types of variables you can pass as the argument.
  *
- * **URL String**: A URL to the the video file. Use this method if you are sure
+ * **URL String**: A URL to the the video doc. Use this method if you are sure
  * the current playback technology (HTML5/Flash) can support the source you
  * provide. Currently only MP4 files can be used in both HTML5 and Flash.
  *
  *     myPlayer.src("http://www.example.com/path/to/video.mp4");
  *
  * **Source Object (or element):** A javascript object containing information
- * about the source file. Use this method if you want the player to determine if
- * it can support the file using the type information.
+ * about the source doc. Use this method if you want the player to determine if
+ * it can support the doc using the type information.
  *
  *     myPlayer.src({ type: "video/mp4", src: "http://www.example.com/path/to/video.mp4" });
  *
  * **Array of Source Objects:** To provide multiple versions of the source so
  * that it can be played using HTML5 across browsers you can use an array of
  * source objects. Video.js will detect which version is supported and load that
- * file.
+ * doc.
  *
  *     myPlayer.src([
  *       { type: "video/mp4", src: "http://www.example.com/path/to/video.mp4" },

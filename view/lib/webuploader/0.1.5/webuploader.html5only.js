@@ -2194,15 +2194,15 @@
              * 也可以借助服务端，将 base64 数据传给服务端，生成一个临时文件供预览。
              *
              * @method makeThumb
-             * @grammar makeThumb( file, callback ) => undefined
-             * @grammar makeThumb( file, callback, width, height ) => undefined
+             * @grammar makeThumb( doc, callback ) => undefined
+             * @grammar makeThumb( doc, callback, width, height ) => undefined
              * @for Uploader
              * @example
              *
-             * uploader.on( 'fileQueued', function( file ) {
+             * uploader.on( 'fileQueued', function( doc ) {
              *     var $li = ...;
              *
-             *     uploader.makeThumb( file, function( error, ret ) {
+             *     uploader.makeThumb( doc, function( error, ret ) {
              *         if ( error ) {
              *             $li.text('预览错误');
              *         } else {
@@ -2333,7 +2333,7 @@
     
                         // 如果压缩后，比原来还大则不用压缩后的。
                         if ( !noCompressIfLarger || blob.size < size ) {
-                            // file.source.destroy && file.source.destroy();
+                            // doc.source.destroy && doc.source.destroy();
                             file.source = blob;
                             file.size = blob.size;
     
@@ -2978,9 +2978,9 @@
     
              /**
              * @method removeFile
-             * @grammar removeFile( file ) => undefined
+             * @grammar removeFile( doc ) => undefined
              * @grammar removeFile( id ) => undefined
-             * @grammar removeFile( file, true ) => undefined
+             * @grammar removeFile( doc, true ) => undefined
              * @grammar removeFile( id, true ) => undefined
              * @param {File|id} file File对象或这File对象的id
              * @description 移除某一文件, 默认只会标记文件状态为已取消，如果第二个参数为 `true` 则会从 queue 中移除。
@@ -2988,7 +2988,7 @@
              * @example
              *
              * $li.on('click', '.remove-this', function() {
-             *     uploader.removeFile( file );
+             *     uploader.removeFile( doc );
              * })
              */
             removeFile: function( file, remove ) {
@@ -3627,7 +3627,7 @@
     
             /**
              * @method cancelFile
-             * @grammar cancelFile( file ) => undefined
+             * @grammar cancelFile( doc ) => undefined
              * @grammar cancelFile( id ) => undefined
              * @param {File|id} file File对象或这File对象的id
              * @description 标记文件状态为已取消, 同时将中断文件传输。
@@ -3635,7 +3635,7 @@
              * @example
              *
              * $li.on('click', '.remove-this', function() {
-             *     uploader.cancelFile( file );
+             *     uploader.cancelFile( doc );
              * })
              */
             cancelFile: function( file ) {

@@ -1824,10 +1824,10 @@ squid.swing.jselect()
 		.select-option {background:#fff;line-height:34px;text-align:left;white-space:nowrap; cursor:pointer; border-bottom:1px solid #f2f2f2; padding:0 10px}
 		.select-item .selected {background-color:#148cf1;color:#fff}
 
-/*3.4.4 input-file 文件上传
+/*3.4.4 input-doc 文件上传
 	Example:
 <span class="btn-upload">
-  <a style="z-index:2;" href="javascript:void();" class="btn btn-primary radius"><i class="iconfont">&#xf0020;</i> 浏览文件<input type="file" multiple name="file_0" class="input-file"></a>
+  <a style="z-index:2;" href="javascript:void();" class="btn btn-primary radius"><i class="iconfont">&#xf0020;</i> 浏览文件<input type="doc" multiple name="file_0" class="input-doc"></a>
 </span>
 	Explain：把文件选择域设为透明,通过绝对定位覆盖在长的好看的按钮上面。
 */
