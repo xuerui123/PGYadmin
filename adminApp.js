@@ -46,14 +46,14 @@ router.get('/version/yidai', ctx => ctx.render('/version/yidai'));
 router.get('/version/erdai', ctx => ctx.render('/version/erdai'));
 router.get('/version/add', ctx => ctx.render('/version/add'));
 router.get('/version/edit', ctx => ctx.render('/version/edit'));
-router.get('/doc/doc1', ctx => ctx.render('/doc/doc1'));
-router.get('/doc/doc2', ctx => ctx.render('/doc/doc2'));
-router.get('/doc/doc3', ctx => ctx.render('/doc/doc3'));
-router.get('/doc/doc4', ctx => ctx.render('/doc/doc4'));
-router.get('/doc/doc5', ctx => ctx.render('/doc/doc5'));
-router.get('/doc/doc6', ctx => ctx.render('/doc/doc6'));
-router.get('/doc/doc7', ctx => ctx.render('/doc/doc7'));
-router.get('/doc/doc8', ctx => ctx.render('/doc/doc8'));
+router.get('/doc/yunint1', ctx => ctx.render('/doc/doc1'));
+router.get('/doc/yunint2', ctx => ctx.render('/doc/doc2'));
+router.get('/doc/yunint3', ctx => ctx.render('/doc/doc3'));
+router.get('/doc/yunint4', ctx => ctx.render('/doc/doc4'));
+router.get('/doc/yunint5', ctx => ctx.render('/doc/doc5'));
+router.get('/doc/yunint6', ctx => ctx.render('/doc/doc6'));
+router.get('/doc/yunint7', ctx => ctx.render('/doc/doc7'));
+router.get('/doc/yunint8', ctx => ctx.render('/doc/doc8'));
 
 
 
