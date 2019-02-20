@@ -1,0 +1,49 @@
+html
+    head
+        meta(charset='utf-8')
+        title
+        link(rel='stylesheet',href='/css/common.css')
+        link(rel='stylesheet',href='/css/version.erdai.css')
+        script(src='https://cdn.bootcss.com/vue/2.6.0/vue.js')
+        script(src='https://cdn.bootcss.com/jquery/2.0.1/jquery.min.js')
+        script(src='../JavaScript/common/swal.js')
+        script(src='../JavaScript/common/mutual.js')
+    body
+        div#VueBox
+            include ../common/top
+            include ../common/nav
+            div.add
+                span.rf.btn.btn-success
+                    a(href='/version/add') 添加版本
+            div.userList
+                table
+                    thead
+                        tr
+                            th id
+                            th 渠道名
+                            th APK全名
+                            th APK URL
+                            th MD5
+                            th 版本号
+                            th 版本code
+                            th MCU URL
+                            th MCU MD5
+                            th MCU CODE
+                            th 操作
+                    tbody
+                        tr(v-for='item in list')
+                            td(v-text='item.id',:title='item.id')
+                            td(v-text='item.apk_name',:title='item.apk_name')
+                            td(v-text='item.apk_full_name',:title='item.apk_full_name')
+                            td(v-text='item.apk_url',:title='item.apk_url')
+                            td(v-text='item.apk_md5',:title='item.apk_md5')
+                            td(v-text='item.version_name',:title='item.version_name')
+                            td(v-text='item.version_code',:title='item.version_code')
+                            td(v-text='item.mcu_url',:title='item.mcu_url')
+                            td(v-text='item.mcu_md5',:title='item.mcu_md5')
+                            td(v-text='item.mcu_code',:title='item.mcu_code')
+                            td.operation
+                                span(@click='editV(item)') 编辑
+                                span(@click='delV(item.id)') 删除
+
+    script(src='../JavaScript/version/erdai.js')

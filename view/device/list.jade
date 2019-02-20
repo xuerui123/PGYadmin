@@ -1,0 +1,49 @@
+html
+    head
+        meta(charset='utf-8')
+        title
+        link(rel='stylesheet',href='/css/common.css')
+        link(rel='stylesheet',href='/css/device.list.css')
+        script(src='https://cdn.bootcss.com/vue/2.6.0/vue.js')
+        script(src='https://cdn.bootcss.com/jquery/2.0.1/jquery.min.js')
+        script(src='../JavaScript/common/swal.js')
+        script(src='../JavaScript/common/mutual.js')
+    body
+        div#VueBox
+            include ../common/top
+            include ../common/nav
+            div.devList
+                table
+                    thead
+                        tr
+                            th id
+                            th sn
+                            th 房间号
+                            th 主机状态
+                            th 房间状态
+                            th 详细信息
+                            th 文本
+                            th 操作
+                    tbody
+                        tr(v-for="item in list")
+                            td(v-text='item.id')
+                            td(v-text='item.sn')
+                            td
+                                input(:value='item.rooms.name',style='width:80px')
+                            td
+                                span(v-if='item.online==1') 在线
+                                span(v-if='item.online==0') 离线
+                            td
+                                select
+                                    option(value='空闲') 空闲
+                                    option(value='有人') 有人
+                            td
+                                a(@click='lookRooms(item)') 查看
+                            td.status
+                                input
+                            td.operation
+                                span 更新
+                                span 发送
+                                span 删除
+
+    script(src='../JavaScript/device/list.js')

@@ -1,0 +1,45 @@
+html
+    head
+        meta(charset='utf-8')
+        title
+        link(rel='stylesheet',href='/css/common.css')
+        link(rel='stylesheet',href='/css/version.add.css')
+        script(src='https://cdn.bootcss.com/vue/2.6.0/vue.js')
+        script(src='https://cdn.bootcss.com/jquery/2.0.1/jquery.min.js')
+        script(src='../JavaScript/common/swal.js')
+        script(src='../JavaScript/common/mutual.js')
+    body
+        div#VueBox
+            include ../common/top
+            include ../common/nav
+            div.userMsg
+                p
+                    span.title 渠道
+                    input.channel
+                p
+                    span.title APK全名
+                    input.apkName
+                p
+                    span.title 下载地址
+                    input.apkUrl
+                p
+                    span.title MD5
+                    input.apkMd5
+                p
+                    span.title 版本号
+                    input.versions
+                p
+                    span.title code
+                    input.versionCode
+                p
+                    span.title MCU 下载地址
+                    input.mcuUrl
+                p
+                    span.title MCU MD5
+                    input.mcuMd5
+                p
+                    span.title MCU CODE
+                    input.mcuCode
+                p
+                    span(@click='save').btn.btn-success 提&nbsp&nbsp&nbsp&nbsp交
+    script(src='../JavaScript/version/add.js')

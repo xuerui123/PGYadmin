@@ -1,0 +1,130 @@
+html
+    head
+        meta(charset='utf-8')
+        title
+        link(rel='stylesheet',href='/css/common.css')
+        link(rel='stylesheet',href='/css/device.rooms.css')
+        script(src='https://cdn.bootcss.com/vue/2.6.0/vue.js')
+        script(src='https://cdn.bootcss.com/jquery/2.0.1/jquery.min.js')
+        script(src='../JavaScript/common/swal.js')
+        script(src='../JavaScript/common/mutual.js')
+    body
+        div#VueBox
+            include ../common/top
+            include ../common/nav
+            div.devList
+                table
+                    thead
+                        tr
+                            th id
+                            th 房间号
+                            th 主机状态
+                            th 房间状态
+                            th 文本
+                            th 操作
+                    tbody
+                        tr
+                            td(v-text='roomsObj.id')
+                            td
+                                input(:value='roomsObj.rooms.name',style='width:80px')
+                            td
+                                span(v-if='roomsObj.online==1') 在线
+                                span(v-if='roomsObj.online==0') 离线
+                            td
+                                select
+                                    option(value='空闲') 空闲
+                                    option(value='有人') 有人
+                            td.status
+                                input
+                            td.operation
+                                span 更新
+                                span 发送
+
+            div.equipmentsAdd
+                span(@click='showBG=!showBG').btn.btn-success.rf 添加电器
+            div.equipments
+                table
+                    thead
+                        tr
+                            th id
+                            th 电器名
+                            th 电器状态
+                            th 添加时间
+                            th 类别
+                            th 说明
+                            th 操作
+                    tbody
+                        tr
+                            td
+                            td
+                            td
+                            td
+                            td
+                            td
+                            td
+            div.showBg(v-if='showBG')
+                div.eqpsBOX
+                    p
+                        span 电器类别：
+                        select(@change='devName')
+                            option(value='') 请选择设备类别
+                            option(value="窗帘") 窗帘
+                            option(value="灯光") 灯光
+                            option(value="智能插座") 智能插座
+                            option(value="空调") 空调
+                            option(value="电视") 电视
+                            option(value="机顶盒") 机顶盒
+                            option(value="网络盒子") 网络盒子
+                            option(value="投影仪") 投影仪
+                            option(value="加湿器") 加湿器
+                            option(value="空气净化器") 空气净化器
+                            option(value="扫地机器人") 扫地机器人
+                            option(value="功放") 功放
+                            option(value="热水器") 热水器
+                    p.brand
+                        span 电器品牌：
+                        select(@change='devBrand')
+                            option(value="") 请选择设备品牌
+                            option(v-if="brandList.length==''", value="") 该设备暂无品牌
+                            option(v-for="item in brandList" ,:value="item.brand",v-text='item.brand')
+
+                    p.devcode
+                        span 电器型号：
+                        select(@change='getRemoid')
+                            option(value="") 请选择设备品牌
+                            option(v-if="codeList.length==''" value="") 该设备暂无品牌
+                            option(v-for="item in codeList" ,:value="item",v-text='item')
+                    p.lamp
+                        span 灯光设备：
+                        select
+                            option(value="") 请选择灯光种类
+                            option(value="吊灯") 吊灯
+                            option(value="灯带") 灯带
+                            option(value="顶灯") 顶灯
+                            option(value="踢脚灯") 踢脚灯
+                            option(value="射灯") 射灯
+                            option(value="筒灯") 筒灯
+                            option(value="日光灯") 日光灯
+                            option(value="壁灯") 壁灯
+                            option(value="氛围灯") 氛围灯
+                            option(value="背景灯") 背景灯
+                            option(value="镜前灯") 镜前灯
+                    p.SmartPlug
+                        span 插座设备：
+                        select
+                            option(value="") 请选择插座设备
+                            option(value="台灯") 台灯
+                            option(value="饮水机") 饮水机
+                            option(value="热水器") 热水器
+                            option(value="加湿器") 加湿器
+                            option(value="笔记本") 笔记本
+                            option(value="电风扇") 电风扇
+                            option(value="鱼缸") 鱼缸
+                            option(value="电视") 电视
+                            option(value="功放") 功放
+                            option(value="冰箱") 冰箱
+
+                    p
+                        span(@click='addDev()').btn.btn-success 添&nbsp&nbsp&nbsp&nbsp加
+                        span(style='margin-left:30px',@click='showBG=!showBG').btn.btn-default 返&nbsp&nbsp&nbsp&nbsp回
+    script(src='../JavaScript/device/rooms.js')

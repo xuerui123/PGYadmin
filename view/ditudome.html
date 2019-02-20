@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>点聚合</title>
+    <link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css"/>
+    <style>
+        html, body, #container {
+            height: 100%;
+            width: 100%;
+        }
+
+        .input-card {
+            width: 25rem;
+        }
+
+        .input-card .btn {
+            width: 7rem;
+            margin-right: .7rem;
+        }
+
+        .input-card .btn:last-child {
+            margin-right: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="container" class="map" tabindex="0"></div>
+<div class="input-card">
+    <h4>聚合点效果切换</h4>
+    <div class="input-item">
+        <input type="button" class="btn" value="默认样式" id="add0" onclick='addCluster(0)'/>
+        <input type="button" class="btn" value="自定义图标" id="add1" onclick='addCluster(1)'/>
+        <input type="button" class="btn" value="完全自定义" id="add2" onclick='addCluster(2)'/>
+    </div>
+</div>
+<!--<script src="//a.amap.com/jsapi_demos/static/china.js"></script>-->
+<script type="text/javascript"
+        src="https://webapi.amap.com/maps?v=1.4.13&key=您申请的key值&plugin=AMap.MarkerClusterer"></script>
+<script type="text/javascript">
+    var cluster, markers = [];
+    let points = [{"lnglat":["113.864691","22.942327"]},{"lnglat":["113.370643","22.938827"]},{"lnglat":["112.985037","23.15046"]},{"lnglat":["110.361899","20.026695"]},{"lnglat":["121.434529","31.215641"]},{"lnglat":["120.682502","28.011099"]},{"lnglat":["126.687123","45.787618"]},{"lnglat":["103.970724","30.397931"]},{"lnglat":["117.212164","31.831641"]},{"lnglat":["121.411101","31.059407"]},{"lnglat":["104.137953","30.784276"]},{"lnglat":["120.499683","30.042305"]},{"lnglat":["108.94686","34.362975"]},{"lnglat":["112.873295","22.920901"]},{"lnglat":["113.373916","23.086728"]},{"lnglat":["113.250159","23.075847"]},{"lnglat":["116.675933","39.986343"]},{"lnglat":["120.75997","31.734934"]},{"lnglat":["118.314741","32.26999"]},{"lnglat":["111.723311","34.771838"]},{"lnglat":["119.537126","26.200017"]},{"lnglat":["113.830123","23.00734"]},{"lnglat":["119.273795","26.060002"]},{"lnglat":["116.466752","39.951042"]},{"lnglat":["114.20716","22.777829"]},{"lnglat":["126.118338","45.11481"]},{"lnglat":["116.366324","39.781077"]},{"lnglat":["120.377998","31.578216"]},{"lnglat":["116.611935","23.66941"]},{"lnglat":["103.787344","30.940037"]},{"lnglat":["112.911223","23.164952"]},{"lnglat":["121.946335","39.403784"]},{"lnglat":["120.172545","36.009391"]},{"lnglat":["126.609854","45.722514"]},{"lnglat":["120.531699","32.402873"]},{"lnglat":["118.914313","32.013572"]},{"lnglat":["126.597762","45.739299"]},{"lnglat":["106.540999","29.520217"]},{"lnglat":["114.033057","22.733424"]},{"lnglat":["104.041129","30.598338"]},{"lnglat":["119.917693","32.484184"]},{"lnglat":["118.371124","35.082682"]},{"lnglat":["120.926368","31.320681"]},{"lnglat":["120.355238","31.557524"]},{"lnglat":["101.775209","36.614975"]},{"lnglat":["114.499404","34.646022"]},{"lnglat":["118.087516","24.474988"]},{"lnglat":["104.638952","30.1253"]},{"lnglat":["116.492237","39.991802"]},{"lnglat":["112.898903","32.04371"]},{"lnglat":["114.104018","22.626803"]},{"lnglat":["119.969664","30.26186"]},{"lnglat":["119.530013","39.935889"]},{"lnglat":["77.254607","39.050215"]},{"lnglat":["117.085608","36.652113"]},{"lnglat":["120.292808","30.299244"]},{"lnglat":["114.397917","23.545706"]},{"lnglat":["120.273933","30.236666"]},{"lnglat":["121.622443","31.152955"]},{"lnglat":["116.417093","39.96918"]},{"lnglat":["113.799453","22.724031"]},{"lnglat":["123.264175","41.768478"]},{"lnglat":["120.626128","30.822477"]},{"lnglat":["115.826361","33.812392"]},{"lnglat":["106.561797","26.579832"]},{"lnglat":["117.285766","34.806079"]},{"lnglat":["111.035766","21.535775"]},{"lnglat":["115.701728","24.066784"]},{"lnglat":["104.061447","30.67089"]},{"lnglat":["121.123465","31.134162"]},{"lnglat":["104.039519","30.719365"]},{"lnglat":["116.625662","39.619879"]},{"lnglat":["108.20204","28.004321"]},{"lnglat":["113.606513","34.807402"]},{"lnglat":["120.213822","30.112851"]},{"lnglat":["120.727637","27.798264"]},{"lnglat":["116.452761","39.951122"]},{"lnglat":["119.555363","39.932751"]},{"lnglat":["120.227111","30.347169"]},{"lnglat":["113.377157","31.797137"]},{"lnglat":["113.334007","23.107744"]},{"lnglat":["112.641848","22.362319"]},{"lnglat":["102.672195","24.974215"]},{"lnglat":["120.190691","30.305693"]},{"lnglat":["117.023543","36.679076"]},{"lnglat":["118.868849","31.918515"]},{"lnglat":["121.473372","31.235574"]},{"lnglat":["116.526635","37.131774"]},{"lnglat":["113.294417","23.159512"]},{"lnglat":["120.163756","30.39902"]},{"lnglat":["121.640998","38.908202"]},{"lnglat":["112.767577","22.445482"]},{"lnglat":["117.287658","31.873351"]},{"lnglat":["117.219603","39.211753"]},{"lnglat":["113.859931","22.971467"]},{"lnglat":["112.438353","34.666416"]},{"lnglat":["120.415793","36.059608"]},{"lnglat":["120.704291","31.825364"]},{"lnglat":["118.143882","24.700477"]},{"lnglat":["119.364493","32.328944"]},{"lnglat":["121.294195","31.888728"]},{"lnglat":["113.365022","22.57829"]},{"lnglat":["120.054198","30.664807"]},{"lnglat":["87.658551","44.008315"]},{"lnglat":["112.541595","26.763181"]},{"lnglat":["115.471106","30.787118"]},{"lnglat":["125.265486","43.869571"]},{"lnglat":["116.644049","39.807311"]},{"lnglat":["112.702588","22.00886"]},{"lnglat":["120.430282","29.365092"]},{"lnglat":["114.04317","22.562925"]},{"lnglat":["121.22947","31.016796"]},{"lnglat":["116.834305","39.825053"]},{"lnglat":["106.28279","29.960069"]},{"lnglat":["116.456392","40.016161"]},{"lnglat":["120.255668","30.435952"]},{"lnglat":["113.518903","22.22175"]},{"lnglat":["106.543339","29.612362"]},{"lnglat":["120.554869","36.38975"]},{"lnglat":["116.833489","39.254627"]},{"lnglat":["112.955801","23.197491"]},{"lnglat":["117.398154","31.985269"]},{"lnglat":["107.125098","26.37983"]},{"lnglat":["130.891768","47.017684"]},{"lnglat":["117.212348","31.82965"]},{"lnglat":["113.376242","22.935718"]},{"lnglat":["117.404318","39.290364"]},{"lnglat":["120.034828","28.908292"]},{"lnglat":["117.442801","39.059195"]},{"lnglat":["115.112965","35.75067"]},{"lnglat":["116.486205","39.812739"]},{"lnglat":["121.567139","31.132951"]},{"lnglat":["116.417075","40.005976"]},{"lnglat":["113.335402","23.021024"]},{"lnglat":["110.131995","27.698087"]},{"lnglat":["126.683096","45.744551"]},{"lnglat":["113.298626","40.086031"]},{"lnglat":["120.455786","30.482805"]},{"lnglat":["103.941726","30.731199"]},{"lnglat":["116.455054","39.957415"]},{"lnglat":["112.554404","22.380084"]},{"lnglat":["116.26261","39.929069"]},{"lnglat":["119.177588","34.614112"]},{"lnglat":["118.088614","24.475403"]},{"lnglat":["116.55152","40.101459"]},{"lnglat":["120.189177","30.19047"]},{"lnglat":["119.212254","36.973457"]},{"lnglat":["116.488509","40.010936"]},{"lnglat":["118.868438","32.022459"]},{"lnglat":["116.266745","40.173843"]}]
+    var map = new AMap.Map("container", {
+        resizeEnable: true,
+        center: [105, 34],
+        zoom: 5,
+
+    });
+    console.log(points)
+    for (var i = 0; i < points.length; i += 1) {
+        markers.push(new AMap.Marker({
+            position: points[i]['lnglat'],
+            content: '<div style="background-color: hsla(180, 100%, 50%, 0.7); height: 14px; width: 14px; border: 1px solid hsl(180, 100%, 40%); border-radius: 8px; box-shadow: hsl(180, 100%, 50%) 0px 0px 1px;"></div>',
+            offset: new AMap.Pixel(-15, -15)
+        }))
+    }
+    this.renderChinaMap()
+
+    var count = markers.length;
+    var _renderClusterMarker = function (context) {
+        var factor = Math.pow(context.count / count, 1 / 18);
+        var div = document.createElement('div');
+        var Hue = 180 - factor * 180;
+        var bgColor = 'hsla(' + Hue + ',100%,50%,0.7)';
+        var fontColor = 'hsla(' + Hue + ',100%,20%,1)';
+        var borderColor = 'hsla(' + Hue + ',100%,40%,1)';
+        var shadowColor = 'hsla(' + Hue + ',100%,50%,1)';
+        div.style.backgroundColor = bgColor;
+        var size = Math.round(30 + Math.pow(context.count / count, 1 / 5) * 5);
+        div.style.width = div.style.height = size + 'px';
+        div.style.border = 'solid 1px ' + borderColor;
+        div.style.borderRadius = size / 2 + 'px';
+        div.style.boxShadow = '0 0 1px ' + shadowColor;
+        div.innerHTML = context.count;
+        div.style.lineHeight = size + 'px';
+        div.style.color = fontColor;
+        div.style.fontSize = '14px';
+        div.style.textAlign = 'center';
+        context.marker.setOffset(new AMap.Pixel(-size / 2, -size / 2));
+        context.marker.setContent(div)
+    };
+
+    addCluster(2);
+
+    function addCluster(tag) {
+        if (cluster) {
+            cluster.setMap(null);
+        }
+        if (tag == 2) {//完全自定义
+            cluster = new AMap.MarkerClusterer(map, markers, {
+                gridSize: 80,
+                renderClusterMarker: _renderClusterMarker
+            });
+        } else if (tag == 1) {//自定义图标
+            var sts = [{
+                url: "https://a.amap.com/jsapi_demos/static/images/blue.png",
+                size: new AMap.Size(32, 32),
+                offset: new AMap.Pixel(-16, -16)
+            }, {
+                url: "https://a.amap.com/jsapi_demos/static/images/green.png",
+                size: new AMap.Size(32, 32),
+                offset: new AMap.Pixel(-16, -16)
+            }, {
+                url: "https://a.amap.com/jsapi_demos/static/images/orange.png",
+                size: new AMap.Size(36, 36),
+                offset: new AMap.Pixel(-18, -18)
+            }, {
+                url: "https://a.amap.com/jsapi_demos/static/images/red.png",
+                size: new AMap.Size(48, 48),
+                offset: new AMap.Pixel(-24, -24)
+            }, {
+                url: "https://a.amap.com/jsapi_demos/static/images/darkRed.png",
+                size: new AMap.Size(48, 48),
+                offset: new AMap.Pixel(-24, -24)
+            }];
+            cluster = new AMap.MarkerClusterer(map, markers, {
+                styles: sts,
+                gridSize: 80
+            });
+        } else {//默认样式
+            cluster = new AMap.MarkerClusterer(map, markers, {gridSize: 80});
+        }
+    }
+</script>
+</body>
+</html>

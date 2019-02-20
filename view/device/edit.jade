@@ -1,0 +1,71 @@
+html
+    head
+        meta(charset='utf-8')
+        title
+        link(rel='stylesheet',href='/css/common.css')
+        link(rel='stylesheet',href='/css/device.edit.css')
+        script(src='https://cdn.bootcss.com/vue/2.6.0/vue.js')
+        script(src='https://cdn.bootcss.com/jquery/2.0.1/jquery.min.js')
+        script(src='../JavaScript/common/swal.js')
+        script(src='../JavaScript/common/mutual.js')
+    body
+        div#VueBox
+            include ../common/top
+            include ../common/nav
+            div.topList
+                span(@click='showBox("device")') 设备信息
+                span(@click='showBox("oem")') OEM信息配置
+                span(@click='showBox("room")') 房间号管理
+            div.device(v-if='show=="device"')
+                table
+                    thead
+                        tr
+                            th ID
+                            th 设备SN
+                            th 设备id
+                            th 操作
+                    tbody
+                        tr(v-for='item in list')
+                            td(v-text='item.id')
+                            td(v-text='item.sn')
+                            td(v-text='item.device_id')
+                            td.btnBOx
+                                span(@click='editSN(item.sn)') 编辑
+                                span(@click='editOEM(item.oem)') 配置OEM
+                                span(@click='delSN(item.sn)') 删除
+            div.oem(v-if='show=="oem"')
+                textarea(placeholder='请填写oem信息内容')
+                div
+                    span(@click='setoem()').btn.btn-success 保&nbsp&nbsp&nbsp存
+                    //span.btn.btn-default 返&nbsp&nbsp&nbsp回
+            div.room(v-if='show=="room"')
+                table
+                    thead
+                        tr
+                            th ID
+                            th 设备SN
+                            th 设备id
+                            th 房间号
+                            th 操作
+                    tbody
+                        tr(v-for='item in list')
+                            td(v-text='item.id')
+                            td(v-text='item.sn')
+                            td(v-text='item.device_id')
+                            td
+                                input(placeholder='请输入房间号',:value='item.rooms.name').roomNum
+                            td.btnbox
+                                span(@click='setroom(item.sn,$event)') 保存
+                                span 清除
+            div.showBg(v-if='showBG')
+                div.editSn(v-if='editBOX == "sn"')
+                    input(placeholder='请输入要修改的sn')
+                    div.btnBOx
+                        span(@click='subSN').btn.btn-success 提交
+                        span(@click='cleanBg()').btn.btn-default 返回
+                div.editOem(v-if='editBOX == "oem"')
+                    textarea(placeholder='请填写oem信息')
+                    div.btnBOx
+                        span(@click='subOEM').btn.btn-success 提交
+                        span(@click='cleanBg()').btn.btn-default 返回
+    script(src='../JavaScript/device/edit.js')

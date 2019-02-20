@@ -1,0 +1,52 @@
+html
+    head
+        meta(charset='utf-8')
+        title
+        link(rel='stylesheet',href='/css/common.css')
+        link(rel='stylesheet',href='/css/user.add.css')
+        script(src='https://cdn.bootcss.com/vue/2.6.0/vue.js')
+        script(src='https://cdn.bootcss.com/jquery/2.0.1/jquery.min.js')
+        script(src='../JavaScript/common/swal.js')
+        script(src='../JavaScript/common/mutual.js')
+    body
+        div#VueBox
+            include ../common/top
+            include ../common/nav
+            div.userMsg
+                p
+                    span.title 账号
+                    input.account
+                p
+                    span.title 公司名
+                    input.name
+                p
+                    span.title 产品名称
+                    input.platname
+                p
+                    span.title 手机
+                    input.phone
+                p
+                    span.title 邮箱
+                    input.email
+                p
+                    span.title 身份
+                    select.identity
+                        option(value='') 请选择用户身份
+                        option(value='酒店') 酒店
+                        option(value='代理') 代理
+                p
+                    span.title 接口访问次数
+                    input.infrared
+                p
+                    span.title 所属用户
+                    input.superior
+                p
+                    span.title 所在城市
+                    input.place
+                p
+                    span.title 备注
+                    textarea.remarks
+                p
+                    span(@click='add()').btn.btn-success 提&nbsp&nbsp&nbsp&nbsp交
+                    span.btn.btn-default 返&nbsp&nbsp&nbsp&nbsp回
+    script(src='../JavaScript/user/add.js')

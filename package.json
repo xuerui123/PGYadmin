@@ -3,11 +3,11 @@
   "version": "0.0.1",
   "dependencies": {
     "jade": "*",
-    "koa": "*",
-    "koa-bodyparser": "*",
+    "koa": "^2.7.0",
+    "koa-bodyparser": "^4.2.1",
     "koa-gzip": "*",
     "koa-router": "*",
     "koa-static-cache": "*",
-    "request": "*"
+    "request": "^2.88.0"
   }
 }

@@ -1,0 +1,23 @@
+html
+    head
+        meta(charset='utf-8')
+        title
+        link(rel='stylesheet',href='/css/common.css')
+        link(rel='stylesheet',href='/css/login.css')
+        script(src='https://cdn.bootcss.com/vue/2.6.0/vue.js')
+        script(src='https://cdn.bootcss.com/jquery/2.0.1/jquery.min.js')
+        script(src='../JavaScript/common/swal.js')
+        script(src='../JavaScript/common/mutual.js')
+    body
+        div#VueBox
+            include common/top
+            div.loginBox
+                p.act
+                    span 账户
+                    input(placeholder='请填写账户',v-model='act')
+                p.pwd
+                    span 密码
+                    input(placeholder='请填写密码',type='password' v-model='pwd')
+                p
+                    span.btn.btn-success(@click='login') 登&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp录
+    script(src='../JavaScript/login.js')

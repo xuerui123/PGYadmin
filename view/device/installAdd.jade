@@ -1,0 +1,21 @@
+html
+    head
+        meta(charset='utf-8')
+        title
+        link(rel='stylesheet',href='/css/common.css')
+        link(rel='stylesheet',href='/css/device.installAdd.css')
+        script(src='https://cdn.bootcss.com/vue/2.6.0/vue.js')
+        script(src='https://cdn.bootcss.com/jquery/2.0.1/jquery.min.js')
+        script(src='../JavaScript/common/swal.js')
+        script(src='../JavaScript/common/mutual.js')
+    body
+        div#VueBox
+            include ../common/top
+            include ../common/nav
+            div
+                textarea(placeholder='请填写设备号')
+            div.btnBOx
+                span(@click='save()').btn-success.btn 提&nbsp&nbsp&nbsp交
+                span(@click='back()').btn-default.btn 返&nbsp&nbsp&nbsp回
+
+    script(src='../JavaScript/device/installAdd.js')

@@ -1,7 +1,0 @@
-{
-  "localPort": 5003,
-  "resource": {
-    "javascript": "/javascript/main",
-    "css": "/css"
-  }
-}

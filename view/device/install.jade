@@ -1,0 +1,41 @@
+html
+    head
+        meta(charset='utf-8')
+        title
+        link(rel='stylesheet',href='/css/common.css')
+        link(rel='stylesheet',href='/css/user.list.css')
+        script(src='https://cdn.bootcss.com/vue/2.6.0/vue.js')
+        script(src='https://cdn.bootcss.com/jquery/2.0.1/jquery.min.js')
+        script(src='../JavaScript/common/swal.js')
+        script(src='../JavaScript/common/mutual.js')
+    body
+        div#VueBox
+            include ../common/top
+            include ../common/nav
+            div.userList(style='margin-top:20px')
+                table
+                    thead
+                        tr
+                            th 用户名
+                            th 前端接口调用
+                            th 手机号
+                            th 邮箱
+                            th 地址
+                            th 添加时间
+                            th 状态
+                            th 操作
+                    tbody
+                        tr(v-for="item in list")
+                            td(v-text='item.name')
+                            td(v-text='item.infrared')
+                            td(v-text='item.phone')
+                            td(v-text='item.email')
+                            td(v-text='item.place')
+                            td(v-text='item.last_login_time')
+                            td.status
+                                span(v-text='item.status==1?"正常":"冻结"',:class='item.status==1?"lable-success":"lable-warning"')
+                            td.operation
+                                span(@click='add(item.uid)') 添加设备
+                                span(@click='edit(item.uid)') 编辑OEM
+
+    script(src='../JavaScript/device/install.js')

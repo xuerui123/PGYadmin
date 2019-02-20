@@ -1,17 +1,33 @@
-let uid = window.location.search.split('=')[1]
-console.log(uid)
 var context = new Vue({
-    el: '#content',
+    el: '#VueBox',
     data: {
-        list: []
+        identity: '未登录',
+        urlObj: {},
+        show: 'device',
+        list: [],
+        showBG: false,
+        editBOX: ''
+    },
+    mounted: function () {
+        let identity = sessionStorage.getItem('pr');
+        this.urlObj = new UrlSearch();
+        if (identity == 'admin') {
+            this.identity = '管理员'
+        } else {
+            this.identity = identity
+        }
+        this.listsys()
+
     },
     methods: {
-        listuser: function () {
+        showBox: function (str) {
+            this.show = str;
+        },
+        listsys: function () {
             let data = {
                 token: sessionStorage.getItem('token'),
-                uid:uid
+                uid: this.urlObj.id
             }
-            let arr = []
             mutual('/Manage/device/listsys', data, function (res) {
                 console.log(res)
                 context.list = res.data.list;
@@ -19,77 +35,109 @@ var context = new Vue({
                 console.log(error)
             })
         },
-        setoem:function () {
+        editSN: function (sn) {
+            console.log(sn)
+            this.showBG = true;
+            this.editBOX = 'sn';
+            setTimeout(function () {
+                $('.editSn input').val(sn)
+            }, 1)
+        },
+        editOEM: function (oem) {
+            console.log(oem)
+            this.showBG = true;
+            this.editBOX = 'oem';
+            setTimeout(function () {
+                $('.editOem textarea').val(oem)
+            }, 1)
+
+        },
+        subSN: function () {
+
+        },
+        subOEM: function (str) {
             let data = {
-                uid:uid,
-                token:sessionStorage.getItem('token'),
-                oem:$('.textarea').val()
-            }
+                sn: str,
+                oem: $('.editOem').val(),
+                token: sessionStorage.getItem('token')
+            };
             mutual('/Manage/device/setoem', data, function (res) {
                 console.log(res)
+                swal('提示', '修改成功', 'success');
+                context.cleanBg()
             }, function (error) {
                 console.log(error)
             })
         },
-        eidtOEM:function (sn) {
-            layer_show('配置oem', 'oem?sn='+sn, 400, 400);
+        cleanBg: function () {
+            this.showBG = false;
         },
-        delSN:function (sn) {
+        setoem: function () {
             let data = {
-                token:sessionStorage.getItem('token'),
-                sn:sn
+                uid: this.urlObj.id,
+                token: sessionStorage.getItem('token'),
+                oem: $('.oem textarea').val()
             }
-            layer.confirm('确认删除改设备', function (index) {
+            mutual('/Manage/device/setoem', data, function (res) {
+                console.log(res)
+                swal('提示', '修改成功', 'success');
+            }, function (error) {
+                console.log(error)
+            })
+        },
 
-                mutual('/Manage/device/delsys',data,function (res) {
-                    console.log(res)
-                    layer.msg('已删除!', {icon: 1, time: 1000});
-                    context.listuser()
-                },function (error) {
-                    console.log(error)
-                })
-            },)
+        delSN: function (sn) {
+            let data = {
+                token: sessionStorage.getItem('token'),
+                sn: sn
+            }
+            swal({
+                    title: "提示",
+                    text: "确认删除该设备？",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确认",
+                    cancelButtonText: "取消",
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                },
+                function (isConfirm) {
+                    if (isConfirm) {
+                        mutual('/Manage/device/delsys', data, function (res) {
+                            swal('提示', '已删除', 'success')
+                            context.listuser()
+                        }, function (error) {
+                            console.log(error)
+                        })
+                    } else {
+                        swal('提示', '已取消删除', 'success')
+                    }
+                });
+
 
         },
-        editSN:function (sn) {
-            layer_show('编辑SN', 'sn?sn='+sn, 300, 300);
-        },
-        setroom:function (id,e) {
+
+        setroom: function (id, e) {
 
             let data = {
-                sn:id,
-                token:sessionStorage.getItem('token'),
+                sn: id,
+                token: sessionStorage.getItem('token'),
                 roomname: $(e.target).parent().prev().find('input').val()
             }
-            if(data.roomname==''){
-                layer.msg('房间号不可为空!', {icon: 1, time: 1000});
-            }else{
-                mutual('/Manage/room/setroom',data,function (res) {
+            if (data.roomname == '') {
+                swal('提示', '房间号不可为空', 'error')
+
+            } else {
+                mutual('/Manage/room/setroom', data, function (res) {
                     console.log(res)
-                    layer.msg('更新成功!', {icon: 1, time: 1000});
-                    context.listuser()
-                },function (error) {
+                    swal('提示', '修改成功', 'success')
+
+                }, function (error) {
                     console.log(error)
                 })
             }
         }
     },
-    computed: {}
+
 });
-
-context.listuser()
-
-$(function () {
-    $('.skin-minimal input').iCheck({
-        checkboxClass: 'icheckbox-blue',
-        radioClass: 'iradio-blue',
-        increaseArea: '20%'
-    });
-    $("#tab-system").Huitab({
-        index: 0
-    });
-});
-
-function editSN() {
-    layer_show()
-}
