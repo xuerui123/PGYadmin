@@ -65,6 +65,6 @@ router.get('/doc/yunint8', ctx => ctx.render('/doc/doc8'));
 
 app.use(serve(path.join(__dirname, './resource')));
 app.use(router.routes());
-app.listen(3500, function () {
-    console.log(`程序启动成功，当前监听3500端口`);
+app.listen(3600, function () {
+    console.log(`程序启动成功，当前监听3600端口`);
 });
