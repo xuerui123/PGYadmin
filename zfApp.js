@@ -43,7 +43,7 @@ app.use(async (ctx, next) => {
 
 
 
-router.get('/', ctx => ctx.render('login'));
+router.get('/welcome', ctx => ctx.render('login'));
 router.get('/user/list', ctx => ctx.render('user/list'));
 router.get('/user/add', ctx => ctx.render('user/add'));
 router.get('/device/install', ctx => ctx.render('device/install'));
