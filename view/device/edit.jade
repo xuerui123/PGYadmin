@@ -53,7 +53,7 @@ html
                             td(v-text='item.sn')
                             td(v-text='item.device_id')
                             td
-                                input(placeholder='请输入房间号',:value='item.rooms.name').roomNum
+                                input(placeholder='请输入房间号',:value='item.rooms?item.rooms.name:""').roomNum
                             td.btnbox
                                 span(@click='setroom(item.sn,$event)') 保存
                                 span 清除

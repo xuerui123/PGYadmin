@@ -50,9 +50,11 @@ router.get('/device/install', ctx => ctx.render('device/install'));
 router.get('/device/installAdd', ctx => ctx.render('device/installAdd'));
 router.get('/device/edit', ctx => ctx.render('device/edit'));
 router.get('/device/list', ctx => ctx.render('device/list'));
+router.get('/device/roomlist', ctx => ctx.render('device/roomlist'));
 router.get('/device/rooms', ctx => ctx.render('device/rooms'));
 router.get('/version/erdai', ctx => ctx.render('version/erdai'));
 router.get('/version/add', ctx => ctx.render('version/add'));
+router.get('/others/apply', ctx => ctx.render('others/apply'));
 
 router.get('/doc/yunint1', ctx => ctx.render('/doc/doc1'));
 router.get('/doc/yunint2', ctx => ctx.render('/doc/doc2'));

@@ -29,7 +29,7 @@ html
                             td(v-text='item.id')
                             td(v-text='item.sn')
                             td
-                                input(:value='item.rooms.name',style='width:80px')
+                                input(:value='item.rooms?item.rooms.name:""',style='width:80px')
                             td
                                 span(v-if='item.online==1') 在线
                                 span(v-if='item.online==0') 离线

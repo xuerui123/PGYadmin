@@ -26,7 +26,7 @@ html
                         tr
                             td(v-text='roomsObj.id')
                             td
-                                input(:value='roomsObj.rooms.name',style='width:80px')
+                                input(:value='roomsObj.rooms?roomsObj.rooms.name:""',style='width:80px')
                             td
                                 span(v-if='roomsObj.online==1') 在线
                                 span(v-if='roomsObj.online==0') 离线
@@ -54,14 +54,19 @@ html
                             th 说明
                             th 操作
                     tbody
-                        tr
+                        tr(v-for='item in devlist')
+                            td(v-text='item.id')
+                            td(v-text='item.dname')
+                            td
+                                span(v-text='item.online==1?"在线":"离线"')
+                            td
+
+                            td
+                                span(v-if='item.dch=="01"') 红外
+                                span(v-if='item.dch!="01"') 射频
                             td
                             td
-                            td
-                            td
-                            td
-                            td
-                            td
+                                span.btn(@click='delDev(item.yid)') 删除
             div.showBg(v-if='showBG')
                 div.eqpsBOX
                     p
@@ -94,7 +99,7 @@ html
                             option(value="") 请选择设备品牌
                             option(v-if="codeList.length==''" value="") 该设备暂无品牌
                             option(v-for="item in codeList" ,:value="item",v-text='item')
-                    p.lamp
+                    p.lamp(@change='lamp')
                         span 灯光设备：
                         select
                             option(value="") 请选择灯光种类
@@ -111,7 +116,7 @@ html
                             option(value="镜前灯") 镜前灯
                     p.SmartPlug
                         span 插座设备：
-                        select
+                        select(@change='SmartPlug')
                             option(value="") 请选择插座设备
                             option(value="台灯") 台灯
                             option(value="饮水机") 饮水机

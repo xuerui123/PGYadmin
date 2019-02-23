@@ -1,9 +1,9 @@
 var context = new Vue({
     el: '#VueBox',
     data: {
-        identity:'未登录',
-        showBG:false,
-        roomsObj:{},
+        identity: '未登录',
+        showBG: false,
+        roomsObj: {},
         roomName: '',
         brandList: [],
         dname: '',
@@ -11,39 +11,40 @@ var context = new Vue({
         codeList: [],
         remoid: '',
         lampName: '',
+        devlist: [],
         SmartPlugName: ''
     },
-    mounted:function () {
+    mounted: function () {
         let identity = sessionStorage.getItem('pr');
         this.roomsObj = JSON.parse(sessionStorage.getItem('rooms'))
-        if(identity == 'admin'){
+        if (identity == 'admin') {
             this.identity = '管理员'
-        }else{
+        } else {
             this.identity = identity
         }
         this.loadDevList();
     },
     methods: {
 
-        loadDevList:function () {
+        loadDevList: function () {
             let data = {
-                sn:this.roomsObj.sn,
-                token:sessionStorage.getItem('token'),
-                roomname:this.roomsObj.rooms.name
+                sn: this.roomsObj.sn,
+                token: sessionStorage.getItem('token'),
+                roomname: this.roomsObj.rooms.name
             };
             mutual('/Manage/room/elelist', data, function (res) {
                 console.log(res)
-                if(res.ack==1){
-                    console.log(res)
-                }else{
-                    swal('提示',res.msg,'error')
+                if (res.ack == 1) {
+                    context.devlist = res.data.list
+                } else {
+                    swal('提示', res.msg, 'error')
                 }
             }, function (error) {
                 console.log(error)
             })
         },
         devName: function (e) {
-            console.log( e.target.value)
+            console.log(e.target.value)
             context.dname = e.target.value;
             context.brandList = [];
             context.codeList = [];
@@ -57,7 +58,7 @@ var context = new Vue({
                 } else if (context.dname == '智能插座') {
                     $('.SmartPlug').css('display', 'block')
                     $('.lamp').css('display', 'none')
-                }else if(context.dname == '窗帘'){
+                } else if (context.dname == '窗帘') {
                     $('.SmartPlug').css('display', 'none')
                     $('.lamp').css('display', 'none')
                 }
@@ -315,14 +316,58 @@ var context = new Vue({
             console.log(obj)
             mutual('/Manage/device/ele', obj, function (res) {
                 console.log(res)
-                if(res.ack==1){
-                    swal('提示','添加成功','success')
-                }else{
-                    swal('提示',res.msg,'error')
+                if (res.ack == 1) {
+                    swal('提示', '添加成功', 'success');
+                    setTimeout(function () {
+                        context.loadDevList();
+                    },1000)
+                } else {
+                    swal('提示', res.msg, 'error')
                 }
             }, function (error) {
                 console.log(error)
             })
+        },
+        delDev: function (id) {
+            let data = {
+                act: 'del',
+                sn:this.roomsObj.sn,
+                yid:id,
+                token:sessionStorage.getItem('token')
+            };
+            swal({
+                    title: "提示",
+                    text: "确认删除该电器？",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确认",
+                    cancelButtonText: "取消",
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                },
+                function (isConfirm) {
+                    if (isConfirm) {
+                        mutual('/Manage/device/ele', data, function (res) {
+                            if(res.ack==1){
+                                swal('提示', '已删除', 'success')
+                                setTimeout(function () {
+                                    context.loadDevList();
+                                },1000)
+
+                            }else{
+                                swal('提示', res.msg, 'error')
+                            }
+
+                        }, function (error) {
+                            console.log(error)
+                        })
+                    } else {
+                        swal('提示', '已取消删除', 'success')
+                    }
+                }
+            );
+
         }
     },
 

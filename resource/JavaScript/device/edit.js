@@ -106,7 +106,7 @@ var context = new Vue({
                     if (isConfirm) {
                         mutual('/Manage/device/delsys', data, function (res) {
                             swal('提示', '已删除', 'success')
-                            context.listuser()
+                            context.listsys()
                         }, function (error) {
                             console.log(error)
                         })
