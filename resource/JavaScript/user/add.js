@@ -72,7 +72,7 @@ let context = new Vue({
                     mutual('/Manage/Index/updateUser', data, function (res) {
                         console.log(res)
                         if(res.ack==1){
-                            swal('提示','appid：'+ res.data.appid + ' , ' + 'appselect：' + res.data.appkey,'success')
+                            swal('提示','appid：'+ res.data.appid + ' , ' + 'appkey：' + res.data.appkey,'success')
                         }else{
                             swal('提示',res.data.msg,'error')
                         }
@@ -83,7 +83,7 @@ let context = new Vue({
                     mutual('/Manage/Index/addUser', data, function (res) {
                         console.log(res)
                         if(res.ack==1){
-                            swal('提示','appid：'+ res.data.appid + ' , ' + 'appselect：' + res.data.appkey,'success')
+                            swal('提示','appid：'+ res.data.appid + ' , ' + 'appkey：' + res.data.appkey,'success')
                         }else{
                             swal('提示',res.msg,'error')
                         }

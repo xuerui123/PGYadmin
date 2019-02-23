@@ -1,6 +1,7 @@
 var koa = require('koa');
 var router = require('koa-router')();
 var gzip = require('koa-gzip');
+var fs = require('fs');
 var jade = require("jade");
 var path = require('path');
 var serve = require('koa-static-cache');
@@ -29,13 +30,21 @@ app.use(async (ctx, next) => {
         if (!params) {
             params = {};
         }
-        if(this.phoneType && this.phoneType.match(/android/i) == 'android'){
-            ctx.body = jade.renderFile(`${__dirname}/phone/${path}.jade`, params);
-        }else if (this.phoneType && (this.phoneType.match(/iphone/i) == 'iphone' || this.phoneType.match(/ipad/i) == 'ipad')) {
-            ctx.body = jade.renderFile(`${__dirname}/phone/${path}.jade`, params);
+
+        if(path.indexOf('doc')!=-1){
+            ctx.body = fs.readFileSync(`${__dirname}/view/${path}.html`, 'utf-8');
         }else{
             ctx.body = jade.renderFile(`${__dirname}/view/${path}.jade`, params);
         }
+        // if(this.phoneType && this.phoneType.match(/android/i) == 'android'){
+        //
+        //
+        //
+        // }else if (this.phoneType && (this.phoneType.match(/iphone/i) == 'iphone' || this.phoneType.match(/ipad/i) == 'ipad')) {
+        //     ctx.body = jade.renderFile(`${__dirname}/phone/${path}.jade`, params);
+        // }else{
+        //     ctx.body = jade.renderFile(`${__dirname}/view/${path}.jade`, params);
+        // }
 
     };
     await next();

@@ -54,11 +54,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="apply.jade" pinned="false" current-in-tab="true">
+      <file leaf-file-name="apply.jade" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/view/others/apply.jade">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="371">
               <caret line="35" column="62" lean-forward="false" selection-start-line="35" selection-start-column="62" selection-end-line="35" selection-end-column="62" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="add.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/resource/JavaScript/user/add.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="74" column="80" lean-forward="false" selection-start-line="74" selection-start-column="80" selection-end-line="74" selection-end-column="80" />
               <folding />
             </state>
           </provider>
@@ -79,16 +89,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="333">
               <caret line="25" column="44" lean-forward="false" selection-start-line="25" selection-start-column="44" selection-end-line="25" selection-end-column="44" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="add.less" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resource/less/user/add.less">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="36">
-              <caret line="11" column="17" lean-forward="false" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -146,10 +146,11 @@
         <option value="$PROJECT_DIR$/resource/less/others/apply.less" />
         <option value="$PROJECT_DIR$/view/device/rooms.jade" />
         <option value="$PROJECT_DIR$/resource/JavaScript/device/rooms.js" />
-        <option value="$PROJECT_DIR$/admin.js" />
         <option value="$PROJECT_DIR$/resource/less/build.sh" />
         <option value="$PROJECT_DIR$/resource/JavaScript/others/apply.js" />
         <option value="$PROJECT_DIR$/view/others/apply.jade" />
+        <option value="$PROJECT_DIR$/admin.js" />
+        <option value="$PROJECT_DIR$/resource/JavaScript/user/add.js" />
       </list>
     </option>
   </component>
@@ -228,6 +229,13 @@
               <item name="resource" type="462c0819:PsiDirectoryNode" />
               <item name="JavaScript" type="462c0819:PsiDirectoryNode" />
               <item name="others" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PGYadmin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PGYadmin" type="462c0819:PsiDirectoryNode" />
+              <item name="resource" type="462c0819:PsiDirectoryNode" />
+              <item name="JavaScript" type="462c0819:PsiDirectoryNode" />
+              <item name="user" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="PGYadmin" type="b2602c69:ProjectViewProjectNode" />
@@ -331,8 +339,8 @@
     </list>
     <recent_temporary>
       <list size="3">
-        <item index="0" class="java.lang.String" itemvalue="Bash.build.sh" />
-        <item index="1" class="java.lang.String" itemvalue="Node.js.admin.js" />
+        <item index="0" class="java.lang.String" itemvalue="Node.js.admin.js" />
+        <item index="1" class="java.lang.String" itemvalue="Bash.build.sh" />
         <item index="2" class="java.lang.String" itemvalue="Node.js.adminApp.js" />
       </list>
     </recent_temporary>
@@ -349,12 +357,12 @@
       <updated>1548385248046</updated>
       <workItem from="1548385250734" duration="3651000" />
       <workItem from="1548662295108" duration="19132000" />
-      <workItem from="1550656251051" duration="8351000" />
+      <workItem from="1550656251051" duration="8930000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="31134000" />
+    <option name="totallyTimeSpent" value="31713000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -399,20 +407,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/view/doc/doc7.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6180">
-          <caret line="412" column="89" lean-forward="false" selection-start-line="412" selection-start-column="89" selection-end-line="412" selection-end-column="89" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/view/doc/doc8.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6210">
-          <caret line="414" column="89" lean-forward="false" selection-start-line="414" selection-start-column="89" selection-end-line="414" selection-end-column="89" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/adminApp.js" />
     <entry file="file://$PROJECT_DIR$/view/list/agent.html" />
     <entry file="file://$PROJECT_DIR$/resource/css/login.css">
@@ -637,14 +631,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="52" column="65" lean-forward="false" selection-start-line="52" selection-start-column="65" selection-end-line="52" selection-end-column="65" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resource/JavaScript/device/roomlist.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -701,10 +687,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/jade/lib/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="379" column="9" lean-forward="false" selection-start-line="379" selection-start-column="9" selection-end-line="379" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="131">
+          <caret line="36" column="57" lean-forward="false" selection-start-line="36" selection-start-column="57" selection-end-line="36" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/view/others/apply.jade">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="371">
           <caret line="35" column="62" lean-forward="false" selection-start-line="35" selection-start-column="62" selection-end-line="35" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resource/JavaScript/user/add.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="74" column="80" lean-forward="false" selection-start-line="74" selection-start-column="80" selection-end-line="74" selection-end-column="80" />
           <folding />
         </state>
       </provider>
