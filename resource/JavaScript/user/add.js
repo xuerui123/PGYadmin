@@ -14,7 +14,7 @@ let context = new Vue({
             $('.phone').val(this.userObj.phone);
             $('.email').val(this.userObj.email);
             $('.identity').val(this.userObj.pr);
-            $('.infrared').val(this.userObj.infrared);
+
             $('.superior').val(this.userObj.superior);
             $('.place').val(this.userObj.place);
             $('.remarks').val(this.userObj.remarks)
@@ -36,6 +36,7 @@ let context = new Vue({
             mutual('/Manage/Index/getAppdata', data, function (res) {
                 console.log(res)
                 $('.platname').val(res.data.platname)
+                $('.infrared').val(res.data.limit);
             }, function (error) {
                 console.log(error)
             })
@@ -49,7 +50,7 @@ let context = new Vue({
                 email: $('.email').val(),
                 pr: $('.identity').val(),
                 superior: $('.superior').val(),
-                infrared: $('.infrared').val(),
+                limit: $('.infrared').val(),
                 place: $('.place').val(),
                 platname: $('.platname').val(),
                 token: sessionStorage.getItem('token'),

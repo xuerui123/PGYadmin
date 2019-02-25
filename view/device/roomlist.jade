@@ -1,0 +1,18 @@
+html
+    head
+        meta(charset='utf-8')
+        title
+        link(rel='stylesheet',href='/css/common.css')
+        link(rel='stylesheet',href='/css/device.roomlist.css')
+        script(src='https://cdn.bootcss.com/vue/2.6.0/vue.js')
+        script(src='https://cdn.bootcss.com/jquery/2.0.1/jquery.min.js')
+        script(src='../JavaScript/common/swal.js')
+        script(src='../JavaScript/common/mutual.js')
+    body
+        div#VueBox
+            include ../common/top
+            include ../common/nav
+            div.roomList
+                div.num(v-for='item in list',v-text='item.rooms?item.rooms.name:""',':class'="{'k':item.safemode==0,'flag2':item.safemode!=0}")
+
+    script(src='../JavaScript/device/roomlist.js')
