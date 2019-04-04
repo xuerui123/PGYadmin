@@ -401,7 +401,7 @@
                     <h3 class="menu-title">PuGoing开发者平台</h3>
                     <ul class="menu-1">
                         <li class>
-                            <a  class="J_ExpTrigger open"  href="javascript:void(0)" title="新手教程">云接入</a>
+                            <a class="J_ExpTrigger open" href="javascript:void(0)" title="新手教程">云接入</a>
                             <ul class="menu-2">
                                 <li><a title="概览" href="/doc/yunint1">概览</a></li>
                                 <li><a title="用户操作接口" href="/doc/yunint2">用户操作接口</a></li>
@@ -413,8 +413,6 @@
                                 <li><a title="主机文字交互" href="/doc/yunint8">主机文字交互</a></li>
                             </ul>
                         </li>
-
-
 
 
                     </ul>
@@ -1100,7 +1098,9 @@
                             <tr>
                                 <td>eva</td>
                                 <td>String</td>
-                                <td> 标准化一些基础的能力 open，close  打开、关闭----move 移动  ----alarm 闹钟  ----temH 温度过高  ----temL 温度过低   ----humH 湿度过高  ---humL  湿度过低   ---lumH 光很亮 ---lumL 光很暗  ---pm25</td>
+                                <td> 标准化一些基础的能力 open，close 打开、关闭----move 移动 ----alarm 闹钟 ----temH 温度过高 ----temL 温度过低
+                                    ----humH 湿度过高 ---humL 湿度过低 ---lumH 光很亮 ---lumL 光很暗 ---pm25
+                                </td>
                             </tr>
                             <tr>
                                 <td>dsys</td>
@@ -1110,7 +1110,7 @@
                             <tr>
                                 <td>dpanel</td>
                                 <td>String</td>
-                                <td>面板编号1 or 2  当同一个电器，比如风扇，有多种遥控器的话，需要根据这个选择相应的面板进行前端界面显示</td>
+                                <td>面板编号1 or 2 当同一个电器，比如风扇，有多种遥控器的话，需要根据这个选择相应的面板进行前端界面显示</td>
                             </tr>
                             <tr>
                                 <td>dno</td>
@@ -1140,9 +1140,10 @@
                             <tr>
                                 <td>dch</td>
                                 <td>String</td>
-                                <td>01:红外数据通道  红外压缩编码数据      02：红外数据通道-红外原始电平通道
-                                    11:433射频 ASK 1527  12:433射频电平ASK    13:433 FSK透传   14:433 ASK透传  15：奥普433私有协议
-                                    21:315射频 ASK1527   22: 315射频电平ASK   23: 315FSK透传   24: 315ASK透传 </td>
+                                <td>01:红外数据通道 红外压缩编码数据 02：红外数据通道-红外原始电平通道
+                                    11:433射频 ASK 1527 12:433射频电平ASK 13:433 FSK透传 14:433 ASK透传 15：奥普433私有协议
+                                    21:315射频 ASK1527 22: 315射频电平ASK 23: 315FSK透传 24: 315ASK透传
+                                </td>
                             </tr>
                             <tr>
                                 <td>dcap</td>
@@ -1173,7 +1174,8 @@
                             <tr>
                                 <td>dnlp</td>
                                 <td>String</td>
-                                <td>自定义设备，当添加自定义的按键功能时，比如自定义设备-车库。dnlp字段为打开,关闭。则设备支持自定义语义功能。比如帮我打开一下车库，都能够支持。本地语义解析支持</td>
+                                <td>自定义设备，当添加自定义的按键功能时，比如自定义设备-车库。dnlp字段为打开,关闭。则设备支持自定义语义功能。比如帮我打开一下车库，都能够支持。本地语义解析支持
+                                </td>
                             </tr>
                             <tr>
                                 <td>dres1</td>
@@ -1193,7 +1195,7 @@
                             <tr>
                                 <td>remoid</td>
                                 <td>String</td>
-                                <td>K00081（官方标准库） 遥控器ID  UK0001(用户库)    86SW3</td>
+                                <td>K00081（官方标准库） 遥控器ID UK0001(用户库) 86SW3</td>
                             </tr>
                             <tr>
                                 <td>dver</td>
@@ -1203,7 +1205,9 @@
                             <tr>
                                 <td>dtag</td>
                                 <td>String</td>
-                                <td>设备用来手动区分的标记，比如一个房间有好几个人体感应器，那么怎么区分同一个房间的各个地方的人体感应器呢，就用到了这个dtag。比如在卧室。。床下人体活动  门口人体活动 </td>
+                                <td>设备用来手动区分的标记，比如一个房间有好几个人体感应器，那么怎么区分同一个房间的各个地方的人体感应器呢，就用到了这个dtag。比如在卧室。。床下人体活动
+                                    门口人体活动
+                                </td>
                             </tr>
 
                             </tbody>
@@ -1212,7 +1216,276 @@
 
                     </div>
                     <div class="doc-detail-bd" id="bd4">
-                        <h3>五.设备控制相关的功能</h3>
+                        <h3>五.根据yid查看设备信息</h3>
+                        <p>示例：</p>
+                        <pre>{
+    &quot;op&quot;:&quot;device&quot;,
+    &quot;act&quot;:&quot;yid&quot;,
+    &quot;uid&quot;:&quot;XXXXXXXXXX&quot;,
+    &quot;did&quot;:&quot;XXXXXXXXXX&quot;,
+    &quot;token&quot;:&quot;XXXXXXXXXX&quot;
+    "date":{
+        yid:123546567676
+    }
+ }</pre>
+                        <p>正常响应：</p>
+                        <pre>{"ack":"1",
+   "msg":{
+       "dev":
+           {
+                "id":"2333",
+                "yid":"c2f90dc105bc091b360f0f7551dda784",
+                "xqid":"30373331313044303741343543364445",
+                "danme":"",
+                "uidp":"6",
+                "online":"1",
+                "mdid":"",
+                "isev":"1",
+                "eva":"temH,temL,humH,humL,lumH,lumL",
+                "dsys":"6137",
+                "dpanel":"IntelligentButler",
+                "dno":"PGY_MV1",
+                "dname":"\u8bed\u97f3\u4e3b\u673a",
+                "dloca":"\u5ba2\u5385",
+                "dlab":"",
+                "did":"30373331313044303741343543364445",
+                "dch":"ff",
+                "dcap":"wake:null;sen:5;tem:10;hum:63;lum:89",
+                "dbra":"",
+                "dbat":"",
+                "dinfo":"10\u2103|63%|89L",
+                "danam":null,
+                "dnlp":"",
+                "dres1":null,
+                "dres2":null,
+                "dlogo":"IntelligentButler.svg",
+                "remoid":"",
+                "dver":null,
+                "dtag":null
+           }
+       }
+ }</pre>
+                        <h3>参数协议</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>op</td>
+                                <td>String</td>
+                                <td>方法类别</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>act</td>
+                                <td>String</td>
+                                <td>方法名</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>uid</td>
+                                <td>String</td>
+                                <td>用户的微信uid</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>did</td>
+                                <td>String</td>
+                                <td>主机的did</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>token</td>
+                                <td>String</td>
+                                <td>见二.获取token</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>yid</td>
+                                <td>String</td>
+                                <td>设备的yid</td>
+                                <td>是</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <h3>返回的参数说明</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>id</td>
+                                <td>String</td>
+                                <td>设备id（前端暂无使用）</td>
+                            </tr>
+                            <tr>
+                                <td>yid</td>
+                                <td>String</td>
+                                <td>添加设备时返回的yid</td>
+                            </tr>
+                            <tr>
+                                <td>xqid</td>
+                                <td>String</td>
+                                <td>前端暂无使用</td>
+                            </tr>
+                            <tr>
+                                <td>danme</td>
+                                <td>String</td>
+                                <td>插座、墙面开关 类这种需要</td>
+                            </tr>
+                            <tr>
+                                <td>uidp</td>
+                                <td>String</td>
+                                <td>所有人都能控制此设备、6：管理和家里人能控制此设备、4：只有管理员可以控制此设备。</td>
+                            </tr>
+                            <tr>
+                                <td>online</td>
+                                <td>String</td>
+                                <td>设备是否在线（1为在线，0为不在线）</td>
+                            </tr>
+                            <tr>
+                                <td>mdid</td>
+                                <td>String</td>
+                                <td>前端暂无使用</td>
+                            </tr>
+                            <tr>
+                                <td>isev</td>
+                                <td>String</td>
+                                <td> 为空或者0没有，为1设备拥有事件触发能力 ， 设备是否拥有事件能力，当做场景触发的条件</td>
+                            </tr>
+                            <tr>
+                                <td>eva</td>
+                                <td>String</td>
+                                <td> 标准化一些基础的能力 open，close 打开、关闭----move 移动 ----alarm 闹钟 ----temH 温度过高 ----temL 温度过低
+                                    ----humH 湿度过高 ---humL 湿度过低 ---lumH 光很亮 ---lumL 光很暗 ---pm25
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>dsys</td>
+                                <td>String</td>
+                                <td> xxxx多个组合码,占位从高位到低位</td>
+                            </tr>
+                            <tr>
+                                <td>dpanel</td>
+                                <td>String</td>
+                                <td>面板编号1 or 2 当同一个电器，比如风扇，有多种遥控器的话，需要根据这个选择相应的面板进行前端界面显示</td>
+                            </tr>
+                            <tr>
+                                <td>dno</td>
+                                <td>String</td>
+                                <td>设备型号</td>
+                            </tr>
+                            <tr>
+                                <td>dname</td>
+                                <td>String</td>
+                                <td>设备名称</td>
+                            </tr>
+                            <tr>
+                                <td>dloca</td>
+                                <td>String</td>
+                                <td>设备位置（客厅、主卧/考虑区域属性，一楼客厅，一楼主卧，area+room方式。关闭一楼所有的灯光。）</td>
+                            </tr>
+                            <tr>
+                                <td>dlab</td>
+                                <td>String</td>
+                                <td>配套万能遥控器用—根据标签索引是哪一个遥控器</td>
+                            </tr>
+                            <tr>
+                                <td>did</td>
+                                <td>String</td>
+                                <td>添加设备时返回的did</td>
+                            </tr>
+                            <tr>
+                                <td>dch</td>
+                                <td>String</td>
+                                <td>01:红外数据通道 红外压缩编码数据 02：红外数据通道-红外原始电平通道
+                                    11:433射频 ASK 1527 12:433射频电平ASK 13:433 FSK透传 14:433 ASK透传 15：奥普433私有协议
+                                    21:315射频 ASK1527 22: 315射频电平ASK 23: 315FSK透传 24: 315ASK透传
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>dcap</td>
+                                <td>String</td>
+                                <td>像智能门锁这些，有用户运行数据，比如指纹/密码用户编号，版本号，电量统计。格式为 电量：正常6.0v，设备当前状态：打开 ，设备数据：0102F2，固件版本：v1.2
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>dbra</td>
+                                <td>String</td>
+                                <td>设备品牌</td>
+                            </tr>
+                            <tr>
+                                <td>dbat</td>
+                                <td>String</td>
+                                <td>非电池类为空，电池类直接是0-100的电量值。</td>
+                            </tr>
+                            <tr>
+                                <td>dinfo</td>
+                                <td>String</td>
+                                <td>显示在设备界面的信息，设备最后一条日志记录保存到这里。例如：门磁：4/6 20:25 开</td>
+                            </tr>
+                            <tr>
+                                <td>danam</td>
+                                <td>String</td>
+                                <td>设备别名（插座、墙面开关 类这种需要）</td>
+                            </tr>
+                            <tr>
+                                <td>dnlp</td>
+                                <td>String</td>
+                                <td>自定义设备，当添加自定义的按键功能时，比如自定义设备-车库。dnlp字段为打开,关闭。则设备支持自定义语义功能。比如帮我打开一下车库，都能够支持。本地语义解析支持
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>dres1</td>
+                                <td>String</td>
+                                <td>保留字段</td>
+                            </tr>
+                            <tr>
+                                <td>dres2</td>
+                                <td>String</td>
+                                <td>保留字段</td>
+                            </tr>
+                            <tr>
+                                <td>dlogo</td>
+                                <td>String</td>
+                                <td>每个设备的logo图片命名，比如 电视是TV.svg</td>
+                            </tr>
+                            <tr>
+                                <td>remoid</td>
+                                <td>String</td>
+                                <td>K00081（官方标准库） 遥控器ID UK0001(用户库) 86SW3</td>
+                            </tr>
+                            <tr>
+                                <td>dver</td>
+                                <td>String</td>
+                                <td>设备的固件版本信息，对于自组网设备，需要存储这个字段</td>
+                            </tr>
+                            <tr>
+                                <td>dtag</td>
+                                <td>String</td>
+                                <td>设备用来手动区分的标记，比如一个房间有好几个人体感应器，那么怎么区分同一个房间的各个地方的人体感应器呢，就用到了这个dtag。比如在卧室。。床下人体活动
+                                    门口人体活动
+                                </td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                    <div class="doc-detail-bd" id="bd5">
+                        <h3>六.设备控制相关的功能</h3>
                         <p>示例：</p>
                         <pre>{
     &quot;op&quot;:&quot;device&quot;,
@@ -1327,8 +1600,8 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="doc-detail-bd" id="bd5">
-                        <h3>六.设备学习模式</h3>
+                    <div class="doc-detail-bd" id="bd6">
+                        <h3>七.设备学习模式</h3>
                         <p>示例：</p>
                         <pre>{
     &quot;op&quot;:&quot;device&quot;,
@@ -1420,13 +1693,13 @@
                             <tr>
                                 <td>isgru</td>
                                 <td>String</td>
-                                <td>1(组合按键学习)  0(单键学习)</td>
+                                <td>1(组合按键学习) 0(单键学习)</td>
                                 <td>是</td>
                             </tr>
                             <tr>
                                 <td>dvcm</td>
                                 <td>String</td>
-                                <td>芝麻开门  打开车库  自定义语音指令 （和dkey二选一</td>
+                                <td>芝麻开门 打开车库 自定义语音指令 （和dkey二选一</td>
                                 <td>是</td>
                             </tr>
                             <tr>
@@ -1438,16 +1711,17 @@
                             <tr>
                                 <td>dch</td>
                                 <td>String</td>
-                                <td>01:红外数据通道  红外压缩编码数据      02：红外数据通道-红外原始电平通道
-                                    11:433射频 ASK 1527  12:433射频电平ASK    13:433 FSK透传   14:433 ASK透传  15：奥普433私有协议
-                                    21:315射频 ASK1527   22: 315射频电平ASK   23: 315FSK透传   24: 315ASK透传
-                                    31：WIFI内部局域网UDP通讯和HILINK路由器  32：WIFI 外网连接udp  32：WIFI 外网连接http  33：本地局域网tcp  34：本地局域网udp</td>
+                                <td>01:红外数据通道 红外压缩编码数据 02：红外数据通道-红外原始电平通道
+                                    11:433射频 ASK 1527 12:433射频电平ASK 13:433 FSK透传 14:433 ASK透传 15：奥普433私有协议
+                                    21:315射频 ASK1527 22: 315射频电平ASK 23: 315FSK透传 24: 315ASK透传
+                                    31：WIFI内部局域网UDP通讯和HILINK路由器 32：WIFI 外网连接udp 32：WIFI 外网连接http 33：本地局域网tcp 34：本地局域网udp
+                                </td>
                                 <td>是</td>
                             </tr>
                             <tr>
                                 <td>gkdt</td>
                                 <td>String</td>
-                                <td> 2(s秒)  2秒—标准遥控器面板，长按进行组合键学习，单击进行单个按键学习模式。遥控器面板可处于编辑模式。默认为空，不起作用。</td>
+                                <td> 2(s秒) 2秒—标准遥控器面板，长按进行组合键学习，单击进行单个按键学习模式。遥控器面板可处于编辑模式。默认为空，不起作用。</td>
                                 <td>是</td>
                             </tr>
                             </tbody>
@@ -1455,8 +1729,8 @@
 
 
                     </div>
-                    <div class="doc-detail-bd" id="bd6">
-                        <h3>七.电视屏道绑定</h3>
+                    <div class="doc-detail-bd" id="bd7">
+                        <h3>八.电视屏道绑定</h3>
                         <p>示例：</p>
                         <pre>{
     &quot;op&quot;:&quot;device&quot;,
@@ -1552,8 +1826,8 @@
 
 
                     </div>
-                    <div class="doc-detail-bd" id="bd7">
-                        <h3>八.电视屏道绑定</h3>
+                    <div class="doc-detail-bd" id="bd8">
+                        <h3>九.电视屏道绑定</h3>
                         <p>示例：</p>
                         <pre>{
     &quot;op&quot;:&quot;device&quot;,
@@ -1649,8 +1923,8 @@
 
 
                     </div>
-                    <div class="doc-detail-bd" id="bd8">
-                        <h3>九.查看屏道绑定</h3>
+                    <div class="doc-detail-bd" id="bd9">
+                        <h3>十.查看屏道绑定</h3>
                         <p>示例：</p>
                         <pre>{
     &quot;op&quot;:&quot;device&quot;,
@@ -1729,11 +2003,9 @@
                             </tr>
                             </tbody>
                         </table>
-
-
                     </div>
-                    <div class="doc-detail-bd" id="bd9">
-                        <h3>十.删除屏道绑定</h3>
+                    <div class="doc-detail-bd" id="bd10">
+                        <h3>十一.删除屏道绑定</h3>
                         <p>示例：</p>
                         <pre>{
     &quot;op&quot;:&quot;device&quot;,
@@ -1819,17 +2091,335 @@
                             </tr>
                             </tbody>
                         </table>
+                    </div>
+                    <div class="doc-detail-bd" id="bd11">
+                        <h3>四.根据房间号查看设备</h3>
+                        <p>示例：</p>
+                        <pre>{
+    &quot;op&quot;:&quot;device&quot;,
+    &quot;act&quot;:&quot;del&quot;,
+    &quot;uid&quot;:&quot;XXXXXXXXXX&quot;,
+    &quot;did&quot;:&quot;XXXXXXXXXX&quot;,
+    &quot;token&quot;:&quot;XXXXXXXXXX&quot;
+    "date":"{
+        "dloca":"客厅"
+        }"
+ }</pre>
+                        <p>正常响应：</p>
+                        <pre>{"ack":"1",
+   "msg":{
+       "devlist":[
+           {
+                "id":"2333",
+                "yid":"c2f90dc105bc091b360f0f7551dda784",
+                "xqid":"30373331313044303741343543364445",
+                "danme":"",
+                "uidp":"6",
+                "online":"1",
+                "mdid":"",
+                "isev":"1",
+                "eva":"temH,temL,humH,humL,lumH,lumL",
+                "dsys":"6137",
+                "dpanel":"IntelligentButler",
+                "dno":"PGY_MV1",
+                "dname":"\u8bed\u97f3\u4e3b\u673a",
+                "dloca":"\u5ba2\u5385",
+                "dlab":"",
+                "did":"30373331313044303741343543364445",
+                "dch":"ff",
+                "dcap":"wake:null;sen:5;tem:10;hum:63;lum:89",
+                "dbra":"",
+                "dbat":"",
+                "dinfo":"10\u2103|63%|89L",
+                "danam":null,
+                "dnlp":"",
+                "dres1":null,
+                "dres2":null,
+                "dlogo":"IntelligentButler.svg",
+                "remoid":"",
+                "dver":null,
+                "dtag":null
+           },{
+                "id":"2439",
+                "yid":"68b283bbd74e9becbcae48a0f045c74a",
+                "xqid":"30373331313044303741343543364445",
+                "danme":"",
+                "uidp":"",
+                "online":"1",
+                "mdid":"",
+                "isev":"",
+                "eva":"",
+                "dsys":"1121",
+                "dpanel":"Lamp",
+                "dno":"",
+                "dname":"\u540a\u706f",
+                "dloca":"default",
+                "dlab":"",
+                "did":"",
+                "dch":"11",
+                "dcap":"",
+                "dbra":"",
+                "dbat":"",
+                "dinfo":"",
+                "danam":"",
+                "dnlp":"",
+                "dres1":"",
+                "dres2":"",
+                "dlogo":"Chandelier.svg",
+                "remoid":"",
+                "dver":"",
+                "dtag":""
+           },{
+                "id":"2442",
+                "yid":"b30d14157c015d74985db951cc2ea472",
+                "xqid":"30373331313044303741343543364445",
+                "danme":"",
+                "uidp":"",
+                "online":"1",
+                "mdid":"",
+                "isev":"",
+                "eva":"",
+                "dsys":"2126",
+                "dpanel":"Humidifier",
+                "dno":"",
+                "dname":"\u52a0\u6e7f\u5668",
+                "dloca":"default",
+                "dlab":"",
+                "did":"",
+                "dch":"01",
+                "dcap":"",
+                "dbra":"",
+                "dbat":"",
+                "dinfo":"",
+                "danam":"",
+                "dnlp":"",
+                "dres1":"",
+                "dres2":"",
+                "dlogo":"Humidifier.svg",
+                "remoid":"",
+                "dver":"",
+                "dtag":""
+           }
+       ]}
+ }</pre>
+                        <h3>参数协议</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                                <th>是否必传</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>op</td>
+                                <td>String</td>
+                                <td>方法类别</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>act</td>
+                                <td>String</td>
+                                <td>方法名</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>uid</td>
+                                <td>String</td>
+                                <td>用户的微信uid</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>did</td>
+                                <td>String</td>
+                                <td>主机的did</td>
+                                <td>是</td>
+                            </tr>
+                            <tr>
+                                <td>token</td>
+                                <td>String</td>
+                                <td>见二.获取token</td>
+                                <td>是</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <h3>返回的参数说明</h3>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>参数名</th>
+                                <th>参数类型</th>
+                                <th>参数说明</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>id</td>
+                                <td>String</td>
+                                <td>设备id（前端暂无使用）</td>
+                            </tr>
+                            <tr>
+                                <td>yid</td>
+                                <td>String</td>
+                                <td>添加设备时返回的yid</td>
+                            </tr>
+                            <tr>
+                                <td>xqid</td>
+                                <td>String</td>
+                                <td>前端暂无使用</td>
+                            </tr>
+                            <tr>
+                                <td>danme</td>
+                                <td>String</td>
+                                <td>插座、墙面开关 类这种需要</td>
+                            </tr>
+                            <tr>
+                                <td>uidp</td>
+                                <td>String</td>
+                                <td>所有人都能控制此设备、6：管理和家里人能控制此设备、4：只有管理员可以控制此设备。</td>
+                            </tr>
+                            <tr>
+                                <td>online</td>
+                                <td>String</td>
+                                <td>设备是否在线（1为在线，0为不在线）</td>
+                            </tr>
+                            <tr>
+                                <td>mdid</td>
+                                <td>String</td>
+                                <td>前端暂无使用</td>
+                            </tr>
+                            <tr>
+                                <td>isev</td>
+                                <td>String</td>
+                                <td> 为空或者0没有，为1设备拥有事件触发能力 ， 设备是否拥有事件能力，当做场景触发的条件</td>
+                            </tr>
+                            <tr>
+                                <td>eva</td>
+                                <td>String</td>
+                                <td> 标准化一些基础的能力 open，close 打开、关闭----move 移动 ----alarm 闹钟 ----temH 温度过高 ----temL 温度过低
+                                    ----humH 湿度过高 ---humL 湿度过低 ---lumH 光很亮 ---lumL 光很暗 ---pm25
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>dsys</td>
+                                <td>String</td>
+                                <td> xxxx多个组合码,占位从高位到低位</td>
+                            </tr>
+                            <tr>
+                                <td>dpanel</td>
+                                <td>String</td>
+                                <td>面板编号1 or 2 当同一个电器，比如风扇，有多种遥控器的话，需要根据这个选择相应的面板进行前端界面显示</td>
+                            </tr>
+                            <tr>
+                                <td>dno</td>
+                                <td>String</td>
+                                <td>设备型号</td>
+                            </tr>
+                            <tr>
+                                <td>dname</td>
+                                <td>String</td>
+                                <td>设备名称</td>
+                            </tr>
+                            <tr>
+                                <td>dloca</td>
+                                <td>String</td>
+                                <td>设备位置（客厅、主卧/考虑区域属性，一楼客厅，一楼主卧，area+room方式。关闭一楼所有的灯光。）</td>
+                            </tr>
+                            <tr>
+                                <td>dlab</td>
+                                <td>String</td>
+                                <td>配套万能遥控器用—根据标签索引是哪一个遥控器</td>
+                            </tr>
+                            <tr>
+                                <td>did</td>
+                                <td>String</td>
+                                <td>添加设备时返回的did</td>
+                            </tr>
+                            <tr>
+                                <td>dch</td>
+                                <td>String</td>
+                                <td>01:红外数据通道 红外压缩编码数据 02：红外数据通道-红外原始电平通道
+                                    11:433射频 ASK 1527 12:433射频电平ASK 13:433 FSK透传 14:433 ASK透传 15：奥普433私有协议
+                                    21:315射频 ASK1527 22: 315射频电平ASK 23: 315FSK透传 24: 315ASK透传
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>dcap</td>
+                                <td>String</td>
+                                <td>像智能门锁这些，有用户运行数据，比如指纹/密码用户编号，版本号，电量统计。格式为 电量：正常6.0v，设备当前状态：打开 ，设备数据：0102F2，固件版本：v1.2
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>dbra</td>
+                                <td>String</td>
+                                <td>设备品牌</td>
+                            </tr>
+                            <tr>
+                                <td>dbat</td>
+                                <td>String</td>
+                                <td>非电池类为空，电池类直接是0-100的电量值。</td>
+                            </tr>
+                            <tr>
+                                <td>dinfo</td>
+                                <td>String</td>
+                                <td>显示在设备界面的信息，设备最后一条日志记录保存到这里。例如：门磁：4/6 20:25 开</td>
+                            </tr>
+                            <tr>
+                                <td>danam</td>
+                                <td>String</td>
+                                <td>设备别名（插座、墙面开关 类这种需要）</td>
+                            </tr>
+                            <tr>
+                                <td>dnlp</td>
+                                <td>String</td>
+                                <td>自定义设备，当添加自定义的按键功能时，比如自定义设备-车库。dnlp字段为打开,关闭。则设备支持自定义语义功能。比如帮我打开一下车库，都能够支持。本地语义解析支持
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>dres1</td>
+                                <td>String</td>
+                                <td>保留字段</td>
+                            </tr>
+                            <tr>
+                                <td>dres2</td>
+                                <td>String</td>
+                                <td>保留字段</td>
+                            </tr>
+                            <tr>
+                                <td>dlogo</td>
+                                <td>String</td>
+                                <td>每个设备的logo图片命名，比如 电视是TV.svg</td>
+                            </tr>
+                            <tr>
+                                <td>remoid</td>
+                                <td>String</td>
+                                <td>K00081（官方标准库） 遥控器ID UK0001(用户库) 86SW3</td>
+                            </tr>
+                            <tr>
+                                <td>dver</td>
+                                <td>String</td>
+                                <td>设备的固件版本信息，对于自组网设备，需要存储这个字段</td>
+                            </tr>
+                            <tr>
+                                <td>dtag</td>
+                                <td>String</td>
+                                <td>设备用来手动区分的标记，比如一个房间有好几个人体感应器，那么怎么区分同一个房间的各个地方的人体感应器呢，就用到了这个dtag。比如在卧室。。床下人体活动
+                                    门口人体活动
+                                </td>
+                            </tr>
+
+                            </tbody>
+                        </table>
 
 
                     </div>
                 </div>
-                >
             </div>
-            >
         </div>
-        >
     </div>
-    >
+
 </div>
 <script src="//g.alicdn.com/shop/tae-portal/0.4.5/scripts/docs-cc-v2.js"></script>
 </body>

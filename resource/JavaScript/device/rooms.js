@@ -368,6 +368,46 @@ var context = new Vue({
                 }
             );
 
+        },
+        updateSys: function (sn,e) {
+            console.log($($(e.target).parent().siblings()[3]).find('select').val())
+            let safemode = ''
+            if($($(e.target).parent().siblings()[3]).find('select').val()=='有人'){
+                safemode = 1
+            }else if($($(e.target).parent().siblings()[3]).find('select').val()=='空闲'){
+                safemode = 0
+            }
+            let data = {
+                token:sessionStorage.getItem('token'),
+                sn:sn,
+                status:safemode
+            }
+            mutual('/Manage/room/setroomstatus', data, function (res) {
+                console.log(res)
+                if(res.ack==1){
+                    swal('提示','更新成功','success')
+                }
+            }, function (error) {
+                console.log(error)
+            })
+        },
+        send: function (sn, e) {
+
+            let text = $(e.target).parent().prev().find('input').val()
+            let data = {
+                sn: sn,
+                token: sessionStorage.getItem('token'),
+                msg: text
+            }
+            mutual('/Manage/device/textsend', data, function (res) {
+                console.log(res)
+                if(res.ack==1){
+                    swal('提示','消息发送成功','success')
+                    $(e.target).parent().prev().find('input').val('')
+                }
+            }, function (error) {
+                console.log(error)
+            })
         }
     },
 

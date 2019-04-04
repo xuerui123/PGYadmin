@@ -1,0 +1,36 @@
+html
+    head
+        meta(charset='utf-8')
+        title
+        link(rel='stylesheet',href='/css/common.css')
+        link(rel='stylesheet',href='/css/others.apply.css')
+        script(src='https://cdn.bootcss.com/vue/2.6.0/vue.js')
+        script(src='https://cdn.bootcss.com/jquery/2.0.1/jquery.min.js')
+        script(src='../JavaScript/common/swal.js')
+        script(src='../JavaScript/common/mutual.js')
+    body
+        div#VueBox
+            include ../common/top
+            include ../common/nav
+            div.applyList
+                table
+                    thead
+                        tr
+                            th 姓名
+                            th 电话
+                            th 地区
+                            th 支付金额
+                            th 成交时间
+                            th 操作
+                    tbody
+                        tr(v-for='item in list')
+                            td(v-text='item.name')
+                            td(v-text='item.phone')
+                            td(v-text='item.adress')
+                            td(v-text='item.fee')
+                            td(v-text='item.addtime')
+                            td.operation
+                                //span(@click='edit(item)') 已读
+                                span(@click='del(item.account)') 删除
+
+    script(src='../JavaScript/others/buy.js')

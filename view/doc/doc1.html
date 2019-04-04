@@ -452,6 +452,64 @@
                         <p>socket地址：wss://xqwxmp.cspugoing.com</p>
                         <p>WSS协议（加密的WebSocket）</p>
                         <p>使用json数据格式与云平台进行通讯</p>
+                        <p>h5接入方式</p>
+                            <pre>
+                                let ws = new WebSocket("wss://xqwxmp.cspugoing.com");
+                                // 打开一个 web socket 地址为
+                                ws.onopen = function()
+                               {
+                                  // Web Socket 已连接上，使用 send() 方法发送数据
+                                  ws.send(JSON.stringify({
+                                        &quot;op&quot;:&quot;mysys&quot;,
+                                        &quot;act&quot;:&quot;auth&quot;,
+                                        &quot;date&quot;:{
+                                            &quot;appid&quot;:&quot;XXXX&quot;,
+                                            &quot;appkey&quot;:&quot;XXXXX&quot;
+                                          }
+                                    }));
+                                  alert("数据发送中...");
+                               };
+                                ws.onmessage = function (evt){
+                                  //接收服务其返回的数据
+                                  var received_msg = evt.data;
+                                  alert("数据已接收...");
+                               };
+
+                               ws.onclose = function()
+                               {
+                                  // 关闭 websocket
+                                  alert("连接已关闭...");
+                               };
+
+                            </pre>
+                        <p>h5接入详细说明http://www.runoob.com/html/html5-websocket.html</p>
+                        <p>小程序接入</p>
+                        <pre>
+                            wx.connectSocket({
+                            //建立与wss://xqwxmp.cspugoing.com的链接
+                              url: 'wss://xqwxmp.cspugoing.com',
+                              success:function(res){
+                                //链接建立成功
+                              },
+                              fail:function(res){
+                                //链接建立失败（res失败的原因）
+                              }
+                            })
+                            wx.sendSocketMessage({data:JSON.string({
+                                &quot;op&quot;:&quot;mysys&quot;,
+                                &quot;act&quot;:&quot;auth&quot;,
+                                &quot;date&quot;:{
+                                    &quot;appid&quot;:&quot;XXXX&quot;,
+                                    &quot;appkey&quot;:&quot;XXXXX&quot;
+                                  }
+                            })})
+                            //发送JSON数据
+                            wx.onSocketMessage(function(res){
+                                //服务器返回的消息
+                                //res.data返回的消息内容
+                            })
+                        </pre>
+                        <p>小程序接入详细说明https://developers.weixin.qq.com/miniprogram/dev/api/wx.sendSocketMessage.html</p>
                         <p>示例：</p>
                         <pre>{
     &quot;op&quot;:&quot;mysys&quot;,

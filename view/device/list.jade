@@ -33,8 +33,8 @@ html
                             td
                                 span(v-if='item.online==1') 在线
                                 span(v-if='item.online==0') 离线
-                            td
-                                select
+                            td.safemode
+                                select(:value='item.safemode==0?"空闲":"有人"')
                                     option(value='空闲') 空闲
                                     option(value='有人') 有人
                             td
@@ -42,8 +42,7 @@ html
                             td.status
                                 input
                             td.operation
-                                span 更新
-                                span 发送
-                                span 删除
+                                span(@click='update(item.sn,$event)') 更新
+                                span(@click='send(item.sn,$event)') 发送
 
     script(src='../JavaScript/device/list.js')

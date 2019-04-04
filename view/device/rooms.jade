@@ -13,6 +13,11 @@ html
             include ../common/top
             include ../common/nav
             div.devList
+                p.welcome
+                    input(placeholder='设置欢迎语')
+                    span.btn.btn-success 提交
+                    input(style='margin-left:100px',placeholder='设置用户手机号')
+                    span.btn.btn-success 提交
                 table
                     thead
                         tr
@@ -30,18 +35,18 @@ html
                             td
                                 span(v-if='roomsObj.online==1') 在线
                                 span(v-if='roomsObj.online==0') 离线
-                            td
-                                select
+                            td.safemode
+                                select(:value='roomsObj.safemode==0?"空闲":"有人"')
                                     option(value='空闲') 空闲
                                     option(value='有人') 有人
                             td.status
                                 input
                             td.operation
-                                span 更新
-                                span 发送
+                                span(@click='updateSys(roomsObj.sn,$event)') 更新
+                                span(@click='send(roomsObj.sn,$event)') 发送
 
             div.equipmentsAdd
-                span(@click='showBG=!showBG').btn.btn-success.rf 添加电器
+                span(@click='showBG="dev"').btn.btn-success.rf 添加电器
             div.equipments
                 table
                     thead
@@ -67,8 +72,25 @@ html
                             td
                             td
                                 span.btn(@click='delDev(item.yid)') 删除
+            div.equipmentsAdd
+                span(@click='showBG="sence"').btn.btn-success.rf 添加场景
+            div.sence
+                table
+                    thead
+                        tr
+                            th id
+                            th 场景名
+                            th 场景上次执行时间
+                            th 操作
+                    tbody
+                        tr
+                            td
+                            td
+                            td
+                            td
+
             div.showBg(v-if='showBG')
-                div.eqpsBOX
+                div.eqpsBOX(v-if='showBG=="dev"')
                     p
                         span 电器类别：
                         select(@change='devName')
@@ -131,5 +153,11 @@ html
 
                     p
                         span(@click='addDev()').btn.btn-success 添&nbsp&nbsp&nbsp&nbsp加
-                        span(style='margin-left:30px',@click='showBG=!showBG').btn.btn-default 返&nbsp&nbsp&nbsp&nbsp回
+                        span(style='margin-left:30px',@click='showBG=""').btn.btn-default 返&nbsp&nbsp&nbsp&nbsp回
+                div.senceBox(v-if='showBG=="sence"')
+                    p
+                        span(@click='addDev()').btn.btn-success 添&nbsp&nbsp&nbsp&nbsp加
+                        span(style='margin-left:30px',@click='showBG=""').btn.btn-default 返&nbsp&nbsp&nbsp&nbsp回
+
+
     script(src='../JavaScript/device/rooms.js')

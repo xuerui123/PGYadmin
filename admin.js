@@ -64,6 +64,10 @@ router.get('/device/rooms', ctx => ctx.render('device/rooms'));
 router.get('/version/erdai', ctx => ctx.render('version/erdai'));
 router.get('/version/add', ctx => ctx.render('version/add'));
 router.get('/others/apply', ctx => ctx.render('others/apply'));
+router.get('/others/buy', ctx => ctx.render('others/buy'));
+router.get('/problem/look', ctx => ctx.render('problem/look'));
+router.get('/problem/list', ctx => ctx.render('problem/list'));
+router.get('/problem/send', ctx => ctx.render('problem/send'));
 
 router.get('/doc/yunint1', ctx => ctx.render('/doc/doc1'));
 router.get('/doc/yunint2', ctx => ctx.render('/doc/doc2'));
